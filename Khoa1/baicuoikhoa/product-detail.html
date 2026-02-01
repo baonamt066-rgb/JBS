@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chi tiết sản phẩm</title>
+  <link rel="stylesheet" href="product-detail.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <img src="logo.png" alt="Logo">
+        <span>MyShop Dropship</span>
+      </a>
+      <a href="products.html" class="back-btn">⬅ Quay lại sản phẩm</a>
+      <div class="dropdown">
+        <button class="dropdown-btn">≡ Danh mục</button>
+        <div class="dropdown-content">
+          <a href="products.html?category=all">Tất cả</a>
+          <a href="products.html?category=technology">Công nghệ</a>
+          <a href="products.html?category=fashion">Thời trang</a>
+          <a href="products.html?category=cosmetics">Mỹ phẩm</a>
+        </div>
+      </div>
+      <div class="search-box">
+        <input type="text" placeholder="Tìm kiếm sản phẩm..." id="search-input">
+        <button id="search-btn">🔍</button>
+      </div>
+      <a href="#top" class="scroll-top">⬆</a>
+      <a href="cart.html" class="cart-icon">🛍 <span id="cart-count">0</span></a>
+    </div>
+  </nav>
+
+  <!-- Chi tiết sản phẩm -->
+  <main>
+    <div class="details" id="product-detail">
+      <div class="product-image">
+        <img src="" alt="">
+      </div>
+
+      <div class="product-info">
+        <h2 class="product-title"></h2>
+
+        <div class="price-section"></div>
+
+        <div class="action-buttons">
+          <a href="#" class="buy-now">
+            <span class="buy-text">🛒 Thêm vào giỏ hàng</span>
+            <small class="delivery-info"></small>
+          </a>
+
+          <!-- Nút Nhắn tư vấn ngay (thay thế nút consult-now cũ) -->
+          <a href="#" id="chat-btn" class="consult-now">
+            💬 Nhắn tư vấn ngay
+            <small class="consult-info">Chat miễn phí 24/7</small>
+          </a>
+        </div>
+
+        <div class="product-details">
+          <h3>Thông tin chung</h3>
+          <p class="product-desc"></p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal Popup cho Nhắn Tư Vấn (Ẩn mặc định) -->
+<div id="chat-modal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h3>💬 Nhắn tin tư vấn sản phẩm</h3>
+    <p>Chúng tôi sẽ phản hồi nhanh chóng trong vòng 5 phút!</p>
+    <form id="chat-form">
+      <label for="user-name">Họ tên:</label>
+      <input type="text" id="user-name" placeholder="Nhập họ tên" required>
+      
+      <label for="user-email">Email/SĐT:</label>
+      <input type="text" id="user-email" placeholder="Nhập email hoặc số điện thoại" required>
+      
+      <label for="message">Tin nhắn:</label>
+      <textarea id="message" placeholder="Hỏi về sản phẩm, giá cả, hoặc tư vấn..." rows="4" required></textarea>
+      
+      <button type="submit" class="submit-chat">Gửi tin nhắn</button>
+    </form>
+  </div>
+</div>
+
+  <!-- JS điền dữ liệu sản phẩm (ĐẦY ĐỦ HOÀN CHỈNH - 24 sản phẩm) -->
+  <script>
+    // Dữ liệu sản phẩm ĐẦY ĐỦ (24 sản phẩm)
+    const products = {
+      "1": {
+        title: "Loa Divoom DitooPro",
+        price: "300.000đ",
+        image: "https://hdradio.vn/upload/hinhanh/loa-di-dong/divoom/ditoopro/ditoopro-avt.jpg",
+        delivery: "Giao tận nơi / Nhận tại cửa hàng",
+        consult: "Chat miễn phí 24/7",
+        description: `🔹 Kích thước 18.5 inch LED<br>
+🔹 Độ phân giải chuẩn HD<br>
+🔹 Phù hợp văn phòng, học tập<br>
+🔹 Thiết kế gọn, dễ lắp đặt<br>
+<strong>Nhà Sản Xuất:</strong> VietTech`
+      },
+      "2": {
+        title: "Elgato Stream Deck Neo",
+        price: "450.000đ",
+        image: "https://imagedelivery.net/ZeGtsGSjuQe1P3UP_zk3fQ/d21c2f61-af72-4cc4-972b-e5a073db9c00/storedata",
+        delivery: "Giao tận nơi / Nhận tại cửa hàng",
+        consult: "Chat miễn phí 24/7",
+        description: `🔹 Thiết kế chuyên nghiệp<br>
+🔹 Nhiều phím tùy chỉnh<br>
+🔹 Hỗ trợ streamer và content creator<br>
+<strong>Nhà Sản Xuất:</strong> Elgato`
+      },
+      "3": {
+        title: "Elgato Gaming Stream Deck XL",
+        price: "500.000đ",
+        image: "https://imagedelivery.net/ZeGtsGSjuQe1P3UP_zk3fQ/3dd303f9-1bdf-47b9-7e17-c01658b9a800/storedata",
+        delivery: "Giao tận nơi / Nhận tại cửa hàng",
+        consult: "Chat miễn phí 24/7",
+        description: `🔹 32 phím LCD<br>
+🔹 Dễ dàng tuỳ chỉnh macro<br>
+🔹 Hỗ trợ gaming và streaming<br>
+<strong>Nhà Sản Xuất:</strong> Elgato`
+      },
+      "4": {
+        title: "Giá đỡ màn hình North Bayou F80",
+        price: "250.000đ",
+        image: "https://anphat.com.vn/media/product/33286_gia_do_man_hinh_north_bayou_17_3.png",
+        delivery: "Giao tận nơi / Nhận tại cửa hàng",
+        consult: "Chat miễn phí 24/7",
+        description: `🔹 Chất liệu thép bền<br>
+🔹 Tải trọng tối đa 15kg<br>
+🔹 Dễ lắp đặt, xoay 360 độ<br>
+<strong>Nhà Sản Xuất:</strong> North Bayou`
+      },
+      "5": {
+        title: "Tai nghe Lobel TWS F9-5",
+        price: "300.000đ",
+        image: "https://salt.tikicdn.com/cache/750x750/ts/product/5e/ba/07/9a769c0db6544b5b62c3be3104c1a829.jpg.webp",
+        delivery: "Giao tận nơi / Nhận tại cửa hàng",
+        consult: "Chat miễn phí 24/7",
+        description: `🔹 Tai nghe True Wireless<br>
+🔹 Kết nối Bluetooth 5.0<br>
+🔹 Pin 6 giờ liên tục<br>
+<strong>Nhà Sản Xuất:</strong> Lobel`
+      },
+      "6": {
+        title: "Bàn phím cơ AULA F3261",
+        price: "450.000đ",
+        image: "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/f/r/frame_516_5__1.png",
+        delivery: "Giao tận nơi / Nhận tại cửa hàng",
+        consult: "Chat miễn phí 24/7",
+        description: `🔹 Bàn phím cơ RGB<br>
+🔹 Switch Blue bấm êm<br>
+🔹 Thiết kế gaming<br>
+<strong>Nhà Sản Xuất:</strong> AULA`
+      },
+      "7": {
+        title: "Chuột Mchose G3 Wireless",
+        price: "500.000đ",
+        image: "https://bizweb.dktcdn.net/thumb/grande/100/534/572/products/screenshot-2024-12-18-114608.png?v=1755598260167",
+        delivery: "Giao tận nơi / Nhận tại cửa hàng",
+        consult: "Chat miễn phí 24/7",
+        description: `🔹 Chuột không dây<br>
+🔹 DPI 16000<br>
+🔹 Pin lâu dài<br>
+<strong>Nhà Sản Xuất:</strong> Mchose`
+      },
+      "8": {
+        title: "Màn hình HP V193B",
+        price: "250.000đ",
+        image: "https://vietminh.vn/uploads/files/man-hp-v193b(1).jpg",
+        delivery: "Giao tận nơi / Nhận tại cửa hàng",
+        consult: "Chat miễn phí 24/7",
+        description: `🔹 Kích thước 19 inch<br>
+🔹 Độ phân giải Full HD<br>
+🔹 Tấm nền TN<br>
+<strong>Nhà Sản Xuất:</strong> HP`
+      },
+      "9": {
+        title: "Son Nhã - Sắc Màu Thanh Nhã",
+        price: "330.000đ",
+        image: "https://media.comem.vn/uploads/September2023/son-nha-sac-mau-thanh-nha-1_sp2x.webp",
+        delivery: "Giao tận nơi / Nhận tại cửa hàng",
+        consult: "Chat miễn phí 24/7",
+        description: `🔹 Màu sắc nhẹ nhàng, tự nhiên<br>
+🔹 Chống khô môi<br>
+🔹 Lên màu chuẩn<br>
+<strong>Nhà Sản Xuất:</strong> Nhã Cosmetics`
+      },
+      "10": {
+        title: "Son YSL Rouge Pur Couture",
+        price: "890.000đ",
+        image: "https://vilip.vn/wp-content/uploads/2023/09/Son-YSL-Rouge-Pur-Couture-01-Le-Rouge-%E2%80%93-Mau-Do-Tuoi-dd.jpg?v=1694339097",
+        delivery: "Giao tận nơi / Nhận tại cửa hàng",
+        consult: "Chat miễn phí 24/7",
+        description: `🔹 Lên màu chuẩn, bền lâu<br>
+🔹 Chất son mềm mịn<br>
+🔹 Dưỡng môi tự nhiên<br>
+<strong>Nhà Sản Xuất:</strong> YSL`
+      },
+      "11": {
+        title: "Phấn Nước YSL Glow-Pact B10",
+        price: "2.500.000đ",
+        image: "https://cdn.vuahanghieu.com/unsafe/0x500/left/top/smart/filters:quality(90)/https://admin.vuahanghieu.com/upload/product/2025/07/phan-nuoc-yves-saint-laurent-beaute-touche-eclat-glow-pact-cushion-foundation-tone-b10-688836df227fb-29072025095007.jpg",
+        delivery: "Giao tận nơi / Nhận tại cửa hàng",
+        consult: "Chat miễn phí 24/7",
+        description: `🔹 Che phủ tốt, lớp nền mịn<br>
+🔹 Chống trôi, lâu trôi<br>
+🔹 Phù hợp mọi loại da<br>
+<strong>Nhà Sản Xuất:</strong> YSL`
+      },
+      "12": {
+        title: "Charlotte Tilbury Gian Lông Mày",
+        price: "686.660đ",
+        image: "https://is4.fwrdassets.com/images/p/fw/45/CTIL-WU151_V1.jpg",
+        delivery: "Giao tận nơi / Nhận tại cửa hàng",
+        consult: "Chat miễn phí 24/7",
+        description: `🔹 Bền màu<br>
+🔹 Dễ tán, tự nhiên<br>
+🔹 Chống lem<br>
+<strong>Nhà Sản Xuất:</strong> Charlotte Tilbury`
+      },
+      "13": {
+        title: "Cốp Đựng Trang Điểm LED",
+        price: "1.850.000đ",
+        image: "https://phukientrangdiem.com/thumb.php?src=https://phukientrangdiem.com/upload/public/cop-trang-diem/cop-dung-do-trang-diem-xach-tay-guong-den-led-mau-den-khung-nhom-phukientrangdiem.com-4.1.jpg&w=500&h=0&f=products&s=1",
+        delivery: "Giao tận nơi / Nhận tại cửa hàng",
+        consult: "Chat miễn phí 24/7",
+        description: `🔹 Có gương và đèn LED<br>
+🔹 Thiết kế tiện lợi<br>
+🔹 Chất liệu cao cấp<br>
+<strong>Nhà Sản Xuất:</strong> PKD`
+      },
+      "14": {
+        title: "Bộ Mỹ Hoàng Cung Phẩm Hồng 5in1",
+        price: "450.000đ",
+        image: "https://pos.nvncdn.com/688d2d-180276/ps/20240814_eXAj2aRqx3.jpeg?v=1723647728",
+        delivery: "Giao tận nơi / Nhận tại cửa hàng",
+        consult: "Chat miễn phí 24/7",
+        description: `🔹 Bao gồm 5 sản phẩm<br>
+🔹 Dưỡng ẩm và làm sáng da<br>
+🔹 Phù hợp mọi loại da<br>
+<strong>Nhà Sản Xuất:</strong> Hoàng Cung`
+      },
+      "15": {
+        title: "Cốp Đựng Mỹ Phẩm Vân Nổi",
+        price: "690.000đ",
+        image: "https://i.ebayimg.com/images/g/lzQAAOSwLcFjIEQ1/s-l1600.webp",
+        delivery: "Giao tận nơi / Nhận tại cửa hàng",
+        consult: "Chat miễn phí 24/7",
+        description: `🔹 Vân nổi chống trầy<br>
+🔹 Chất liệu chắc chắn<br>
+🔹 Thiết kế sang trọng<br>
+<strong>Nhà Sản Xuất:</strong> PKD`
+      },
+      "16": {
+        title: "Kem Dưỡng Ẩm Ban Đêm OLAY",
+        price: "816.000đ",
+        image: "https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lvyfnpdrhejda9@resize_w900_nl.webp",
+        delivery: "Giao tận nơi / Nhận tại cửa hàng",
+        consult: "Chat miễn phí 24/7",
+        description: `🔹 Dưỡng ẩm sâu<br>
+🔹 Làm mềm da, giảm nếp nhăn<br>
+🔹 Phù hợp mọi loại da<br>
+<strong>Nhà Sản Xuất:</strong> OLAY`
+      },
+      "17": {
+        title: "Áo thun xanh navy BSX653",
+        price: "289.000đ",
+        image: "https://thoitrangbigsize.vn/wp-content/uploads/2021/10/BSX653D0.jpg",
+        delivery: "Giao tận nơi / Nhận tại cửa hàng",
+        consult: "Chat miễn phí 24/7",
+        description: `🔹 Chất liệu cotton thoáng mát<br>
+🔹 Form rộng, thoải mái<br>
+🔹 Phù hợp đi chơi, đi học<br>
+<strong>Nhà Sản Xuất:</strong> BigSize Fashion`
+      },
+      "18": {
+        title: "Quần Short Kaki Nam M-8XL",
+        price: "380.000đ",
+        image: "https://thoitrangbigsize.vn/wp-content/uploads/2025/04/Den-9.jpg",
+        delivery: "Giao tận nơi / Nhận tại cửa hàng",
+        consult: "Chat miễn phí 24/7",
+        description: `🔹 Chất liệu kaki bền<br>
+🔹 Size từ M đến 8XL<br>
+🔹 Phù hợp mặc hàng ngày<br>
+<strong>Nhà Sản Xuất:</strong> BigSize Fashion`
+      },
+      "19": {
+        title: "Túi Đeo Vai UN767",
+        price: "2.394.000đ",
+        image: "https://nhatminhsports.vn/wp-content/uploads/2025/03/Tui-Deo-Vai-Shoulder-Pouch-UN767-White-01.jpg",
+        delivery: "Giao tận nơi / Nhận tại cửa hàng",
+        consult: "Chat miễn phí 24/7",
+        description: `🔹 Chất liệu cao cấp<br>
+🔹 Ngăn chứa rộng, tiện lợi<br>
+🔹 Dây đeo êm ái<br>
+<strong>Nhà Sản Xuất:</strong> UN Sports`
+      },
+      "20": {
+        title: "Giày Tommy Hilfiger Trắng",
+        price: "2.995.000đ",
+        image: "https://bizweb.dktcdn.net/thumb/1024x1024/100/449/458/products/anh-ghep-logo-web-7-22b8e5b3-9199-4fb3-8959-9a731199c56b.png",
+        delivery: "Giao tận nơi / Nhận tại cửa hàng",
+        consult: "Chat miễn phí 24/7",
+        description: `🔹 Thiết kế sang trọng<br>
+🔹 Chất liệu da cao cấp<br>
+🔹 Đế chống trượt<br>
+<strong>Nhà Sản Xuất:</strong> Tommy Hilfiger`
+      },
+            "21": {
+        title: "Váy Hoa Tiệc Trà Nữ",
+        price: "631.398đ",
+        image: "https://down-vn.img.susercontent.com/file/sg-11134201-7rau8-ma9fc0o8vstub1@resize_w900_nl.webp",
+        delivery: "Giao tận nơi / Nhận tại cửa hàng",
+        consult: "Chat miễn phí 24/7",
+        description: `🔹 Chất liệu vải mềm mịn<br>
+🔹 Họa tiết hoa sang trọng<br>
+🔹 Phù hợp đi tiệc<br>
+<strong>Nhà Sản Xuất:</strong> Fashion Queen`
+      },
+      "22": {
+        title: "Dây Chuyền Swarovski Swan",
+        price: "4.190.000đ",
+        image: "https://swavi.vn/wp-content/swift-ai/images/wp-content/uploads/2024/01/Day-Chuyen-Swarovski-Chinh-Hang-Dancing-Swan-necklace-Swan-Blue-Rhodium-plated-01-jpg.webp",
+        delivery: "Giao tận nơi / Nhận tại cửa hàng",
+        consult: "Chat miễn phí 24/7",
+        description: `🔹 Đính đá Swarovski<br>
+🔹 Thiết kế tinh xảo<br>
+🔹 Dễ phối đồ<br>
+<strong>Nhà Sản Xuất:</strong> Swarovski`
+      },
+      "23": {
+        title: "Mũ TaylorMade Newport",
+        price: "900.000đ",
+        image: "https://nhatminhsports.vn/wp-content/uploads/2025/04/Taylor-Made-Metal-Eyelit-Hat-2024-Model-Adjustable-White.webp",
+        delivery: "Giao tận nơi / Nhận tại cửa hàng",
+        consult: "Chat miễn phí 24/7",
+        description: `🔹 Chất liệu cao cấp<br>
+🔹 Điều chỉnh vừa vặn<br>
+🔹 Kiểu dáng năng động<br>
+<strong>Nhà Sản Xuất:</strong> TaylorMade`
+      },
+      "24": {
+        title: "Thắt Lưng MIB35-2M01",
+        price: "780.000đ",
+        image: "https://bizweb.dktcdn.net/thumb/grande/100/059/374/products/anhdaidien-web-1500x1500.jpg?v=1656078752770",
+        delivery: "Giao tận nơi / Nhận tại cửa hàng",
+        consult: "Chat miễn phí 24/7",
+        description: `🔹 Chất liệu da PU cao cấp<br>
+🔹 Khóa chắc chắn<br>
+🔹 Phù hợp với nhiều trang phục<br>
+<strong>Nhà Sản Xuất:</strong> MIB`
+      }
+    };  // Kết thúc object products
+
+    
+
+      // Hiển thị dữ liệu chi tiết sản phẩm dựa trên ID từ URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const productId = urlParams.get('id');
+  let currentProduct = null;
+  let isResellProduct = false;
+  let resellId = null;
+
+  if (productId && productId.startsWith('resell-')) {
+    // Xử lý sản phẩm resell từ localStorage (SỬA: Find bằng item.id chính xác)
+    isResellProduct = true;
+    resellId = productId; // ID thực tế: resell-${timestamp}
+    const resellList = JSON.parse(localStorage.getItem("resellList")) || [];
+    currentProduct = resellList.find(item => item.id === resellId);  // SỬA: Find bằng ID, không dùng index
+    
+    if (currentProduct) {
+      // Load dữ liệu resell (giữ nguyên)
+      document.querySelector('.product-title').innerText = currentProduct.name;
+      document.querySelector('.price-section').innerText = currentProduct.price;
+      document.querySelector('.product-image img').src = currentProduct.img || 'https://via.placeholder.com/400x400?text=No+Image';
+      document.querySelector('.delivery-info').innerText = 'Giao tận nơi / Nhận tại cửa hàng'; // Placeholder
+      document.querySelector('.consult-info').innerText = 'Chat miễn phí 24/7'; // Placeholder
+
+      // Xử lý desc với newline → <br>, rồi thêm manufacturer (GIỮ NGUYÊN)
+      let descHtml = (currentProduct.desc || 'Không có mô tả.').replace(/\n/g, '<br>');
+      if (currentProduct.manufacturer) {
+        descHtml += `<br><strong>Nhà Sản Xuất:</strong> ${currentProduct.manufacturer}`;
+      } else {
+        descHtml += `<br><strong>Nhà Sản Xuất:</strong> Không xác định`;
+      }
+      document.querySelector('.product-desc').innerHTML = descHtml;
+    } else {
+      document.querySelector('#product-detail').innerHTML = "<p class='error-message'>Sản phẩm resell không tồn tại!</p>";
+    }
+  } else if (products[productId]) {
+    // Xử lý sản phẩm gốc (GIỮ NGUYÊN)
+    currentProduct = products[productId];
+    document.querySelector('.product-title').innerText = currentProduct.title;
+    document.querySelector('.price-section').innerText = currentProduct.price;
+    document.querySelector('.product-image img').src = currentProduct.image;
+    document.querySelector('.delivery-info').innerText = currentProduct.delivery;
+    document.querySelector('.consult-info').innerText = currentProduct.consult;
+    document.querySelector('.product-desc').innerHTML = currentProduct.description;
+  } else {
+    document.querySelector('#product-detail').innerHTML = "<p class='error-message'>Sản phẩm không tồn tại!</p>";
+  }
+
+  // XỬ LÝ THANH TÌM KIẾM (GIỮ NGUYÊN)
+  const searchInput = document.getElementById('search-input');
+  const searchButton = document.getElementById('search-btn');
+
+  function redirectToProductsWithSearch() {
+    const searchTerm = searchInput.value.trim();
+    if (searchTerm) {
+      window.location.href = `products.html?search=${encodeURIComponent(searchTerm)}`;
+    } else {
+      window.location.href = 'products.html';
+    }
+  }
+
+  searchButton.addEventListener('click', redirectToProductsWithSearch);
+  searchInput.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      redirectToProductsWithSearch();
+    }
+  });
+
+  // Cập nhật số lượng giỏ hàng (GIỮ NGUYÊN, nhưng sửa count thành total quantity)
+  function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const cartCountElement = document.getElementById("cart-count");
+    if (cartCountElement) {
+      const total = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);  // SỬA: Tính total quantity
+      cartCountElement.textContent = total <= 5 ? total : '5+';
+    }
+  }
+  updateCartCount();
+
+  // XỬ LÝ NÚT CHO SẢN PHẨM RESell (SỬA: Delete dùng findIndex bằng ID, edit truyền ID thực)
+  document.addEventListener('DOMContentLoaded', () => {
+    const buyNowBtn = document.querySelector('.buy-now');
+    const consultNowBtn = document.querySelector('.consult-now');
+
+    if (isResellProduct && currentProduct && buyNowBtn && consultNowBtn) {
+  // Thay đổi nút đầu thành "Xóa sản phẩm" (nền đỏ) - GIỮ NGUYÊN, dùng class thay vì style
+  buyNowBtn.classList.remove('buy-now');
+  buyNowBtn.classList.add('delete-btn');
+  buyNowBtn.innerHTML = `
+    <span class="buy-text">🗑 Xóa sản phẩm</span>
+    <small class="delivery-info">Xóa khỏi danh sách bán lại</small>
+  `;
+  consultNowBtn.classList.remove('consult-now');
+  consultNowBtn.classList.add('edit-btn');
+  consultNowBtn.innerHTML = `
+    <span class="buy-text">✏ Chỉnh sửa sản phẩm</span>
+    <small class="consult-info">Chỉnh sửa thông tin</small>
+  `;
+  let descHtml = (currentProduct.desc || 'Không có mô tả.').replace(/\n/g, '<br>');
+  if (currentProduct.manufacturer) {
+    descHtml += `<br><strong>Nhà Sản Xuất:</strong> ${currentProduct.manufacturer}`;
+  } else {
+    descHtml += `<br><strong>Nhà Sản Xuất:</strong> Không xác định`;
+  }
+  document.querySelector('.product-desc').innerHTML = descHtml;
+
+
+      // Sự kiện xóa sản phẩm (SỬA: Dùng findIndex bằng resellId = productId)
+      buyNowBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (confirm('Bạn có chắc chắn muốn xóa sản phẩm này khỏi danh sách bán lại?')) {
+          const resellList = JSON.parse(localStorage.getItem("resellList")) || [];
+          const resellIndex = resellList.findIndex(item => item.id === resellId);  // SỬA: Find bằng ID
+          if (resellIndex !== -1) {  // Kiểm tra !== -1 thay vì >=0
+            resellList.splice(resellIndex, 1); // Xóa theo index tìm được
+            localStorage.setItem("resellList", JSON.stringify(resellList));
+            alert('Đã xóa sản phẩm thành công!');
+            window.location.href = 'products.html'; // Chuyển về danh sách sản phẩm
+          } else {
+            alert('Lỗi: Không tìm thấy sản phẩm để xóa!');
+          }
+        }
+      });
+
+      // Sự kiện chỉnh sửa sản phẩm (SỬA: Truyền resellId = productId thực tế)
+      consultNowBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.location.href = `checkout.html?edit=${resellId}`;  // resellId = productId (resell-${timestamp})
+      });
+    } else if (!isResellProduct && currentProduct && buyNowBtn) {
+      // Giữ nguyên sự kiện thêm vào giỏ cho sản phẩm gốc (GIỮ NGUYÊN)
+      buyNowBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const existingItem = cart.find(item => item.name === currentProduct.title);
+        if (existingItem) {
+          alert('Sản phẩm này đã có trong giỏ hàng rồi! Bạn chỉ có thể thêm 1 lần.');
+          return;
+        }
+        const newItem = {
+          name: currentProduct.title,
+          price: currentProduct.price,
+          img: currentProduct.image,
+          quantity: 1
+        };
+        cart.push(newItem);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartCount();
+        alert('Đã thêm sản phẩm vào giỏ hàng thành công!');
+      }); 
+    }
+  });
+
+  // Chức năng Nhắn Tư Vấn Ngay (Chỉ cho sản phẩm gốc)
+document.addEventListener('DOMContentLoaded', () => {
+  const chatBtn = document.getElementById('chat-btn');
+  const modal = document.getElementById('chat-modal');
+  const closeBtn = document.querySelector('.close');
+  const chatForm = document.getElementById('chat-form');
+
+  if (chatBtn && !isResellProduct) {  // Chỉ áp dụng nếu KHÔNG phải resell
+    // Hàm pre-fill form từ thông tin đăng nhập
+    function preFillForm() {
+      const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+      if (isLoggedIn) {
+        try {
+          const currentUser = JSON.parse(localStorage.getItem("currentUser") || "{}");
+          if (currentUser.fullname && currentUser.email) {
+            document.getElementById('user-name').value = currentUser.fullname;
+            document.getElementById('user-email').value = currentUser.email;
+            console.log('Đã tự động điền thông tin từ tài khoản đăng nhập:', currentUser.fullname);
+            return true;  // Thành công
+          }
+        } catch (e) {
+          console.error('Lỗi parse currentUser:', e);
+        }
+      }
+      // Nếu chưa đăng nhập hoặc lỗi, để trống và nhắc (tùy chọn)
+      // alert('Vui lòng đăng nhập để tự động điền họ tên và email!');  // Uncomment nếu muốn nhắc
+      return false;
+    }
+
+    chatBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      modal.style.display = 'block';  // Mở modal
+      document.body.style.overflow = 'hidden';  // Ẩn scroll khi modal mở
+      
+      // Pre-fill form ngay khi mở modal
+      preFillForm();
+    });
+
+    // Đóng modal khi click X hoặc ngoài modal
+    closeBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto';  // Khôi phục scroll
+      // Reset form khi đóng (tùy chọn, để giữ pre-fill lần sau)
+      chatForm.reset();
+    });
+
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+        chatForm.reset();  // Reset khi đóng từ ngoài
+      }
+    });
+
+    // Xử lý form gửi tin nhắn (mô phỏng gửi - SỬ DỤNG GIÁ TRỊ FORM ĐÃ PRE-FILL)
+chatForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const name = document.getElementById('user-name').value.trim();
+  const contact = document.getElementById('user-email').value.trim();
+  const msg = document.getElementById('message').value.trim();
+
+  if (name && contact && msg) {  // Kiểm tra xem các biến name, contact, và msg (lấy từ giá trị input form) có giá trị và không rỗng. Điều này đảm bảo rằng người dùng đã điền đầy đủ thông tin trước khi xử lý.
+    // THÊM CODE LƯU VÀO LOCALSTORAGE NGAY ĐÂY (chỉ khi submit thành công)
+    let chats = JSON.parse(localStorage.getItem('chats') || '[]');  // Lấy mảng 'chats' từ localStorage. Nếu không tồn tại, sử dụng '[]' (mảng rỗng) và JSON.parse() chuyển chuỗi JSON thành mảng.
+    chats.push({  // Thêm một đối tượng mới vào mảng chats.
+      name: name,  // Lưu giá trị họ tên từ form.
+      contact: contact,  // Lưu giá trị email hoặc phương thức liên hệ.
+      msg: msg,  // Lưu nội dung tin nhắn.
+      timestamp: new Date().toISOString()  // Tạo và lưu thời gian gửi tin nhắn dưới dạng chuỗi ISO (ví dụ: "2023-10-01T12:00:00.000Z"), giúp theo dõi thời gian chính xác.
+    });
+    localStorage.setItem('chats', JSON.stringify(chats));  // Lưu mảng chats đã cập nhật vào localStorage dưới dạng chuỗi JSON, đảm bảo dữ liệu được lưu trữ lâu dài.
+    console.log('Đã lưu chat vào localStorage:', chats[chats.length - 1]);  // Ghi log để debug: Hiển thị chat mới nhất trong mảng (chats[chats.length - 1] là phần tử cuối cùng), giúp kiểm tra trong console browser.
+
+    // Mô phỏng gửi: Alert xác nhận (sử dụng giá trị đã điền sẵn hoặc chỉnh sửa)
+    alert(`Cảm ơn ${name}! Tin nhắn của bạn đã được gửi. Chúng tôi sẽ liên hệ qua ${contact} trong 5 phút.`);  // Hiển thị hộp thoại alert để xác nhận với người dùng, sử dụng biến name và contact để cá nhân hóa thông báo.
+
+    // Reset form và đóng modal
+    chatForm.reset();  // Reset tất cả các field trong form chatForm, xóa giá trị đã nhập để chuẩn bị cho lần sử dụng tiếp theo.
+    modal.style.display = 'none';  // Ẩn modal chat bằng cách đặt thuộc tính display thành 'none', giúp đóng cửa sổ chat.
+    document.body.style.overflow = 'auto';  // Khôi phục thanh cuộn của trang web, cho phép người dùng cuộn trang bình thường sau khi đóng modal (trước đó có thể đã ẩn bằng 'hidden').
+
+    // Log để debug (xóa sau)
+    console.log('Tin nhắn gửi:', { name, contact, msg });  // Ghi log để debug: Hiển thị đối tượng chứa thông tin tin nhắn đã gửi, giúp kiểm tra trong console. Bạn có thể xóa dòng này sau khi phát triển xong.
+  } else {
+    alert('Vui lòng điền đầy đủ thông tin!');  // Nếu bất kỳ trường nào thiếu, hiển thị hộp thoại alert để thông báo lỗi, yêu cầu người dùng điền đầy đủ.
+  }
+});  // Kết thúc event listener cho chatForm.addEventListener('submit', ...), đóng khối hàm xử lý submit form.
+  }
+});
+</script>
+
+  <!-- FOOTER (Hoàn chỉnh) -->
+  <footer class="footer">
+    © 2025 MyShop Dropship. Giữ toàn bộ bản quyền.
+  </footer>
+
+</body>
+</html>

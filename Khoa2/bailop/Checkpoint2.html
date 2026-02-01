@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="Checkpoint2.css">
+</head>
+<body>
+
+<!-- Màn hình 1 -->
+<div class="screen screen-search active">
+    <div class="weather-box text-center">
+        <h3 class="mb-3">🌤️Dự báo thời tiết</h3>
+
+        <input id="cityInput" class="form-control mb-3" placeholder="Nhập tên thành phố">
+
+        <button id="btnCity" class="btn btn-primary w-100 mb-2">
+            Tìm theo thành phố
+        </button>
+
+        <button id="btnLocation" class="btn btn-success w-100">
+            Dùng định vị
+        </button>
+    </div>
+</div>
+
+<!-- Màn hình 2 -->
+<div class="screen screen-weather">
+
+    <div class="app-card">
+
+        <div class="header">
+            <span class="back" onclick="backToSearch()">←</span>
+            <span class="title">App Thời tiết</span>
+        </div>
+        <img id="weatherIcon" class="icon" src="" alt="Weather icon">
+        <div class="temperature" id="temperature">--°C</div>
+        <div class="description" id="description">---</div>
+        <div class="location" id="location">📍 ---</div>
+
+        <div class="info">
+            <div class="info-box">
+                <div class="info-icon">🌡</div>
+                <div class="info-value" id="Nhiệt độ">--°C</div>
+                <div class="info-label">Nhiệt độ</div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="info-box">
+                <div class="info-icon">💧</div>
+                <div class="info-value" id="Độ ẩm">--%</div>
+                <div class="info-label">Độ ẩm</div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="Checkpoint2.js"></script>
+</body>
+</html>

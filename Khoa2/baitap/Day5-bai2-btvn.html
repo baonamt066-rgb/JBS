@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tạo hồ sơ cá nhân</title>
+    <link rel="stylesheet" href="Day5-bai2-btvn.css">
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Form nhập thông tin -->
+    <div class="form-box">
+        <h2>Tạo hồ sơ cá nhân</h2>
+
+        <label>Họ tên</label>
+        <input type="text" id="name">
+
+        <label>Email</label>
+        <input type="email" id="email">
+
+        <label>Số điện thoại</label>
+        <input type="text" id="phone">
+
+        <label>Địa chỉ</label>
+        <input type="text" id="address">
+
+        <label>Ảnh đại diện (URL)</label>
+        <input type="text" id="avatar">
+
+        <button id="saveBtn">Lưu hồ sơ</button>
+    </div>
+
+    <!-- Khung hiển thị hồ sơ -->
+    <div class="profile-box">
+        <h2>Hồ sơ cá nhân</h2>
+
+        <img id="profileImage" src="" alt="avatar">
+
+        <p id="profileName"></p>
+        <p id="profileEmail"></p>
+        <p id="profilePhone"></p>
+        <p id="profileAddress"></p>
+    </div>
+
+</div>
+
+<script src="Day5-bai2-btvn.js"></script>
+</body>
+</html>

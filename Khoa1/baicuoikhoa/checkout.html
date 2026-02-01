@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bán lại sản phẩm</title>
+  <link rel="stylesheet" href="checkout.css">
+</head>
+<body>
+  <h1 id="page-title">🔄 Bán lại sản phẩm</h1> <!-- JS sẽ thay đổi nếu edit -->
+
+  <div class="resell-container">
+    <!-- Nút quay lại -->
+    <a href="products.html" class="back-btn">⬅ Quay lại sản phẩm</a>
+
+    <!-- Hiển thị dropdown ở cả hai mode (sửa: không ẩn ở edit mode) -->
+    <div id="product-select-section">
+      <label for="my-products">Chọn sản phẩm bạn muốn bán lại:</label>
+      <select id="my-products">
+        <option value="">-- Chọn sản phẩm --</option>
+      </select>
+    </div>
+
+    <!-- Form -->
+    <form id="resell-form">
+      <label for="resell-name">Tên sản phẩm:</label>
+      <input type="text" id="resell-name" placeholder="Nhập tên sản phẩm" required>
+
+      <label for="resell-img">Link ảnh sản phẩm:</label>
+      <input type="url" id="resell-img" placeholder="Dán link ảnh" required>
+
+      <label for="resell-desc">Chi tiết sản phẩm:</label>
+      <textarea id="resell-desc" placeholder="Nhập mô tả sản phẩm" required></textarea>
+
+      <label for="resell-price">Giá bán:</label>
+      <input type="text" id="resell-price" placeholder="Nhập giá mong muốn (ví dụ: 1000000)" required>
+
+      <!-- Input cho Nhà sản xuất (optional) -->
+      <label for="resell-manufacturer">Nhà sản xuất:</label>
+      <input type="text" id="resell-manufacturer" placeholder="Nhập tên nhà sản xuất (tùy chọn)">
+
+      <button type="submit" class="resell-btn" id="submit-btn">Đăng bán sản phẩm</button>
+    </form>
+  </div>
+
+ <script>
+  document.addEventListener("DOMContentLoaded", () => {
+  // Sự kiện này chờ cho đến khi toàn bộ tài liệu HTML được tải xong, đảm bảo tất cả phần tử DOM có thể được truy cập mà không bị lỗi.
+  
+  const productSelect = document.getElementById("my-products"); // Lấy phần tử dropdown (select) có ID "my-products" để hiển thị danh sách sản phẩm.
+  const resellForm = document.getElementById("resell-form"); // Lấy phần tử form có ID "resell-form" dùng để nhập thông tin sản phẩm.
+  const pageTitle = document.getElementById("page-title"); // Lấy phần tử tiêu đề trang để cập nhật nội dung động.
+  const productSelectSection = document.getElementById("product-select-section"); // Lấy phần tử chứa dropdown sản phẩm.
+  const submitBtn = document.getElementById("submit-btn"); // Lấy nút submit form để thay đổi nội dung và xử lý sự kiện.
+  // Cập nhật sản phẩm
+  const urlParams = new URLSearchParams(window.location.search); // Tạo đối tượng để phân tích tham số URL (ví dụ: ?edit=someId).
+  const editId = urlParams.get('edit'); // Lấy giá trị của tham số 'edit' từ URL, dùng để xác định chế độ chỉnh sửa.
+  let isEditMode = !!editId; // Chuyển editId thành boolean: true nếu tồn tại (chế độ chỉnh sửa), false nếu không.
+  let currentProduct = null; // Biến lưu trữ sản phẩm hiện tại, ban đầu là null.
+  let currentEditId = editId; // Lưu ID chỉnh sửa từ URL để sử dụng trong các hàm (giữ nguyên ID).
+  let pendingToRemove = null; // Biến theo dõi sản phẩm pending cần xóa sau khi submit, tránh xóa sớm.
+
+  // Hàm loadDropdown: Tải danh sách sản phẩm vào dropdown, với logic lọc trùng tên và xử lý chế độ.
+  function loadDropdown() {
+    const resellList = JSON.parse(localStorage.getItem("resellList")) || []; // Lấy mảng "resellList" từ localStorage, nếu không tồn tại thì dùng mảng rỗng.
+    const tempCart = JSON.parse(localStorage.getItem("tempCartForResell")) || []; // Lấy mảng "tempCartForResell" từ localStorage, nếu không tồn tại thì dùng mảng rỗng.
+    productSelect.innerHTML = '<option value="">-- Chọn sản phẩm --</option>'; // Reset nội dung dropdown và thêm option mặc định.
+    
+    if (!isEditMode) { // Nếu không phải chế độ chỉnh sửa (tức là chế độ tạo mới).
+      // Chế độ tạo mới: Chỉ thêm sản phẩm từ tempCart.
+      if (tempCart.length > 0) { // Kiểm tra nếu tempCart có sản phẩm.
+        tempCart.forEach(item => { // Duyệt qua từng sản phẩm trong tempCart.
+          const option = document.createElement("option"); // Tạo một phần tử option mới.
+          const pendingValue = `pending-${item.name}`; // Tạo giá trị cho option với prefix "pending-" để nhận diện.
+          option.value = pendingValue; // Đặt giá trị của option.
+          option.text = item.name; // Đặt nội dung hiển thị là tên sản phẩm.
+          option.setAttribute('data-type', 'pending'); // Thêm thuộc tính data-type để phân biệt loại sản phẩm.
+          productSelect.appendChild(option); // Thêm option vào dropdown.
+        });
+      } else { // Nếu tempCart rỗng.
+        const noProductOption = document.createElement("option"); // Tạo option thông báo.
+        noProductOption.value = ""; // Không có giá trị.
+        noProductOption.text = "Không có sản phẩm nào để bán lại"; // Nội dung thông báo.
+        noProductOption.disabled = true; // Làm option này không thể chọn.
+        productSelect.appendChild(noProductOption); // Thêm vào dropdown.
+      }
+    } else { // Nếu là chế độ chỉnh sửa.
+      // Chế độ chỉnh sửa: Thêm sản phẩm hiện tại (A) và các pending không trùng tên.
+      const currentName = resellList.find(item => item.id === currentEditId)?.name || ''; // Tìm tên sản phẩm dựa trên currentEditId, nếu không tìm thấy thì dùng chuỗi rỗng.
+      if (currentEditId) { // Nếu có ID chỉnh sửa.
+        const currentEditProduct = resellList.find(item => item.id === currentEditId); // Tìm sản phẩm trong resellList.
+        if (currentEditProduct) { // Nếu tìm thấy.
+          const option = document.createElement("option"); // Tạo option mới.
+          option.value = currentEditId; // Đặt giá trị là ID sản phẩm.
+          option.text = currentName; // Đặt nội dung là tên sản phẩm.
+          option.setAttribute('data-type', 'resell'); // Thêm thuộc tính data-type.
+          productSelect.appendChild(option); // Thêm option.
+          productSelect.value = currentEditId; // Tự động chọn option này.
+        }
+      }
+      
+      // Thêm sản phẩm pending, nhưng chỉ những cái không trùng tên với sản phẩm hiện tại.
+      if (tempCart.length > 0) {
+        tempCart.forEach(item => {
+          if (item.name !== currentName) { // Kiểm tra không trùng tên.
+            const option = document.createElement("option");
+            const pendingValue = `pending-${item.name}`;
+            option.value = pendingValue;
+            option.text = item.name;
+            option.setAttribute('data-type', 'pending');
+            productSelect.appendChild(option);
+          }
+        });
+      } else if (!currentEditId) { // Nếu không có ID chỉnh sửa và tempCart rỗng.
+        const noProductOption = document.createElement("option");
+        noProductOption.value = "";
+        noProductOption.text = "Không tìm thấy sản phẩm để chỉnh sửa";
+        noProductOption.disabled = true;
+        productSelect.appendChild(noProductOption);
+      }
+    }
+
+    productSelectSection.style.display = 'block'; // Hiển thị phần chứa dropdown.
+  }
+
+  // Hàm loadProductToForm: Xử lý việc tải dữ liệu sản phẩm vào form khi chọn từ dropdown.
+  function loadProductToForm(selectedValue) {
+    const resellList = JSON.parse(localStorage.getItem("resellList")) || [];
+    const tempCart = JSON.parse(localStorage.getItem("tempCartForResell")) || [];
+
+    if (selectedValue.startsWith('pending-')) {
+      // Xử lý khi chuyển sang sản phẩm pending (B): Cập nhật form và UI.
+      const pendingName = selectedValue.replace('pending-', ''); // Loại bỏ prefix 'pending-' để lấy tên sản phẩm.
+      currentProduct = tempCart.find(item => item.name === pendingName); // Tìm sản phẩm trong tempCart.
+      if (currentProduct) {
+        const newName = currentProduct.name; // Lấy tên mới.
+        document.getElementById("resell-name").value = newName; // Điền tên vào field.
+        
+        // Reset các field khác để người dùng nhập mới.
+        document.getElementById("resell-img").value = '';
+        document.getElementById("resell-desc").value = '';
+        document.getElementById("resell-price").value = '';
+        document.getElementById("resell-manufacturer").value = '';
+        
+        pendingToRemove = pendingName; // Đánh dấu sản phẩm để xóa sau khi submit.
+        
+        // Cập nhật UI của dropdown: Thay đổi text của option A thành tên B.
+        const currentOption = productSelect.querySelector(`option[value="${currentEditId}"]`);
+        if (currentOption) {
+          currentOption.text = newName; // Cập nhật nội dung hiển thị.
+        }
+        
+        pageTitle.innerText = '✏ Chỉnh sửa sản phẩm'; // Cập nhật tiêu đề trang.
+        submitBtn.innerText = 'Cập nhật sản phẩm'; // Cập nhật nội dung nút submit.
+        productSelect.value = currentEditId; // Giữ selection là A, nhưng với text mới.
+      }
+    } else if (selectedValue === currentEditId) {
+      // Xử lý khi chọn lại sản phẩm gốc (A).
+      currentProduct = resellList.find(item => item.id === selectedValue); // Tìm sản phẩm trong resellList.
+      if (currentProduct) {
+        document.getElementById("resell-name").value = currentProduct.name; // Điền tên.
+        document.getElementById("resell-img").value = currentProduct.img; // Điền link ảnh.
+        document.getElementById("resell-desc").value = currentProduct.desc; // Điền mô tả.
+        
+        const cleanPrice = currentProduct.price.replace(/\D/g, ""); // Lấy giá và loại bỏ ký tự không phải số (như "đ").
+        const priceNum = parseInt(cleanPrice); // Chuyển thành số nguyên.
+        if (!isNaN(priceNum) && priceNum > 0) {
+          document.getElementById("resell-price").value = priceNum.toLocaleString("vi-VN"); // Định dạng giá theo định dạng Việt Nam và điền vào field.
+        } else {
+          document.getElementById("resell-price").value = ''; // Nếu giá không hợp lệ, reset field.
+        }
+        
+        document.getElementById("resell-manufacturer").value = currentProduct.manufacturer || ''; // Điền nhà sản xuất, nếu không có thì để trống.
+        
+        pageTitle.innerText = '✏ Chỉnh sửa sản phẩm'; // Cập nhật tiêu đề.
+        submitBtn.innerText = 'Cập nhật sản phẩm'; // Cập nhật nút submit.
+        pendingToRemove = null; // Reset biến, vì quay lại sản phẩm A.
+      }
+    }
+  }
+
+  // Cập nhật , Load ban đầu: Gọi hàm để tải dropdown và thiết lập sự kiện.
+  if (isEditMode) {
+    loadDropdown(); // Tải dropdown nếu là chế độ chỉnh sửa.
+    if (currentEditId) {
+      loadProductToForm(currentEditId); // Tải dữ liệu sản phẩm vào form nếu có ID.
+    }
+  } else {
+    loadDropdown(); // Tải dropdown cho chế độ tạo mới.
+    // Thêm event listener cho dropdown ở chế độ tạo mới.
+    productSelect.addEventListener("change", () => {
+      const selectedValue = productSelect.value;
+      if (selectedValue && !isEditMode && selectedValue.startsWith('pending-')) {
+        const pendingName = selectedValue.replace('pending-', ''); // Lấy tên sản phẩm từ giá trị selected.
+        document.getElementById("resell-name").value = pendingName; // Auto-fill tên sản phẩm.
+        // Reset các field khác.
+        document.getElementById("resell-img").value = '';
+        document.getElementById("resell-desc").value = '';
+        document.getElementById("resell-price").value = '';
+        document.getElementById("resell-manufacturer").value = '';
+        pageTitle.innerText = '🔄 Bán lại sản phẩm'; // Cập nhật tiêu đề.
+        submitBtn.innerText = 'Đăng bán sản phẩm'; // Cập nhật nút submit.
+      }
+    });
+  }
+
+  // Event listener cho sự kiện thay đổi dropdown.
+  productSelect.addEventListener("change", (e) => {
+    const selectedValue = e.target.value; // Lấy giá trị được chọn.
+    if (!selectedValue) return; // Nếu không chọn gì, thoát hàm.
+    
+    if (!isEditMode) return; // Nếu không phải chế độ chỉnh sửa, không xử lý ở đây.
+    
+    if (selectedValue !== currentEditId) { // Nếu chọn giá trị khác với ID hiện tại.
+      if (confirm('Bạn muốn chuyển sang sản phẩm khác? Dữ liệu hiện tại sẽ bị mất nếu chưa lưu.')) { // Hỏi xác nhận.
+        loadProductToForm(selectedValue); // Gọi hàm để load dữ liệu mới.
+      } else {
+        e.target.value = currentEditId; // Giữ nguyên giá trị hiện tại.
+        loadProductToForm(currentEditId); // Load lại dữ liệu gốc.
+      }
+    } else {
+      loadProductToForm(selectedValue); // Nếu chọn lại giá trị hiện tại, load nó.
+    }
+  });
+
+  // Event listener cho sự kiện submit form.
+  resellForm.addEventListener("submit", (e) => {
+    e.preventDefault(); // Ngăn chặn hành vi mặc định của form (tức là không reload trang).
+    
+    if (!isEditMode && productSelect.value === "") { // Nếu không phải chế độ chỉnh sửa và chưa chọn sản phẩm.
+      alert("Vui lòng chọn sản phẩm từ danh sách để bán lại!");
+      return; // Thoát hàm.
+    }
+    
+    const name = document.getElementById("resell-name").value.trim(); // Lấy và trim giá trị tên sản phẩm.
+    const img = document.getElementById("resell-img").value.trim(); // Lấy và trim giá trị link ảnh.
+    const desc = document.getElementById("resell-desc").value.trim(); // Lấy và trim giá trị mô tả.
+    const priceInput = document.getElementById("resell-price").value.trim(); // Lấy và trim giá trị giá.
+    
+    const cleanPriceInput = priceInput.replace(/\./g, ''); // Loại bỏ dấu chấm (.) trong giá để chuẩn hóa.
+    const priceNum = parseInt(cleanPriceInput); // Chuyển chuỗi giá thành số nguyên.
+    if (isNaN(priceNum) || priceNum <= 0) { // Kiểm tra nếu giá không phải số hoặc nhỏ hơn hoặc bằng 0.
+      alert("Giá phải là số lớn hơn 0!");
+      return; // Thoát hàm.
+    }
+    
+    const formattedPrice = priceNum.toLocaleString("vi-VN") + "đ"; // Định dạng giá theo định dạng Việt Nam và thêm đơn vị "đ".
+    const manufacturer = document.getElementById("resell-manufacturer").value.trim(); // Lấy và trim giá trị nhà sản xuất.
+    
+    if (!name || !img || !desc || !priceInput) { // Kiểm tra nếu bất kỳ field nào trống.
+      alert("Vui lòng điền đầy đủ thông tin!");
+      return; // Thoát hàm.
+    }
+    
+    let resellList = JSON.parse(localStorage.getItem("resellList")) || []; // Lấy mảng resellList từ localStorage.
+    let tempCart = JSON.parse(localStorage.getItem("tempCartForResell")) || []; // Lấy mảng tempCartForResell từ localStorage.
+    
+    if (isEditMode && currentEditId) { // Nếu là chế độ chỉnh sửa.
+      const index = resellList.findIndex(item => item.id === currentEditId); // Tìm index của sản phẩm cần chỉnh sửa.
+      if (index !== -1) { // Nếu tìm thấy.
+        const duplicate = resellList.find((item, i) => item.name === name && i !== index); // Kiểm tra trùng tên với sản phẩm khác.
+        if (duplicate) {
+          alert("Tên sản phẩm trùng với sản phẩm khác!");
+          return; // Thoát hàm.
+        }
+        resellList[index] = { ...resellList[index], name, img, desc, price: formattedPrice, manufacturer: manufacturer || '' }; // Cập nhật sản phẩm tại index.
+        localStorage.setItem("resellList", JSON.stringify(resellList)); // Lưu lại resellList.
+        
+        if (pendingToRemove) { // Nếu có sản phẩm pending cần xóa.
+          tempCart = tempCart.filter(item => item.name !== pendingToRemove); // Lọc để xóa sản phẩm pending.
+          localStorage.setItem("tempCartForResell", JSON.stringify(tempCart.length > 0 ? tempCart : [])); // Lưu tempCart mới.
+          if (tempCart.length === 0) {
+            localStorage.removeItem("tempCartForResell"); // Xóa key nếu tempCart rỗng.
+          }
+          pendingToRemove = null; // Reset biến.
+        }
+        
+        alert("Cập nhật thành công!"); // Thông báo thành công.
+        window.location.href = "products.html"; // Chuyển hướng về trang products.
+      } else {
+        alert("Lỗi: Không tìm thấy sản phẩm để cập nhật!"); // Thông báo lỗi.
+      }
+      return; // Kết thúc hàm.
+    } else { // Nếu là chế độ tạo mới.
+      const exists = resellList.find(item => item.name === name); // Kiểm tra sản phẩm đã tồn tại.
+      if (exists) {
+        alert("Sản phẩm này đã được đăng bán lại trước đó!");
+        return; // Thoát hàm.
+      }
+      const resellId = `resell-${Date.now()}`; // Tạo ID mới dựa trên thời gian hiện tại.
+      resellList.push({ id: resellId, name, img, desc, price: formattedPrice, manufacturer: manufacturer || '', isResell: true }); // Thêm sản phẩm mới vào resellList.
+      localStorage.setItem("resellList", JSON.stringify(resellList)); // Lưu resellList.
+      
+      tempCart = tempCart.filter(item => item.name !== name); // Xóa sản phẩm từ tempCart nếu trùng tên.
+      localStorage.setItem("tempCartForResell", JSON.stringify(tempCart.length > 0 ? tempCart : [])); // Lưu tempCart mới.
+      if (tempCart.length === 0) {
+        localStorage.removeItem("tempCartForResell"); // Xóa key nếu
+      }
+      
+      alert("Đăng bán thành công!");  // Thông báo thành công sau khi đăng bán.
+      resellForm.reset();  // Reset form để xóa tất cả giá trị nhập.
+      productSelect.value = "";  // Đặt giá trị dropdown về mặc định (không chọn).
+      if (tempCart.length === 0) {  // Kiểm tra nếu giỏ hàng tạm thời rỗng.
+        setTimeout(() => { window.location.href = "products.html"; }, 1500);  // Chờ 1.5 giây rồi chuyển hướng về trang products.
+      } else {  // Nếu còn sản phẩm trong giỏ hàng.
+        alert("Tiếp tục đăng bán sản phẩm còn lại.");  // Thông báo để tiếp tục.
+        loadDropdown();  // Tải lại dropdown để hiển thị sản phẩm còn lại.
+      }
+    }
+  });
+  if (isEditMode) {
+    loadDropdown();  // Nếu là chế độ chỉnh sửa, tải dropdown.
+  }
+});  // Kết thúc sự kiện DOMContentLoaded, đóng toàn bộ script.
+</script>
+</body>
+</html>

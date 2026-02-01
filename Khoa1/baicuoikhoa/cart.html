@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Giỏ hàng</title>
+  <link rel="stylesheet" href="cart.css">
+</head>
+<body>
+  <h1>🛒 Giỏ hàng của bạn</h1>
+
+  <div class="cart-container"></div>
+
+  <div class="cart-summary">
+    <p>Tổng tiền: <span class="total">0đ</span></p>
+    <a href="products.html" class="back-btn">⬅️ Quay lại mua hàng</a>
+    <a href="#" id="checkout-btn" class="checkout-btn">Thanh toán</a> <!-- Thay href="#" để thêm JS -->
+  </div>
+
+  <footer>
+    <p>© 2025 MyShop Dropship. Giữ toàn bộ bản quyền.</p>
+  </footer>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // ================================
+    // 1. Lấy container và phần tổng tiền
+    // ================================
+    const cartContainer = document.querySelector(".cart-container");
+    const totalEl = document.querySelector(".total");
+    const checkoutBtn = document.getElementById("checkout-btn"); // Lấy nút thanh toán
+
+    // Lấy giỏ hàng từ localStorage
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    // ================================
+    // 2. Hàm hiển thị toàn bộ giỏ hàng
+    // ================================
+    function renderCart() {
+      cartContainer.innerHTML = ""; // Xóa nội dung cũ
+
+      // Nếu giỏ hàng trống
+      if (cart.length === 0) {
+        cartContainer.innerHTML = "<p>🛒 Giỏ hàng trống</p>";
+        totalEl.innerText = "0đ";
+        return;
+      }
+
+      let total = 0; // Tổng tiền
+
+      // Duyệt qua từng sản phẩm trong giỏ
+      cart.forEach((item, index) => {
+        const itemDiv = document.createElement("div");
+        itemDiv.classList.add("cart-item");
+
+        // Chuyển giá từ string "100.000đ" → số 100000
+        const priceNum = parseInt(item.price.replace(/\D/g, ""));
+        const itemTotal = priceNum * item.quantity; // Thành tiền = giá × số lượng
+        total += itemTotal; // Cộng vào tổng tiền
+
+        // HTML hiển thị cho từng sản phẩm
+        itemDiv.innerHTML = `
+          <img src="${item.img}" alt="${item.name}">
+          <div class="item-info">
+            <h3>${item.name}</h3>
+            <p class="price">${item.price}</p>
+            <div class="quantity">
+              <button class="decrease">-</button>
+              <span class="count">${item.quantity}</span>
+              <button class="increase">+</button>
+            </div>
+          </div>
+          <button class="remove-btn">❌</button>
+        `;
+
+        // Nút tăng số lượng
+        itemDiv.querySelector(".increase").addEventListener("click", () => {
+          item.quantity++;
+          saveCart();
+          renderCart();
+        });
+
+        // Nút giảm số lượng
+        itemDiv.querySelector(".decrease").addEventListener("click", () => {
+          item.quantity--;
+          if (item.quantity <= 0) {
+            cart.splice(index, 1); // Nếu số lượng = 0 → xóa sản phẩm
+          }
+          saveCart();
+          renderCart();
+        });
+
+        // Nút xóa sản phẩm
+        itemDiv.querySelector(".remove-btn").addEventListener("click", () => {
+          cart.splice(index, 1);
+          saveCart();
+          renderCart();
+        });
+
+        cartContainer.appendChild(itemDiv);
+      });
+
+      // Cập nhật tổng tiền
+      totalEl.innerText = total.toLocaleString("vi-VN") + "đ";
+    }
+
+    // ================================
+    // 3. Hàm lưu giỏ hàng vào localStorage
+    // ================================
+    function saveCart() {
+      localStorage.setItem("cart", JSON.stringify(cart));
+    }
+
+    // ================================
+// 4. Xử lý nút Thanh toán: Lưu tạm cart, MERGE với pending cũ, xóa cart, chuyển hướng
+// ================================
+checkoutBtn.addEventListener("click", (e) => {
+  e.preventDefault(); // Ngăn chuyển hướng mặc định
+  if (cart.length === 0) {
+    alert("Giỏ hàng trống! Không thể thanh toán.");
+    return;
+  }
+
+  // LẤY PENDING CŨ (nếu có)
+  let existingTempCart = JSON.parse(localStorage.getItem("tempCartForResell")) || [];
+
+  // MERGE: Thêm cart mới vào pending cũ, tránh duplicate dựa trên name
+  let mergedTempCart = [...existingTempCart];  // Copy pending cũ
+  cart.forEach(newItem => {
+    // Kiểm tra duplicate (dựa trên name, quantity giữ nguyên từ newItem)
+    const duplicateIndex = mergedTempCart.findIndex(item => item.name === newItem.name);
+    if (duplicateIndex === -1) {
+      // Không duplicate → thêm mới
+      mergedTempCart.push({
+        name: newItem.name,
+        price: newItem.price,
+        img: newItem.img,
+        quantity: newItem.quantity || 1  // Giữ quantity nếu có
+      });
+    } else {
+      // Duplicate → Cập nhật quantity (tăng nếu cần, tùy logic bạn muốn)
+      // Ví dụ: Tăng quantity nếu cùng sản phẩm
+      mergedTempCart[duplicateIndex].quantity += (newItem.quantity || 1);
+      console.log(`Cập nhật quantity cho ${newItem.name}: ${mergedTempCart[duplicateIndex].quantity}`);
+    }
+  });
+
+  // Lưu merged pending vào localStorage
+  localStorage.setItem("tempCartForResell", JSON.stringify(mergedTempCart));
+
+  // Xóa giỏ hàng chính (giữ nguyên)
+  localStorage.removeItem("cart");
+
+  // Chuyển hướng
+  window.location.href = "checkout.html";
+});
+
+    // ================================
+    // 5. Khi mở cart.html lần đầu
+    // ================================
+    renderCart(); // Hiển thị giỏ hàng
+
+    // Đặt cờ "đã xem giỏ hàng" để khi quay lại products thì reset icon
+    localStorage.setItem("cartViewed", "true");
+  });
+  </script>
+</body>
+</html>

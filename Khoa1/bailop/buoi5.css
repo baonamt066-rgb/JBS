@@ -1,0 +1,29 @@
+div{
+    display: block;
+    background-color: #ccc;
+    padding: 10px;
+}
+span{
+    display: inline;
+    background-color: red;
+    color: #fff;
+    padding: 5px;
+}
+.btn1{
+    display: inline-block;
+    color: white;
+    padding: 10px;
+    margin: 5px;
+    background-color: blue;
+}
+.btn2{
+    display: inline-block;
+    color: white;
+    padding: 10px;
+    margin: 5px;
+    background-color: red;
+}
+.container{
+    display: flex;
+    justify-content: center;
+}

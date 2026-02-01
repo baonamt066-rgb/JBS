@@ -1,0 +1,107 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Navbar fixed */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #333;
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  gap: 20px;
+  z-index: 1000;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+}
+
+/* Khoảng trống cho navbar */
+.container {
+  display: flex;
+  margin-top: 70px;
+  padding: 20px;
+}
+
+/* Sidebar sticky */
+.sidebar {
+  position: sticky;
+  top: 70px; /* nằm dưới navbar */
+  width: 200px;
+  height: fit-content;
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-right: 1px solid #ccc;
+}
+
+.sidebar h3 {
+  margin-top: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin-bottom: 10px;
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: #333;
+}
+
+/* Nội dung sản phẩm */
+.main-content {
+  flex: 1;
+  padding-left: 30px;
+}
+
+/* Card sản phẩm */
+.product-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  width: 300px;
+  padding: 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.image-container {
+  position: relative;
+}
+
+.image-container img {
+  width: 100%;
+  border-radius: 6px;
+}
+
+.buy-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #ff5722;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.buy-button:hover {
+  background-color: #e64a19;
+}

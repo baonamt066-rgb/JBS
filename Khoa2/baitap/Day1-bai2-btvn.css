@@ -1,0 +1,53 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 30px;
+    background: #fff;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    gap: 25px;
+    padding: 0 40px;
+}
+
+.product {
+    text-align: center;
+    border: 1px solid #ddd;
+    padding: 12px;
+}
+
+.product img {
+    width: 200px;
+    height: 200px;
+}
+
+.product h3 {
+    font-size: 15px;
+    margin: 10px 0 5px;
+}
+
+.product p {
+    font-size: 14px;
+    color: #444;
+}
+
+.product button {
+    padding: 10px 15px;
+    background: white;
+    border: 1px solid black;
+    cursor: pointer;
+    width: 100%;
+    font-weight: bold;
+}
+
+.product button:hover {
+    background: black;
+    color: white;
+}

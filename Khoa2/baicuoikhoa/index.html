@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Study Planner Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: #f5f7fb;
+    }
+
+    .app {
+      display: flex;
+      height: 100vh;
+    }
+
+    /* ===== SIDEBAR ===== */
+    .sidebar {
+      width: 240px;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      border-right: 1px solid #e5e7eb;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 30px;
+    }
+
+    .menu {
+      flex: 1;
+    }
+
+    .menu-item {
+      display: block;
+      padding: 12px 14px;
+      margin-bottom: 8px;
+      border-radius: 8px;
+      color: #374151;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .menu-item:hover {
+      background: #f1f5f9;
+    }
+
+    .menu-item.active {
+      background: #e0f2fe;
+      color: #0369a1;
+      font-weight: 500;
+    }
+
+    .logout {
+      padding: 12px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      color: #b91c1c;
+      transition: background 0.2s;
+    }
+
+    .logout:hover {
+      background: #fee2e2;
+    }
+
+    /* ===== MAIN ===== */
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .topbar {
+      height: 60px;
+      background: #ffffff;
+      border-bottom: 1px solid #e5e7eb;
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      font-weight: 500;
+      font-size: 18px;
+    }
+
+    .content {
+      padding: 24px;
+    }
+
+    /* Demo card */
+    .card {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      max-width: 400px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="logo">📅 Study Planner</div>
+
+      <nav class="menu">
+        <div class="menu-item active">Dashboard</div>
+        <div class="menu-item">Lịch học</div>
+        <div class="menu-item">Deadline</div>
+        <div class="menu-item">Calendar</div>
+        <div class="menu-item">Settings</div>
+      </nav>
+
+      <div class="logout">Logout</div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+      <div class="topbar">Dashboard</div>
+
+      <div class="content">
+        <div class="card">
+          <h3>Chào mừng 👋</h3>
+          <p>Đây là giao diện dashboard quản lý lịch học.</p>
+          <p>Chức năng sẽ được phát triển sau.</p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+</body>
+</html>

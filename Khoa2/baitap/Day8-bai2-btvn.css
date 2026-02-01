@@ -1,0 +1,36 @@
+.hero {
+    background: url("https://images.unsplash.com/photo-1555992336-cbf7e7c3c2b6") center/cover;
+    padding: 100px 20px;
+}
+
+.time-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.slot {
+    padding: 15px;
+    background: #f8f9fa;
+    text-align: center;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.error {
+    color: red;
+    font-size: 13px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .time-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .time-grid {
+        grid-template-columns: 1fr;
+    }
+}

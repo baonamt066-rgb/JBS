@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grid Example</title>
+
+  <style>
+    /* --- Khung lưới chính --- */
+    .grid-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr; /* 3 cột */
+      grid-template-rows: repeat(4, 100px); /* 4 hàng, mỗi hàng cao 100px */
+      gap: 5px;
+      width: 400px;
+      margin: 20px auto;
+      border: 2px solid black;
+      background-color: #f5f5f5;
+    }
+
+    /* ---------- CỘT 1 ---------- */
+    .c1-item1 {
+      background-color: lightyellow;
+      grid-column-start: 1;
+      grid-column-end: 2;
+      grid-row-start: 1;
+      grid-row-end: 4; /* chiếm hàng 1–3 */
+    }
+
+    .c1-item2 {
+      background-color: lightpink;
+      grid-column-start: 1;
+      grid-column-end: 2;
+      grid-row-start: 4;
+      grid-row-end: 5; /* hàng 4 */
+    }
+
+    /* ---------- CỘT 2 ---------- */
+    .c2-item1 {
+      background-color: rgb(116, 171, 226);
+      grid-column-start: 2;
+      grid-column-end: 3;
+      grid-row-start: 1;
+      grid-row-end: 3; /* chiếm hàng 1–2 */
+    }
+
+    .c2-item2 {
+      background-color: rgb(210, 67, 226);
+      grid-column-start: 2;
+      grid-column-end: 3;
+      grid-row-start: 3;
+      grid-row-end: 5; /* chiếm hàng 3–4 */
+    }
+
+    /* ---------- CỘT 3 ---------- */
+    .c3-item1 {
+      background-color: lightblue;
+      grid-column-start: 3;
+      grid-column-end: 4;
+      grid-row-start: 1;
+      grid-row-end: 2; /* hàng 1 */
+    }
+
+    .c3-item2 {
+      background-color: lightgreen;
+      grid-column-start: 3;
+      grid-column-end: 4;
+      grid-row-start: 2;
+      grid-row-end: 4; /* chiếm hàng 2–3 */
+    }
+
+    .c3-item4 {
+      background-color: lightcoral;
+      grid-column-start: 3;
+      grid-column-end: 4;
+      grid-row-start: 4;
+      grid-row-end: 5; /* hàng 4 */
+    }
+  </style>
+</head>
+
+<body>
+  <div class="grid-container">
+    <!-- Cột 1 -->
+    <div class="c1-item1">C1-1</div>
+    <div class="c1-item2">C1-2</div>
+
+    <!-- Cột 2 -->
+    <div class="c2-item1">C2-1</div>
+    <div class="c2-item2">C2-2</div>
+
+    <!-- Cột 3 -->
+    <div class="c3-item1">C3-1</div>
+    <div class="c3-item2">C3-2</div>
+    <div class="c3-item4">C3-3</div>
+  </div>
+</body>
+</html>

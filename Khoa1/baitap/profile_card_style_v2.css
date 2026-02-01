@@ -1,0 +1,87 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between; /* Căn logo - menu - nút về 3 phía */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  background-color: #0077cc;
+  padding: 10px 20px;
+  color: white;
+}
+
+.logo {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: #ffd700;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.actions button {
+  padding: 6px 12px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.login {
+  background-color: white;
+  color: #0077cc;
+}
+
+.signup {
+  background-color: #ffd700;
+  color: black;
+}
+
+/* Thứ tự ưu tiên khi thu nhỏ màn hình */
+@media (max-width: 768px) {
+  .navbar {
+    flex-wrap: wrap; /* Cho phép xuống dòng */
+    justify-content: center; /* Canh giữa khi wrap */
+  }
+
+  .logo {
+    order: 1; /* Logo lên trên */
+    margin-bottom: 10px;
+  }
+
+  .nav-links {
+    order: 3; /* Menu xuống dưới */
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .actions {
+    order: 2; /* Nút ở giữa logo và menu */
+    margin-bottom: 10px;
+  }
+}

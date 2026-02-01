@@ -1,0 +1,23 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #f8f8f8;
+}
+
+
+.flag {
+    width: 300px;
+    height: 200px;
+    background-color: #da251d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.star {
+    font-size: 100px;     
+    color: #ffcc00;       
+}

@@ -1,0 +1,48 @@
+body {
+    background-color:#f94877;
+    font-family: Arial, sans-serif;
+    color: white;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 50px;
+    align-items: center;
+}
+header h1 {
+    font-size: 24px;
+    margin: 0;
+}
+nav {
+    display: flex;
+    gap: 30px;
+}
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+.content {
+    padding: 100px;
+}
+.content h2 {
+    font-size: 30px;
+    font-family: Comic Sans MS;
+}
+.buttons .btn {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+.btn.apple {
+    border: 5px solid black;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: black;
+}
+
+.btn.google {
+    border: 5px solid white ;
+    padding: 10px;
+    border-radius: 5px;
+}    

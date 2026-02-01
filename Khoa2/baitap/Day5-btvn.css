@@ -1,0 +1,31 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f6f6f6;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.container {
+    background: #fff;
+    padding: 20px 30px;
+    border-radius: 8px;
+    width: 350px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+input {
+    width: 100%;
+    padding: 6px 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+button {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.stored {
+    margin-top: 20px;
+}

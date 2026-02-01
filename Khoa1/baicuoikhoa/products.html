@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Danh sách sản phẩm - MyShop Dropship</title>
+  <link rel="stylesheet" href="products.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="#" class="logo">
+        <img src="logo.png" alt="Logo">
+        <span>MyShop Dropship</span>
+      </a>
+      <a href="checkout.html" class="checkout-btn">➡ Bán lại sản phẩm</a>
+      <div class="dropdown">
+        <button class="dropdown-btn">≡ Danh mục</button>
+        <div class="dropdown-content">
+          <a href="#" data-category="all">Tất cả</a>
+          <a href="#" data-category="technology">Công nghệ</a>
+          <a href="#" data-category="fashion">Thời trang</a>
+          <a href="#" data-category="cosmetics">Mỹ phẩm</a>
+          <a href="#" data-category="khac">Khác</a>
+        </div>
+      </div>
+      <div class="search-box">
+        <input type="text" placeholder="Tìm kiếm sản phẩm..." id="search-input">
+        <button id="search-btn">🔍</button>
+      </div>
+      <a href="#top" class="scroll-top">⬆</a>
+      <a href="cart.html" class="cart-icon">🛍 <span id="cart-count">0</span></a>
+    </div>
+  </nav>
+
+  <!-- Danh sách sản phẩm -->
+  <div class="parent">
+
+    <!-- Nhóm Công nghệ (1–8) -->
+    <div class="category technology">
+      <div class="item-card">
+        <img src="https://hdradio.vn/upload/hinhanh/loa-di-dong/divoom/ditoopro/ditoopro-avt.jpg" alt="Loa Divoom DitooPro">
+        <h3>Loa Divoom DitooPro</h3>
+        <p class="price">300.000đ</p>
+        <a href="product-detail.html?id=1" class="buy-btn">Xem chi tiết</a>
+      </div>
+      <div class="item-card">
+        <img src="https://imagedelivery.net/ZeGtsGSjuQe1P3UP_zk3fQ/d21c2f61-af72-4cc4-972b-e5a073db9c00/storedata" alt="Elgato Stream Deck Neo">
+        <h3>Elgato Stream Deck Neo</h3>
+        <p class="price">450.000đ</p>
+        <a href="product-detail.html?id=2" class="buy-btn">Xem chi tiết</a>
+      </div>
+      <div class="item-card">
+        <img src="https://imagedelivery.net/ZeGtsGSjuQe1P3UP_zk3fQ/3dd303f9-1bdf-47b9-7e17-c01658b9a800/storedata" alt="Elgato Gaming Stream Deck XL">
+        <h3>Elgato Gaming Stream Deck XL</h3>
+        <p class="price">500.000đ</p>
+        <a href="product-detail.html?id=3" class="buy-btn">Xem chi tiết</a>
+      </div>
+      <div class="item-card">
+        <img src="https://anphat.com.vn/media/product/33286_gia_do_man_hinh_north_bayou_17_3.png" alt="Giá đỡ màn hình North Bayou F80">
+        <h3>Giá đỡ màn hình North Bayou F80</h3>
+        <p class="price">250.000đ</p>
+        <a href="product-detail.html?id=4" class="buy-btn">Xem chi tiết</a>
+      </div>
+      <div class="item-card">
+        <img src="https://salt.tikicdn.com/cache/750x750/ts/product/5e/ba/07/9a769c0db6544b5b62c3be3104c1a829.jpg.webp" alt="Tai nghe Lobel TWS F9-5">
+        <h3>Tai nghe Lobel TWS F9-5</h3>
+        <p class="price">300.000đ</p>
+        <a href="product-detail.html?id=5" class="buy-btn">Xem chi tiết</a>
+      </div>
+      <div class="item-card">
+        <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/f/r/frame_516_5__1.png" alt="Bàn phím cơ AULA F3261">
+        <h3>Bàn phím cơ AULA F3261</h3>
+        <p class="price">450.000đ</p>
+        <a href="product-detail.html?id=6" class="buy-btn">Xem chi tiết</a>
+      </div>
+      <div class="item-card">
+        <img src="https://bizweb.dktcdn.net/thumb/grande/100/534/572/products/screenshot-2024-12-18-114608.png?v=1755598260167" alt="Chuột Mchose G3 Wireless">
+        <h3>Chuột Mchose G3 Wireless</h3>
+        <p class="price">500.000đ</p>
+        <a href="product-detail.html?id=7" class="buy-btn">Xem chi tiết</a>
+      </div>
+      <div class="item-card">
+        <img src="https://vietminh.vn/uploads/files/man-hp-v193b(1).jpg" alt="Màn hình HP V193B">
+        <h3>Màn hình HP V193B</h3>
+        <p class="price">250.000đ</p>
+        <a href="product-detail.html?id=8" class="buy-btn">Xem chi tiết</a>
+      </div>
+    </div>
+
+    <!-- Nhóm Mỹ phẩm (9–16) -->
+    <div class="category cosmetics">
+      <div class="item-card">
+        <img src="https://media.comem.vn/uploads/September2023/son-nha-sac-mau-thanh-nha-1_sp2x.webp" alt="Son Nhã - Sắc Màu Thanh Nhã">
+        <h3>Son Nhã - Sắc Màu Thanh Nhã</h3>
+        <p class="price">330.000đ</p>
+        <a href="product-detail.html?id=9" class="buy-btn">Xem chi tiết</a>
+      </div>
+      <div class="item-card">
+        <img src="https://vilip.vn/wp-content/uploads/2023/09/Son-YSL-Rouge-Pur-Couture-01-Le-Rouge-%E2%80%93-Mau-Do-Tuoi-dd.jpg?v=1694339097" alt="Son YSL Rouge Pur Couture">
+        <h3>Son YSL Rouge Pur Couture</h3>
+        <p class="price">890.000đ</p>
+        <a href="product-detail.html?id=10" class="buy-btn">Xem chi tiết</a>
+      </div>
+      <div class="item-card">
+        <img src="https://cdn.vuahanghieu.com/unsafe/0x500/left/top/smart/filters:quality(90)/https://admin.vuahanghieu.com/upload/product/2025/07/phan-nuoc-yves-saint-laurent-beaute-touche-eclat-glow-pact-cushion-foundation-tone-b10-688836df227fb-29072025095007.jpg" alt="Phấn Nước YSL Glow-Pact B10">
+        <h3>Phấn Nước YSL Glow-Pact B10</h3>
+        <p class="price">2.500.000đ</p>
+        <a href="product-detail.html?id=11" class="buy-btn">Xem chi tiết</a>
+      </div>
+      <div class="item-card">
+        <img src="https://is4.fwrdassets.com/images/p/fw/45/CTIL-WU151_V1.jpg" alt="Charlotte Tilbury Gian Lông Mày">
+        <h3>Charlotte Tilbury Gian Lông Mày</h3>
+        <p class="price">686.660đ</p>
+        <a href="product-detail.html?id=12" class="buy-btn">Xem chi tiết</a>
+      </div>
+      <div class="item-card">
+        <img src="https://phukientrangdiem.com/thumb.php?src=https://phukientrangdiem.com/upload/public/cop-trang-diem/cop-dung-do-trang-diem-xach-tay-guong-den-led-mau-den-khung-nhom-phukientrangdiem.com-4.1.jpg&w=500&h=0&f=products&s=1" alt="Cốp Đựng Trang Điểm LED">
+        <h3>Cốp Đựng Trang Điểm LED</h3>
+        <p class="price">1.850.000đ</p>
+        <a href="product-detail.html?id=13" class="buy-btn">Xem chi tiết</a>
+      </div>
+      <div class="item-card">
+        <img src="https://pos.nvncdn.com/688d2d-180276/ps/20240814_eXAj2aRqx3.jpeg?v=1723647728" alt="Bộ Mỹ Phẩm Hồng 5in1">
+        <h3>Bộ Mỹ Hoàng Cung Phẩm Hồng 5in1</h3>
+        <p class="price">450.000đ</p>
+        <a href="product-detail.html?id=14" class="buy-btn">Xem chi tiết</a>
+      </div>
+      <div class="item-card">
+        <img src="https://i.ebayimg.com/images/g/lzQAAOSwLcFjIEQ1/s-l1600.webp" alt="Cốp Đựng Mỹ Phẩm Vân Nổi">
+        <h3>Cốp Đựng Mỹ Phẩm Vân Nổi</h3>
+        <p class="price">690.000đ</p>
+        <a href="product-detail.html?id=15" class="buy-btn">Xem chi tiết</a>
+      </div>
+      <div class="item-card">
+        <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lvyfnpdrhejda9@resize_w900_nl.webp" alt="Kem Dưỡng Ẩm Ban Đêm OLAY">
+        <h3>Kem Dưỡng Ẩm Ban Đêm OLAY</h3>
+        <p class="price">816.000đ</p>
+        <a href="product-detail.html?id=16" class="buy-btn">Xem chi tiết</a>
+      </div>
+    </div>
+
+    <!-- Nhóm Thời trang (17–24) -->
+    <div class="category fashion">
+      <div class="item-card">
+        <img src="https://thoitrangbigsize.vn/wp-content/uploads/2021/10/BSX653D0.jpg" alt="">
+        <h3>Áo thun xanh navy BSX653</h3>
+        <p class="price">289.000đ</p>
+        <a href="product-detail.html?id=17" class="buy-btn">Xem chi tiết</a>
+      </div>
+      <div class="item-card">
+        <img src="https://thoitrangbigsize.vn/wp-content/uploads/2025/04/Den-9.jpg" alt="">
+        <h3>Quần Short Kaki Nam M-8XL</h3>
+        <p class="price">380.000đ</p>
+        <a href="product-detail.html?id=18" class="buy-btn">Xem chi tiết</a>
+      </div>
+      <div class="item-card">
+        <img src="https://nhatminhsports.vn/wp-content/uploads/2025/03/Tui-Deo-Vai-Shoulder-Pouch-UN767-White-01.jpg" alt="">
+        <h3>Túi Đeo Vai UN767</h3>
+        <p class="price">2.394.000đ</p>
+        <a href="product-detail.html?id=19" class="buy-btn">Xem chi tiết</a>
+      </div>
+      <div class="item-card">
+        <img src="https://bizweb.dktcdn.net/thumb/1024x1024/100/449/458/products/anh-ghep-logo-web-7-22b8e5b3-9199-4fb3-8959-9a731199c56b.png" alt="">
+        <h3>Giày Tommy Hilfiger Trắng</h3>
+        <p class="price">2.995.000đ</p>
+        <a href="product-detail.html?id=20" class="buy-btn">Xem chi tiết</a>
+      </div>
+      <div class="item-card">
+        <img src="https://down-vn.img.susercontent.com/file/sg-11134201-7rau8-ma9fc0o8vstub1@resize_w900_nl.webp" alt="">
+        <h3>Váy Hoa Tiệc Trà Nữ</h3>
+        <p class="price">631.398đ</p>
+        <a href="product-detail.html?id=21" class="buy-btn">Xem chi tiết</a>
+      </div>
+      <div class="item-card">
+        <img src="https://swavi.vn/wp-content/swift-ai/images/wp-content/uploads/2024/01/Day-Chuyen-Swarovski-Chinh-Hang-Dancing-Swan-necklace-Swan-Blue-Rhodium-plated-01-jpg.webp" alt="">
+        <h3>Dây Chuyền Swarovski Swan</h3>
+        <p class="price">4.190.000đ</p>
+        <a href="product-detail.html?id=22" class="buy-btn">Xem chi tiết</a>
+      </div>
+      <div class="item-card">
+        <img src="https://nhatminhsports.vn/wp-content/uploads/2025/04/Taylor-Made-Metal-Eyelit-Hat-2024-Model-Adjustable-White.webp" alt="">
+        <h3>Mũ TaylorMade Newport</h3>
+        <p class="price">900.000đ</p>
+        <a href="product-detail.html?id=23" class="buy-btn">Xem chi tiết</a>
+      </div>
+      <div class="item-card">
+        <img src="https://bizweb.dktcdn.net/thumb/grande/100/059/374/products/anhdaidien-web-1500x1500.jpg?v=1656078752770" alt="">
+        <h3>Thắt Lưng MIB35-2M01</h3>
+        <p class="price">780.000đ</p>
+        <a href="product-detail.html?id=24" class="buy-btn">Xem chi tiết</a>
+      </div>
+    </div>
+
+    <!-- Nhóm Sản phẩm Bán Lại (Resell) - Render động từ localStorage -->
+<div class="category khac" id="resell-category">  <!-- SỬA: Đổi từ "resell" thành "khac" -->
+  <!-- Sản phẩm resell sẽ được render bằng JS ở đây -->
+</div>
+
+  </div>
+
+  <script>
+  // --- LỌC DANH MỤC VÀ TÌM KIẾM (CẬP NHẬT CHỐNG LẶP) ---
+const categoryLinks = document.querySelectorAll('.dropdown-content a');  // Lấy tất cả các liên kết trong dropdown danh mục
+const categories = document.querySelectorAll('.category');  // Lấy tất cả các phần tử danh mục trên trang
+const searchInput = document.getElementById('search-input');  // Lấy phần tử input tìm kiếm
+const searchButton = document.getElementById('search-btn');  // Lấy phần tử nút tìm kiếm
+const parentContainer = document.querySelector('.parent');  // Lấy phần tử cha chứa các danh mục và sản phẩm
+
+let searchResultsContainer = null;  // Biến lưu trữ container tạm thời cho kết quả tìm kiếm, ban đầu là null
+let originalItems = [];  // Mảng lưu trữ các item sản phẩm gốc để sử dụng trong lọc, tránh lặp lại
+let isFiltering = false;  // Cờ (flag) để ngăn chặn việc gọi hàm lọc nhiều lần cùng lúc
+
+function filterProducts() {  // Hàm chính để lọc sản phẩm dựa trên từ khóa tìm kiếm và danh mục
+  // Chống double-call: Nếu đang filter, bỏ qua
+  if (isFiltering) return;  // Kiểm tra cờ, nếu đang lọc thì thoát hàm để tránh lỗi
+  isFiltering = true;  // Đặt cờ thành true để đánh dấu đang thực hiện lọc
+
+  const term = searchInput.value.toLowerCase().trim();  // Lấy giá trị từ input tìm kiếm, chuyển thành chữ thường và loại bỏ khoảng trắng thừa
+  let activeCategory = null;  // Biến lưu trữ danh mục đang được chọn
+
+  // Xác định danh mục đang được chọn
+  categoryLinks.forEach(link => {  // Duyệt qua từng liên kết danh mục
+    if (link.classList.contains('active')) {  // Kiểm tra liên kết nào có class 'active'
+      activeCategory = link.dataset.category;  // Lưu giá trị dataset.category của liên kết đó
+    }
+  });
+
+  // Nếu KHÔNG có từ khóa tìm kiếm: Sử dụng lọc category gốc
+  if (!term) {  // Nếu từ khóa tìm kiếm rỗng
+    // Xóa container tìm kiếm nếu tồn tại
+    if (searchResultsContainer) {  // Kiểm tra nếu container kết quả tìm kiếm tồn tại
+      searchResultsContainer.remove();  // Xóa container khỏi DOM
+      searchResultsContainer = null;  // Đặt lại biến thành null
+      parentContainer.classList.remove('search-active');  // Loại bỏ class để khôi phục giao diện ban đầu
+    }
+
+    // Query DOM hiện tại cho category filter (an toàn vì không clone)
+    const currentItems = document.querySelectorAll('.item-card:not(.search-results .item-card)');  // Lấy các item-card gốc, loại trừ các item từ kết quả tìm kiếm cũ
+    categories.forEach(cat => {  // Duyệt qua từng danh mục
+      if (activeCategory === 'all' || !activeCategory || cat.classList.contains(activeCategory)) {  // Kiểm tra nếu danh mục khớp với activeCategory
+        cat.classList.remove('hidden');  // Hiển thị danh mục
+      } else {
+        cat.classList.add('hidden');  // Ẩn danh mục
+      }
+    });
+
+    // Hiển thị tất cả item gốc (không ẩn item nào trong category hiện)
+    currentItems.forEach(item => {  // Duyệt qua từng item hiện tại
+      item.classList.remove('hidden');  // Hiển thị item
+    });
+    isFiltering = false;  // Đặt cờ về false sau khi hoàn thành
+    return;  // Kết thúc hàm
+  }
+
+  // Nếu CÓ từ khóa tìm kiếm: Tạo kết quả liền mạch (dùng originalItems để tránh lặp)
+  parentContainer.classList.add('search-active');  // Thêm class để ẩn các danh mục khác và hiển thị kết quả tìm kiếm
+  // Xóa container cũ nếu tồn tại
+  if (searchResultsContainer) {  // Kiểm tra nếu container cũ tồn tại
+    searchResultsContainer.remove();  // Xóa container cũ
+  }
+
+  // Tạo container mới cho kết quả tìm kiếm
+  searchResultsContainer = document.createElement('div');  // Tạo phần tử div mới
+  searchResultsContainer.classList.add('search-results');  // Thêm class cho container
+
+  // Thu thập và clone các item khớp TỪ originalItems (không query DOM)
+  let matchingItems = [];  // Mảng lưu trữ các item khớp với điều kiện
+  originalItems.forEach(item => {  // Duyệt qua từng item gốc
+    const name = (item.getAttribute('data-name') || item.querySelector('h3').textContent).toLowerCase();  // Lấy tên sản phẩm từ thuộc tính hoặc nội dung, chuyển thành chữ thường
+    const categoryDiv = item.closest('.category');  // Tìm phần tử cha là danh mục
+
+    // Kiểm tra khớp search VÀ category (nếu có)
+    const matchesSearch = name.includes(term);  // Kiểm tra nếu tên sản phẩm chứa từ khóa tìm kiếm
+    const matchesCategory = (activeCategory === 'all' || !activeCategory || 
+      (categoryDiv && categoryDiv.classList.contains(activeCategory)) || 
+      item.getAttribute('data-category') === activeCategory);  // Kiểm tra nếu item thuộc danh mục active
+
+    if (matchesSearch && matchesCategory) {  // Nếu item khớp cả hai điều kiện
+      const clonedItem = item.cloneNode(true);  // Clone item để tránh thay đổi gốc
+      clonedItem.setAttribute('data-name', name);  // Giữ thuộc tính data-name cho item cloned
+      matchingItems.push(clonedItem);  // Thêm item cloned vào mảng
+    }
+  });
+
+  // Thêm các item khớp vào container
+  matchingItems.forEach(item => {  // Duyệt qua mảng matchingItems
+    searchResultsContainer.appendChild(item);  // Thêm item vào container kết quả
+  });
+
+  // Nếu không có kết quả, thêm thông báo
+  if (matchingItems.length === 0) {  // Kiểm tra nếu mảng rỗng
+    const noResult = document.createElement('p');  // Tạo phần tử p cho thông báo
+    noResult.classList.add('no-results');  // Thêm class cho phần tử
+    noResult.textContent = 'Không tìm thấy sản phẩm nào phù hợp!';  // Thiết lập nội dung
+    searchResultsContainer.appendChild(noResult);  // Thêm phần tử vào container
+  } else {
+    // Thêm tiêu đề kết quả
+    const resultTitle = document.createElement('h2');  // Tạo phần tử h2 cho tiêu đề
+    resultTitle.textContent = `Tìm thấy ${matchingItems.length} sản phẩm`;  // Thiết lập nội dung tiêu đề
+    resultTitle.style.textAlign = 'center';  // Cài đặt style cho tiêu đề
+    resultTitle.style.width = '100%';
+    resultTitle.style.marginBottom = '20px';
+    resultTitle.style.color = '#333';
+    resultTitle.style.fontSize = '24px';
+    searchResultsContainer.insertBefore(resultTitle, searchResultsContainer.firstChild);  // Thêm tiêu đề vào đầu container
+  }
+
+  // Thêm container vào parent
+  parentContainer.appendChild(searchResultsContainer);  // Thêm container kết quả vào phần tử cha
+
+  // Log để debug
+  console.log(`Tìm thấy ${matchingItems.length} sản phẩm với từ khóa "${term}" (category: ${activeCategory || 'all'}).`);  // Ghi log để kiểm tra số lượng kết quả
+
+  // Reset flag sau 300ms (đồng bộ debounce)
+  setTimeout(() => { isFiltering = false; }, 300);  // Đặt lại cờ sau 300ms để cho phép lọc tiếp theo
+}
+
+// Sự kiện click category
+categoryLinks.forEach(link => {  // Duyệt qua từng liên kết danh mục
+  link.addEventListener('click', (e) => {  // Thêm sự kiện click cho liên kết
+    e.preventDefault();  // Ngăn chặn hành vi mặc định của liên kết
+    categoryLinks.forEach(l => l.classList.remove('active'));  // Loại bỏ class 'active' từ tất cả liên kết
+    link.classList.add('active');  // Thêm class 'active' cho liên kết được click
+    filterProducts();  // Gọi hàm lọc để áp dụng thay đổi
+  });
+});
+
+// Sự kiện tìm kiếm (click button)
+searchButton.addEventListener('click', (e) => {  // Thêm sự kiện click cho nút tìm kiếm
+  e.preventDefault();  // Ngăn chặn hành vi submit nếu là form
+  filterProducts();  // Gọi hàm lọc
+});
+
+// Sự kiện Enter
+searchInput.addEventListener('keypress', function(e) {  // Thêm sự kiện nhấn phím cho input tìm kiếm
+  if (e.key === 'Enter') {  // Kiểm tra nếu phím Enter được nhấn
+    e.preventDefault();  // Ngăn chặn hành vi mặc định
+    filterProducts();  // Gọi hàm lọc
+  }
+});
+
+// Debounce cho input search (real-time, chống lặp với flag)
+let searchTimeout;
+searchInput.addEventListener('input', function() {  // Thêm sự kiện khi giá trị input thay đổi
+  clearTimeout(searchTimeout);  // Xóa timeout trước đó
+  searchTimeout = setTimeout(() => {  // Đặt timeout mới
+    if (!isFiltering) {  // Chỉ gọi nếu không đang lọc
+      filterProducts();  // Gọi hàm lọc
+    }
+  }, 300);  // Chờ 300ms để tránh gọi hàm quá nhanh (debounce)
+});
+
+// ================================
+// RENDER SẢN PHẨM RESell (GIỮ NGUYÊN)
+// ================================
+function renderResellProducts() {  // Hàm để render sản phẩm resell từ localStorage
+  const resellContainer = document.getElementById('resell-category');  // Lấy phần tử container cho sản phẩm resell
+  const resellList = JSON.parse(localStorage.getItem("resellList")) || [];  // Lấy danh sách resell từ localStorage, nếu không có thì mảng rỗng
+  
+  if (resellList.length === 0) {  // Kiểm tra nếu danh sách rỗng
+    resellContainer.innerHTML = '<p class="no-resell-message">Chưa có sản phẩm bán lại nào. Hãy thêm từ trang checkout!</p>';  // Thiết lập nội dung thông báo
+    return;  // Kết thúc hàm
+  }
+
+  resellContainer.innerHTML = '';  // Xóa nội dung cũ trong container
+  resellList.forEach((product) => {  // Duyệt qua từng sản phẩm trong danh sách
+    const itemCard = document.createElement('div');  // Tạo phần tử div mới cho item
+    itemCard.classList.add('item-card');  // Thêm class cho item
+    const resellId = product.id;  // Lấy ID của sản phẩm
+    itemCard.innerHTML = ` 
+      <img src="${product.img || 'https://via.placeholder.com/200x200?text=No+Image'}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/200x200?text=No+Image'">
+      <h3>${product.name || 'Sản phẩm không tên'}</h3>
+      <p class="price">${product.price || '0đ'}</p>
+      <a href="product-detail.html?id=${resellId}" class="buy-btn">Xem chi tiết</a>
+    `;
+    itemCard.setAttribute('data-category', 'khac');  // Thiết lập thuộc tính cho lọc danh mục
+    itemCard.setAttribute('data-name', (product.name || '').toLowerCase());  // Thiết lập thuộc tính tên sản phẩm
+    resellContainer.appendChild(itemCard);  // Thêm item vào container
+  });
+}
+
+// Set data attributes cho item-card gốc (GIỮ NGUYÊN)
+function setDataAttributes() {  // Hàm để thiết lập thuộc tính dữ liệu cho các item-card
+  const allItems = document.querySelectorAll('.item-card');  // Lấy tất cả các item-card trên trang
+  allItems.forEach(item => {  // Duyệt qua từng item
+    if (!item.getAttribute('data-name')) {  // Kiểm tra nếu thuộc tính data-name chưa tồn tại
+      const name = item.querySelector('h3').textContent.toLowerCase();  // Lấy tên từ nội dung h3 và chuyển thành chữ thường
+      item.setAttribute('data-name', name);  // Thiết lập thuộc tính data-name
+      const parentCat = item.closest('.category');  // Tìm phần tử cha là danh mục
+      if (parentCat) {  // Nếu tồn tại phần tử cha
+        const catClass = Array.from(parentCat.classList).find(cls => cls !== 'category');  // Lấy class danh mục (không phải 'category')
+        if (catClass) {  // Nếu có class
+          item.setAttribute('data-category', catClass);  // Thiết lập thuộc tính data-category
+        }
+      }
+    }
+  });
+}
+
+// Scroll Top Button Handler (GIỮ NGUYÊN)
+const scrollTopBtn = document.querySelector('.scroll-top');  // Lấy phần tử nút cuộn lên đầu trang
+if (scrollTopBtn) {  // Kiểm tra nếu nút tồn tại
+  window.addEventListener('scroll', function() {  // Thêm sự kiện cuộn trang
+    if (window.pageYOffset > 300) {  // Kiểm tra nếu cuộn xuống hơn 300px
+      scrollTopBtn.style.display = 'block';  // Hiển thị nút
+    } else {
+      scrollTopBtn.style.display = 'none';  // Ẩn nút
+    }
+  });
+  scrollTopBtn.addEventListener('click', function(e) {  // Thêm sự kiện click cho nút
+    e.preventDefault();  // Ngăn chặn hành vi mặc định
+    window.scrollTo({ top: 0, behavior: 'smooth' });  // Cuộn lên đầu trang mượt mà
+  });
+}
+
+// ================================
+// XỬ LÝ KHI TẢI TRANG (THÊM LƯU originalItems)
+// ================================
+document.addEventListener("DOMContentLoaded", () => {  // Sự kiện chờ tài liệu tải xong
+  renderResellProducts();  // Gọi hàm để render sản phẩm resell
+  setDataAttributes();  // Gọi hàm để thiết lập thuộc tính cho item-card
+
+  originalItems = Array.from(document.querySelectorAll('.item-card'));  // Lưu tất cả item-card vào mảng originalItems
+
+  const urlParams = new URLSearchParams(window.location.search);  // Lấy tham số từ URL
+  const categoryFromUrl = urlParams.get('category');  // Lấy tham số category từ URL
+  if (!categoryFromUrl) {  // Nếu không có tham số category
+    categoryLinks.forEach(link => {  // Duyệt qua liên kết danh mục
+      if (link.dataset.category === 'all') {  // Tìm liên kết 'all'
+        link.classList.add('active');  // Thêm class active
+        categories.forEach(c => c.classList.remove('hidden'));  // Hiển thị tất cả danh mục
+      }
+    });
+  }
+
+  const searchTermFromUrl = urlParams.get('search');  // Lấy tham số search từ URL
+  if (searchTermFromUrl) {  // Nếu có tham số search
+    searchInput.value = decodeURIComponent(searchTermFromUrl);  // Đặt giá trị input từ URL
+    setTimeout(() => filterProducts(), 100);  // Delay 100ms rồi gọi hàm lọc để tránh xung đột
+  }
+
+  if (categoryFromUrl && categoryFromUrl !== 'all') {  // Nếu có category và không phải 'all'
+    categoryLinks.forEach(link => {  // Duyệt qua liên kết
+      if (link.dataset.category === categoryFromUrl) {  // Tìm liên kết khớp
+        link.click();  // Kích hoạt sự kiện click
+      }
+    });
+  } else if (categoryFromUrl === 'all') {  // Nếu category là 'all'
+    categoryLinks.forEach(link => {  // Duyệt qua liên kết
+      if (link.dataset.category === 'all') {  // Tìm liên kết 'all'
+        link.click();  // Kích hoạt sự kiện
+      }
+    });
+  }
+
+  // Cập nhật cart count
+  function updateCartCount() {  // Hàm cập nhật số lượng sản phẩm trong giỏ hàng
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];  // Lấy giỏ hàng từ localStorage
+    const cartCountElement = document.getElementById("cart-count");  // Lấy phần tử hiển thị số lượng
+    if (cartCountElement) {  // Nếu phần tử tồn tại
+      const total = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);  // Tính tổng số lượng
+      cartCountElement.textContent = total <= 5 ? total : '5+';  // Cập nhật nội dung phần tử
+    }
+  }
+  updateCartCount();  // Gọi hàm để cập nhật ngay
+});
+
+</script>
+
+
+
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 MyShop Dropship. Giữ toàn bộ bản quyền.</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,125 @@
+body {
+    margin: 0;
+    overflow: hidden;
+}
+
+.screen {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.45s ease;
+}
+
+.screen-search {
+    background: linear-gradient(to right, #74ebd5, #acb6e5);
+    transform: translateX(0);
+}
+
+.weather-box {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    width: 320px;
+}
+
+.screen-weather {
+    background: linear-gradient(to bottom, #6dd5fa, #ffffff);
+    transform: translateX(100%);
+}
+
+.screen.active {
+    transform: translateX(0);
+}
+
+.screen.left {
+    transform: translateX(-100%);
+}
+
+.app-card {
+    background: white;
+    border-radius: 25px;
+    padding: 20px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    max-width: 1000px;
+    width: 100%;
+    text-align: center;
+    font-family: "Segoe UI", sans-serif;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.back {
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.title {
+    flex: 1;
+    text-align: center;
+    font-weight: 600;
+    color: #2196f3;
+    margin-right: 22px;
+}
+
+.icon {
+    width: 140px;
+    margin: 10px auto;
+}
+
+.temperature {
+    font-size: 56px;
+    font-weight: bold;
+}
+
+.description {
+    font-size: 18px;
+    text-transform: capitalize;
+    color: #555;
+}
+
+.location {
+    margin-top: 5px;
+    color: #777;
+    font-size: 16px;
+}
+
+.info {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.info-box {
+    text-align: center;
+    width: 45%;
+}
+
+.info-icon {
+    font-size: 22px;
+}
+
+.info-value {
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+.info-label {
+    font-size: 14px;
+    color: #777;
+}
+
+.divider {
+    width: 1px;
+    height: 100px;
+    background: #ddd;
+}

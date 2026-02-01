@@ -1,0 +1,49 @@
+.container{
+    display: grid;
+    grid-template-columns: auto auto auto auto ;
+    background-color:bisque;
+}
+
+.container2{
+    display: grid;
+    grid-template-columns: auto auto auto ;
+    background-color:bisque;
+}
+.item1, .item2{
+    grid-row-start: 1;
+    grid-row-end: 4;
+}
+.item3{
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+.item8 {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    background-color: lightblue;
+}
+
+/* Cột 2: bọc từ hàng 1 → hàng 2 */
+.item9 {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    background-color: lightgreen;
+}
+
+/* Cột 3: bọc từ hàng 2 → hàng 3 */
+.item10 {
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 4;
+    background-color: lightcoral;
+}
+
+div{
+    padding: 10px;
+    border: 1px solid black;
+}

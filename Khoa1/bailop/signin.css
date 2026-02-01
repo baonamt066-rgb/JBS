@@ -1,0 +1,79 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", sans-serif;
+  background-color: #d7b98e; /* màu be nền */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Khung trắng */
+.login-card {
+  position: relative;
+  background: #fff;
+  width: 300px;
+  padding: 40px 30px;
+  border-radius: 4px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+/* Dải băng dính góc */
+.tape {
+  position: absolute;
+  width: 80px;
+  height: 20px;
+  background: rgba(240, 240, 240, 0.8);
+  top: -10px;
+  transform: rotate(-10deg);
+}
+
+.tape-left {
+  left: -20px;
+}
+
+.tape-right {
+  right: -20px;
+  transform: rotate(10deg);
+}
+
+/* Tiêu đề */
+.login-card h2 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  display: inline-block;
+  padding: 10px 20px;
+  margin-bottom: 30px;
+}
+
+/* Input */
+.login-card input {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 14px;
+}
+
+/* Nút đăng nhập */
+.login-card button {
+  width: 100%;
+  padding: 10px;
+  background: linear-gradient(to bottom, #dff0ff, #bcd9f7);
+  border: 1px solid #9ebbe5;
+  border-radius: 3px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.login-card button:hover {
+  background: linear-gradient(to bottom, #e7f4ff, #c8e3ff);
+}

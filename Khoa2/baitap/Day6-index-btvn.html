@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>MindX Cinema</title>
+
+  <style>
+    :root {
+      --bg-image: url('https://i.pinimg.com/736x/19/8b/2f/198b2f01e73b905772279616eccc7c65.jpg');
+    }
+  </style>
+
+  <link rel="stylesheet" href="Day6-style-btvn.css" />
+</head>
+<body>
+
+<div class="auth-box" id="loginBox">
+  <h1>Sign In</h1>
+
+  <form id="loginForm">
+    <input type="text" id="loginUsername" placeholder="Username" />
+    <input type="password" id="loginPassword" placeholder="Password" />
+    <button class="btn">Sign In</button>
+  </form>
+
+  <div class="switch">
+    New to MindX Cinema?
+    <span onclick="showRegister()">Sign up now</span>
+  </div>
+</div>
+
+<div class="auth-box hidden" id="registerBox">
+  <h1>Sign Up</h1>
+
+  <form id="registerForm">
+    <input type="text" id="username" placeholder="Username" />
+    <input type="email" id="email" placeholder="Email" />
+    <input type="password" id="password" placeholder="Password" />
+    <input type="password" id="verifyPassword" placeholder="Verify Password" />
+    <button class="btn">Sign Up</button>
+  </form>
+
+  <div class="switch">
+    Already have an account?
+    <span onclick="showLogin()">Sign in</span>
+  </div>
+</div>
+
+<script src="Day6-auth-btvn.js"></script>
+</body>
+</html>
