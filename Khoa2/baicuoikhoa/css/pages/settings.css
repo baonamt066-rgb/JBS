@@ -1,0 +1,35 @@
+/* --- SETTINGS SPECIFIC --- */
+.settings-section {
+    margin-bottom: 30px;
+}
+
+.settings-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.account-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.account-details h4 {
+    font-size: 16px;
+    margin: 0;
+}
+
+.account-details p {
+    font-size: 13px;
+    color: var(--text-light);
+}
+
+/* --- COLOR PRESETS --- */
+.color-presets {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}

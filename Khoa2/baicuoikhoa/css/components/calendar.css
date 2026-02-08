@@ -1,0 +1,204 @@
+/* --- CALENDAR CSS --- */
+.calendar-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    background: var(--card-bg);
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+}
+
+.cal-nav {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.cal-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-dark);
+    min-width: 200px;
+    text-align: center;
+}
+
+.calendar-container {
+    background: var(--card-bg);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    min-height: 600px;
+}
+
+.month-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1px;
+    background: var(--border-color);
+    border: 1px solid var(--border-color);
+}
+
+.week-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin-bottom: 10px;
+}
+
+.day-name {
+    text-align: center;
+    font-weight: 600;
+    color: var(--text-light);
+    font-size: 13px;
+    padding: 5px;
+}
+
+.cal-cell {
+    background: var(--card-bg);
+    min-height: 100px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.cal-cell:hover {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+.cal-cell.today {
+    background: rgba(59, 130, 246, 0.1);
+}
+
+.cal-cell.has-task {
+    border-bottom: 3px solid var(--task-color, var(--accent-blue));
+}
+
+.cal-cell.has-deadline {
+    position: relative;
+}
+
+.cal-cell.has-deadline::after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 8px;
+    height: 8px;
+    background-color: var(--urgency-high);
+    border-radius: 50%;
+}
+
+.cal-cell.deadline-completed::after {
+    background-color: var(--urgency-low);
+}
+
+.cal-cell.deadline-overdue::after {
+    background-color: var(--urgency-high);
+}
+
+.cal-cell.selected {
+    outline: 2px solid var(--accent-blue);
+    outline-offset: -2px;
+}
+
+.cal-cell.inactive {
+    opacity: 0.4;
+    pointer-events: none;
+    background: var(--main-bg);
+}
+
+.date-num {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 5px;
+}
+
+.cal-cell.today .date-num {
+    color: var(--accent-blue);
+}
+
+.week-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    height: 600px;
+    overflow-y: auto;
+}
+
+.day-col {
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.day-col.today {
+    background: rgba(59, 130, 246, 0.05);
+    border-color: var(--accent-blue);
+}
+
+.col-header {
+    text-align: center;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.evt-pill {
+    font-size: 10px;
+    padding: 3px 6px;
+    border-radius: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.evt-sch {
+    background: var(--task-bg, #E0F2FE);
+    color: var(--task-color, #0284C7);
+    border-left: 3px solid var(--task-color, #0284C7);
+}
+
+.evt-dl {
+    background: #FEE2E2;
+    color: #DC2626;
+    border-left: 3px solid #DC2626;
+}
+
+.evt-pill-week {
+    white-space: normal;
+    height: auto;
+    padding: 8px;
+}
+
+.evt-dl.completed {
+    background: #D1FAE5;
+    color: #059669;
+    border-color: #059669;
+    opacity: 0.7;
+    text-decoration: line-through;
+}
+
+/* --- MODAL EVENT STYLES --- */
+.modal-event.evt-dl {
+    background: #FEE2E2;
+    color: #DC2626;
+    border-left: 3px solid #DC2626;
+}
+
+.modal-event.evt-dl.completed {
+    background: #D1FAE5;
+    color: #059669;
+    border-left-color: #059669;
+}

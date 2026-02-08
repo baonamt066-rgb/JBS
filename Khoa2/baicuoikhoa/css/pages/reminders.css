@@ -1,0 +1,9 @@
+/* --- REMINDERS NEW CSS --- */
+.rem-overdue {
+    border-left: 4px solid var(--urgency-high) !important;
+    background: rgba(239, 68, 68, 0.05);
+}
+
+.rem-active {
+    border-left: 4px solid var(--accent-blue);
+}

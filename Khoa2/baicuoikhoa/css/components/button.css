@@ -1,0 +1,163 @@
+.btn-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+    transition: 0.2s;
+}
+
+.btn-edit {
+    color: var(--accent-blue);
+}
+
+.btn-delete {
+    color: var(--urgency-high);
+}
+
+.btn-icon:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.cal-btn {
+    background: var(--main-bg);
+    border: none;
+    padding: 8px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    color: var(--text-dark);
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+.cal-btn:hover {
+    background: #e2e8f0;
+}
+
+.cal-btn.active {
+    background: var(--sidebar-bg);
+    color: white;
+}
+
+.day-btn {
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: var(--input-bg);
+    color: var(--text-dark);
+    cursor: pointer;
+    transition: 0.2s;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.day-btn:hover {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: var(--accent-blue);
+}
+
+.day-btn.selected {
+    background: var(--accent-blue);
+    color: white;
+    border-color: var(--accent-blue);
+}
+
+.color-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.color-btn.active {
+    border-color: var(--text-dark);
+    transform: scale(1.1);
+}
+
+.onboarding-btn {
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.onboarding-btn.primary {
+    background: white;
+    color: var(--accent-blue);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.onboarding-btn.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.onboarding-btn.secondary {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.onboarding-btn.secondary:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+/* --- BUTTON ANIMATIONS --- */
+.btn-icon,
+button,
+.day-btn,
+.color-btn {
+    transition: all 0.15s ease;
+}
+
+.btn-icon:active,
+button:active,
+.day-btn:active,
+.color-btn:active {
+    transform: scale(0.95);
+}
+
+/* --- LOADING SPINNER --- */
+.btn-loading {
+    position: relative;
+    color: transparent !important;
+}
+
+.btn-loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16px;
+    height: 16px;
+    margin: -8px 0 0 -8px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top: 2px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.btn-success {
+    background: var(--accent-green) !important;
+    color: white !important;
+}
+
+.btn-success::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+}

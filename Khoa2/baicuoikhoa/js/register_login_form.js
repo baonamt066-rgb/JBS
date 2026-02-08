@@ -159,7 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {  // Sự kiện chờ tài
             localStorage.setItem("isLoggedIn", "true");  // Đặt cờ đăng nhập
             localStorage.setItem("currentUser", JSON.stringify(user));  // Lưu thông tin user hiện tại
             alert(`Chào mừng ${user.fullname}! Đăng nhập thành công.`);  // Hiển thị thông báo
-            window.location.href = "oh.html";  // Chuyển hướng đến trang chính
+            window.location.href = "../index.html";  // Chuyển hướng đến trang chính
         });
     }
 

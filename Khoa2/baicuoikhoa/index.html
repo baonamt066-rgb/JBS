@@ -1,144 +1,2932 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <title>Study Planner Dashboard</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <!-- Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-
-  <style>
-    * {
-      box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
-    }
-
-    body {
-      margin: 0;
-      background: #f5f7fb;
-    }
-
-    .app {
-      display: flex;
-      height: 100vh;
-    }
-
-    /* ===== SIDEBAR ===== */
-    .sidebar {
-      width: 240px;
-      background: #ffffff;
-      display: flex;
-      flex-direction: column;
-      padding: 20px;
-      border-right: 1px solid #e5e7eb;
-    }
-
-    .logo {
-      font-size: 20px;
-      font-weight: 600;
-      margin-bottom: 30px;
-    }
-
-    .menu {
-      flex: 1;
-    }
-
-    .menu-item {
-      display: block;
-      padding: 12px 14px;
-      margin-bottom: 8px;
-      border-radius: 8px;
-      color: #374151;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-
-    .menu-item:hover {
-      background: #f1f5f9;
-    }
-
-    .menu-item.active {
-      background: #e0f2fe;
-      color: #0369a1;
-      font-weight: 500;
-    }
-
-    .logout {
-      padding: 12px 14px;
-      border-radius: 8px;
-      cursor: pointer;
-      color: #b91c1c;
-      transition: background 0.2s;
-    }
-
-    .logout:hover {
-      background: #fee2e2;
-    }
-
-    /* ===== MAIN ===== */
-    .main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .topbar {
-      height: 60px;
-      background: #ffffff;
-      border-bottom: 1px solid #e5e7eb;
-      display: flex;
-      align-items: center;
-      padding: 0 24px;
-      font-weight: 500;
-      font-size: 18px;
-    }
-
-    .content {
-      padding: 24px;
-    }
-
-    /* Demo card */
-    .card {
-      background: #ffffff;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-      max-width: 400px;
-    }
-  </style>
+    <link rel="stylesheet" href="css/app.css">
 </head>
+
 <body>
 
-  <div class="app">
-    <!-- SIDEBAR -->
+    <!-- Splash Screen -->
+    <div id="splash-screen" class="splash-screen">
+        <div class="splash-content">
+            <img src="assets/images/logostuday.png" alt="Studay Logo" class="splash-logo-img">
+            <div class="splash-app-name">Studay</div>
+        </div>
+    </div>
+
     <aside class="sidebar">
-      <div class="logo">📅 Study Planner</div>
-
-      <nav class="menu">
-        <div class="menu-item active">Dashboard</div>
-        <div class="menu-item">Lịch học</div>
-        <div class="menu-item">Deadline</div>
-        <div class="menu-item">Calendar</div>
-        <div class="menu-item">Settings</div>
-      </nav>
-
-      <div class="logout">Logout</div>
+        <div class="sidebar-logo">
+            <img src="assets/images/logostuday.png" alt="Studay logo">
+            <span class="logo-text">Studay</span>
+        </div>
+        <ul class="menu" id="sidebarMenu">
+            <li><a href="#" class="active" data-page="dashboard"><i class="fas fa-th-large"></i> <span
+                        data-i18n="menu_dashboard">Dashboard</span></a></li>
+            <li><a href="#" data-page="schedule"><i class="far fa-calendar-alt"></i> <span
+                        data-i18n="menu_schedule">Schedule</span></a></li>
+            <li><a href="#" data-page="deadline"><i class="fas fa-tasks"></i> <span
+                        data-i18n="menu_deadline">Deadline</span></a></li>
+            <li><a href="#" data-page="calendar"><i class="fas fa-calendar-week"></i> <span
+                        data-i18n="menu_calendar">Calendar</span></a></li>
+            <li><a href="#" data-page="subjects"><i class="fas fa-book"></i> <span
+                        data-i18n="menu_subjects">Subjects</span></a></li>
+            <li><a href="#" data-page="statistics"><i class="fas fa-chart-pie"></i> <span
+                        data-i18n="menu_statistics">Statistics</span></a></li>
+            <li><a href="#" data-page="reminders"><i class="far fa-bell"></i> <span
+                        data-i18n="menu_reminders">Reminders</span></a></li>
+        </ul>
+        <div class="bottom-menu">
+            <ul class="menu">
+                <li><a href="#" data-page="settings"><i class="fas fa-cog"></i> <span
+                            data-i18n="menu_settings">Settings</span></a></li>
+                <li><a href="#" data-page="logout"><i class="fas fa-sign-out-alt"></i> <span
+                            data-i18n="menu_logout">Logout</span></a></li>
+            </ul>
+        </div>
     </aside>
 
-    <!-- MAIN -->
-    <main class="main">
-      <div class="topbar">Dashboard</div>
+    <main class="main-content">
+        <header>
+            <div class="header-title">
+                <h1 id="page-title" data-i18n="menu_dashboard">Dashboard</h1>
+            </div>
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search tasks, subjects..." data-i18n-placeholder="search_placeholder">
+                <div id="search-suggestions" class="search-suggestions" style="display: none;"></div>
+            </div>
+            <div class="user-profile">
+                <img src="https://ui-avatars.com/api/?name=User&background=344054&color=fff" alt="User" class="avatar">
+            </div>
+        </header>
 
-      <div class="content">
-        <div class="card">
-          <h3>Chào mừng 👋</h3>
-          <p>Đây là giao diện dashboard quản lý lịch học.</p>
-          <p>Chức năng sẽ được phát triển sau.</p>
+        <div id="view-dashboard" class="view-content active">
+            <div id="onboarding-section" class="onboarding-container" style="display: none;">
+                <div class="card onboarding-card">
+                    <div class="onboarding-content">
+                        <div class="onboarding-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="onboarding-text">
+                            <h3 data-i18n="welcome_title">Welcome to Studay!</h3>
+                            <p data-i18n="onboarding_message">Get started by adding your first schedule or deadline to
+                                organize your study time effectively.</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <section class="stats-grid" id="dashboard-summary"></section>
+            <section class="dashboard-layout" style="margin-top: 20px;">
+                <div class="column-left">
+                    <div class="card">
+                        <div class="section-header">
+                            <h3 data-i18n="today_schedule">Today Schedule</h3>
+                        </div>
+                        <div id="dashboard-today-schedule"></div>
+                    </div>
+                </div>
+                <div class="column-right">
+                    <div class="card" style="background: var(--dark-blue); color: white;">
+                        <h3 style="font-size: 16px; margin-bottom: 10px;" data-i18n="quick_insight">Quick Insight</h3>
+                        <p id="dashboard-insight" style="font-size: 13px; opacity: 0.8;">No data found.</p>
+                    </div>
+                    <div class="card" id="weather-widget">
+                        <h3 style="font-size: 16px; margin-bottom: 10px;" data-i18n="todays_weather">🌤 Today’s Weather
+                        </h3>
+                        <div id="weather-content">
+                            <div class="weather-loading" data-i18n="loading_weather">Loading weather...</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
-      </div>
-    </main>
-  </div>
 
+        <div id="view-schedule" class="view-content">
+            <div class="card" style="display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; gap: 15px; align-items: center;">
+                    <label style="font-size: 13px; font-weight: 600;" data-i18n="filter_day">Filter Day:</label>
+                    <select id="filter-day"
+                        style="padding: 8px; border-radius: 8px; border: 1px solid var(--border-color);">
+                        <option value="all" data-i18n="all_days">All Days</option>
+                        <option value="1" data-i18n="mon">Monday</option>
+                        <option value="2" data-i18n="tue">Tuesday</option>
+                        <option value="3" data-i18n="wed">Wednesday</option>
+                        <option value="4" data-i18n="thu">Thursday</option>
+                        <option value="5" data-i18n="fri">Friday</option>
+                        <option value="6" data-i18n="sat">Saturday</option>
+                        <option value="0" data-i18n="sun">Sunday</option>
+                    </select>
+                </div>
+                <button id="btn-open-form"
+                    style="background: var(--sidebar-bg); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer;">
+                    <i class="fas fa-plus"></i> <span data-i18n="add_new_schedule">Add New Schedule</span>
+                </button>
+            </div>
+
+            <div id="schedule-form-card" class="card" style="display: none;">
+                <h3 id="form-title" style="margin-bottom: 20px;" data-i18n="add_new_schedule">Add New Schedule</h3>
+                <form id="schedule-form">
+                    <input type="hidden" id="edit-id">
+                    <div class="form-grid">
+                        <div class="form-group"><label data-i18n="subject_name_label">Subject Name *</label><input
+                                type="text" id="sch-subject" required></div>
+                        <div class="form-group"><label data-i18n="day_label">Day of Week *</label>
+                            <div id="day-selector" style="display: flex; gap: 8px; flex-wrap: wrap;"><button
+                                    type="button" class="day-btn all-days-btn" data-day="all" data-i18n="all_days">All
+                                    Days</button><button type="button" class="day-btn" data-day="1"
+                                    data-i18n="mon">Monday</button><button type="button" class="day-btn" data-day="2"
+                                    data-i18n="tue">Tuesday</button><button type="button" class="day-btn" data-day="3"
+                                    data-i18n="wed">Wednesday</button><button type="button" class="day-btn" data-day="4"
+                                    data-i18n="thu">Thursday</button><button type="button" class="day-btn" data-day="5"
+                                    data-i18n="fri">Friday</button><button type="button" class="day-btn" data-day="6"
+                                    data-i18n="sat">Saturday</button><button type="button" class="day-btn" data-day="0"
+                                    data-i18n="sun">Sunday</button></div>
+                        </div>
+                        <div class="form-group"><label data-i18n="start_time_label">Start Time *</label><input
+                                type="time" id="sch-start" required></div>
+                        <div class="form-group"><label data-i18n="end_time_label">End Time *</label><input type="time"
+                                id="sch-end" required></div>
+                        <div class="form-group"><label data-i18n="room_label">Room</label><input type="text"
+                                id="sch-room"></div>
+                        <div class="form-group"><label data-i18n="type_label">Type</label><select id="sch-type">
+                                <option value="Lecture" data-i18n="lecture" class="type-option">Lecture</option>
+                                <option value="Lab" data-i18n="lab" class="type-option">Lab</option>
+                                <option value="Practice" data-i18n="practice" class="type-option">Practice</option>
+                                <option value="Online" data-i18n="online" class="type-option">Online</option>
+                            </select></div>
+                        <div class="form-group"><label data-i18n="event_color_label">Event Color</label><input
+                                type="hidden" id="sch-color" value="#3B82F6">
+                            <div id="sch-color-presets" class="color-presets"><button class="color-btn"
+                                    data-color="#ff6b6b" style="background:#ff6b6b"></button><button class="color-btn"
+                                    data-color="#ffa94d" style="background:#ffa94d"></button><button class="color-btn"
+                                    data-color="#ffd43b" style="background:#ffd43b"></button><button class="color-btn"
+                                    data-color="#51cf66" style="background:#51cf66"></button><button class="color-btn"
+                                    data-color="#20c997" style="background:#20c997"></button><button class="color-btn"
+                                    data-color="#339af0" style="background:#339af0"></button><button class="color-btn"
+                                    data-color="#845ef7" style="background:#845ef7"></button></div>
+                        </div>
+                        <div class="form-group" style="grid-column: span 2;">
+                            <label data-i18n="schedule_description_label">Details / What to prepare</label>
+                            <textarea id="sch-description" rows="3"
+                                style="padding: 10px; border: 1px solid var(--border-color); border-radius: 8px; outline: none; background: var(--input-bg); color: var(--text-dark); resize: vertical;"></textarea>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; margin-top: 20px; justify-content: flex-end;">
+                        <button type="button" id="btn-close-form"
+                            style="padding: 10px 20px; border: 1px solid #ccc; background: none; border-radius: 8px;"
+                            data-i18n="cancel">Cancel</button>
+                        <button type="submit"
+                            style="padding: 10px 20px; background: var(--accent-blue); color: white; border: none; border-radius: 8px;"
+                            data-i18n="save_schedule">Save Schedule</button>
+                    </div>
+                </form>
+            </div>
+            <div class="card">
+                <div id="schedule-list-container"></div>
+            </div>
+        </div>
+
+        <div id="view-deadline" class="view-content">
+            <div class="card" style="display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; gap: 15px; align-items: center;">
+                    <label style="font-size: 13px; font-weight: 600;">Status:</label>
+                    <select id="filter-deadline"
+                        style="padding: 8px; border-radius: 8px; border: 1px solid var(--border-color);">
+                        <option value="all" data-i18n="all_deadlines">All Deadlines</option>
+                        <option value="pending" data-i18n="pending">Pending</option>
+                        <option value="completed" data-i18n="completed">Completed</option>
+                        <option value="overdue" data-i18n="overdue">Overdue</option>
+                    </select>
+                </div>
+                <button id="btn-open-deadline-form"
+                    style="background: var(--accent-pink); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer;">
+                    <i class="fas fa-plus"></i> <span data-i18n="add_new_deadline">Add New Deadline</span>
+                </button>
+            </div>
+
+            <div id="deadline-form-card" class="card" style="display: none;">
+                <h3 id="deadline-form-title" style="margin-bottom: 20px;" data-i18n="create_deadline">Create Deadline
+                </h3>
+                <form id="deadline-form">
+                    <input type="hidden" id="deadline-edit-id">
+                    <div class="form-grid">
+                        <div class="form-group" style="grid-column: span 2;"><label
+                                data-i18n="deadline_title_label">Deadline Title *</label><input type="text"
+                                id="dl-title" required></div>
+                        <div class="form-group"><label data-i18n="due_date_label">Due Date *</label><input
+                                type="datetime-local" id="dl-date" required></div>
+                        <div class="form-group"><label data-i18n="subject_label">Subject</label><input type="text"
+                                id="dl-subject"></div>
+                        <div class="form-group" style="grid-column: span 2;">
+                            <label data-i18n="deadline_description_label">Details / What to prepare</label>
+                            <textarea id="dl-description" rows="3"
+                                style="padding: 10px; border: 1px solid var(--border-color); border-radius: 8px; outline: none; background: var(--input-bg); color: var(--text-dark); resize: vertical;"></textarea>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; margin-top: 20px; justify-content: flex-end;">
+                        <button type="button" id="btn-close-deadline-form"
+                            style="padding: 10px 20px; border: 1px solid #ccc; background: none; border-radius: 8px;"
+                            data-i18n="cancel">Cancel</button>
+                        <button type="submit"
+                            style="padding: 10px 20px; background: var(--accent-pink); color: white; border: none; border-radius: 8px;"
+                            data-i18n="save_deadline">Save Deadline</button>
+                    </div>
+                </form>
+            </div>
+            <div class="card">
+                <div id="deadline-list-container"></div>
+            </div>
+        </div>
+
+        <div id="view-calendar" class="view-content">
+            <div class="calendar-controls">
+                <div class="cal-nav">
+                    <button class="cal-btn" onclick="Calendar.prev()"><i class="fas fa-chevron-left"></i></button>
+                    <button class="cal-btn" onclick="Calendar.goToToday()" data-i18n="today_btn">Today</button>
+                    <button class="cal-btn" onclick="Calendar.next()"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="cal-title" id="cal-month-year">January 2026</div>
+                <div class="cal-nav">
+                    <button class="cal-btn active" id="btn-view-month" onclick="Calendar.switchView('month')"
+                        data-i18n="month_view">Month</button>
+                    <button class="cal-btn" id="btn-view-week" onclick="Calendar.switchView('week')"
+                        data-i18n="week_view">Week</button>
+                </div>
+            </div>
+
+            <div class="calendar-container">
+                <div class="week-header">
+                    <div class="day-name">Sun</div>
+                    <div class="day-name">Mon</div>
+                    <div class="day-name">Tue</div>
+                    <div class="day-name">Wed</div>
+                    <div class="day-name">Thu</div>
+                    <div class="day-name">Fri</div>
+                    <div class="day-name">Sat</div>
+                </div>
+                <div id="calendar-grid-content"></div>
+            </div>
+        </div>
+
+        <div id="view-subjects" class="view-content">
+            <div class="card" style="display: flex; justify-content: space-between; align-items: center;">
+                <h3 style="font-size: 16px;" data-i18n="manage_subjects">Manage Your Subjects</h3>
+                <button id="btn-open-subject-form"
+                    style="background: var(--accent-blue); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer;">
+                    <i class="fas fa-plus"></i> <span data-i18n="add_new_subject">Add New Subject</span>
+                </button>
+            </div>
+
+            <div id="subject-form-card" class="card" style="display: none;">
+                <h3 id="subject-form-title" style="margin-bottom: 20px;" data-i18n="add_new_subject_form">Add New
+                    Subject</h3>
+                <form id="subject-form">
+                    <input type="hidden" id="sub-edit-id">
+                    <div class="form-grid">
+                        <div class="form-group" style="grid-column: span 2;"><label
+                                data-i18n="subject_name_label">Subject Name *</label><input type="text" id="sub-name"
+                                required placeholder="e.g. Data Structures"></div>
+                        <div class="form-group"><label data-i18n="teacher_name_form">Teacher Name</label><input
+                                type="text" id="sub-teacher" placeholder="e.g. Dr. John Smith"></div>
+                        <div class="form-group"><label data-i18n="room_form">Room</label><input type="text"
+                                id="sub-room" placeholder="e.g. Lab 201"></div>
+                        <div class="form-group"><label data-i18n="color_tag_form">Color Tag</label><input type="hidden"
+                                id="sub-color" value="#3B82F6">
+                            <div id="sub-color-presets" class="color-presets"><button class="color-btn"
+                                    data-color="#ff6b6b" style="background:#ff6b6b"></button><button class="color-btn"
+                                    data-color="#ffa94d" style="background:#ffa94d"></button><button class="color-btn"
+                                    data-color="#ffd43b" style="background:#ffd43b"></button><button class="color-btn"
+                                    data-color="#51cf66" style="background:#51cf66"></button><button class="color-btn"
+                                    data-color="#20c997" style="background:#20c997"></button><button class="color-btn"
+                                    data-color="#339af0" style="background:#339af0"></button><button class="color-btn"
+                                    data-color="#845ef7" style="background:#845ef7"></button></div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; margin-top: 20px; justify-content: flex-end;">
+                        <button type="button" id="btn-close-subject-form"
+                            style="padding: 10px 20px; border: 1px solid #ccc; background: none; border-radius: 8px; cursor: pointer;"
+                            data-i18n="cancel">Cancel</button>
+                        <button type="submit"
+                            style="padding: 10px 20px; background: var(--accent-blue); color: white; border: none; border-radius: 8px; cursor: pointer;"
+                            data-i18n="save_subject">Save Subject</button>
+                    </div>
+                </form>
+            </div>
+            <div class="card">
+                <div id="subject-list-container"></div>
+            </div>
+        </div>
+
+        <div id="view-statistics" class="view-content">
+            <div class="stats-grid" id="stats-summary-cards"></div>
+            <div class="dashboard-layout" style="margin-top: 20px;">
+                <div class="column-left">
+                    <div class="card">
+                        <div class="section-header">
+                            <h3 data-i18n="study_time_distribution">Study Time Distribution</h3>
+                        </div>
+                        <div id="stats-study-time-chart" class="bar-chart"></div>
+                        <div style="height: 30px;"></div>
+                    </div>
+                    <div class="card">
+                        <div class="section-header">
+                            <h3 data-i18n="deadline_completion_rate">Deadline Completion Rate</h3>
+                        </div>
+                        <div id="stats-deadline-completion"></div>
+                    </div>
+                </div>
+                <div class="column-right">
+                    <div class="card">
+                        <div class="section-header">
+                            <h3 data-i18n="schedules_per_subject">Schedules per Subject</h3>
+                        </div>
+                        <div id="stats-subject-breakdown"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-reminders" class="view-content">
+            <div class="dashboard-layout">
+                <div class="column-left">
+                    <div class="card">
+                        <div class="section-header">
+                            <h3 data-i18n="upcoming_reminders">Upcoming Reminders</h3>
+                            <button id="btn-open-reminder-form"
+                                style="background: var(--accent-blue); color: white; border: none; padding: 8px 15px; border-radius: 8px; cursor: pointer; font-size: 13px;">
+                                <i class="fas fa-plus"></i> <span data-i18n="create_reminder">Create Reminder</span>
+                            </button>
+                        </div>
+                        <div id="reminder-list-container"></div>
+                    </div>
+
+                    <div id="reminder-form-card" class="card" style="display:none;">
+                        <h3 style="margin-bottom: 15px;" data-i18n="new_reminder">New Reminder</h3>
+                        <form id="reminder-form">
+                            <div class="form-group" style="margin-bottom:10px;"><label
+                                    data-i18n="reminder_title_label">Title *</label><input type="text" id="rem-title"
+                                    required></div>
+                            <div class="form-group" style="margin-bottom:10px;"><label
+                                    data-i18n="reminder_date_label">Date *</label><input type="date" id="rem-date"
+                                    required></div>
+                            <div class="form-group" style="margin-bottom:10px;"><label
+                                    data-i18n="reminder_time_label">Time *</label><input type="time" id="rem-time"
+                                    required></div>
+                            <div class="form-group" style="margin-bottom:10px;"><label
+                                    data-i18n="reminder_note_label">Note</label><input type="text" id="rem-note"></div>
+                            <div style="display: flex; gap: 10px; margin-top: 15px; justify-content: flex-end;">
+                                <button type="button" id="btn-close-reminder-form"
+                                    style="padding: 8px 15px; border: 1px solid #ccc; background: none; border-radius: 8px;"
+                                    data-i18n="cancel">Cancel</button>
+                                <button type="submit"
+                                    style="padding: 8px 15px; background: var(--accent-blue); color: white; border: none; border-radius: 8px;"
+                                    data-i18n="submit_save">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="column-right">
+                    <div class="card">
+                        <div class="section-header">
+                            <h3 data-i18n="notification_settings">Notification Settings</h3>
+                        </div>
+                        <div class="form-group">
+                            <label data-i18n="select_reminder_label">Select Reminder *</label>
+                            <select id="rem-select-reminder"
+                                style="padding: 8px; border-radius: 8px; border: 1px solid var(--border-color); width: 100%;">
+                                <option value="" data-i18n="choose_reminder_placeholder">-- Choose a reminder --
+                                </option>
+                            </select>
+                        </div>
+                        <div id="rem-selected-info"
+                            style="display:none; padding: 10px; background: var(--main-bg); border-radius: 8px; margin: 10px 0; font-size: 12px; color: var(--text-light);">
+                            <p id="rem-selected-title" style="margin: 0; font-weight: 600; color: var(--text-dark);">
+                            </p>
+                            <p id="rem-selected-status" style="margin: 5px 0 0 0;"></p>
+                        </div>
+                        <div class="form-group" style="margin-top:15px;">
+                            <label data-i18n="reminder_timing">Notification Timing</label>
+                            <select id="rem-timing"
+                                style="padding: 8px; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 10px;">
+                                <option value="5" data-i18n="minutes_5_before" class="timing-option">5 minutes before
+                                </option>
+                                <option value="10" data-i18n="minutes_10_before" class="timing-option">10 minutes before
+                                </option>
+                                <option value="30" data-i18n="minutes_30_before" class="timing-option">30 minutes before
+                                </option>
+                                <option value="custom" data-i18n="custom_option">Custom</option>
+                            </select>
+                            <input type="number" id="rem-custom-timing" placeholder="Enter minutes (1-180)"
+                                style="display:none; padding: 8px; border-radius: 8px; border: 1px solid var(--border-color); width: 100%;"
+                                min="1" max="180">
+                            <div id="rem-timing-error"
+                                style="color: var(--urgency-high); font-size: 12px; margin-top: 5px; display: none;">
+                            </div>
+                        </div>
+                        <button id="btn-save-rem-settings"
+                            style="margin-top:15px; padding: 8px; background: var(--sidebar-bg); color:white; border:none; border-radius:8px; cursor:pointer; width:100%;"
+                            data-i18n="save_settings_btn">Save Settings</button>
+                        <div id="rem-notification-status" style="margin-top: 10px;"></div>
+                    </div>
+
+                    <div class="card">
+                        <div class="section-header">
+                            <h3 data-i18n="snooze_settings">Snooze Settings</h3>
+                        </div>
+                        <div class="form-group">
+                            <label data-i18n="select_reminder_label">Select Reminder *</label>
+                            <select id="snooze-select-reminder"
+                                style="padding: 8px; border-radius: 8px; border: 1px solid var(--border-color); width: 100%;">
+                                <option value="" data-i18n="choose_reminder_placeholder">-- Choose a reminder --
+                                </option>
+                            </select>
+                        </div>
+                        <div id="snooze-selected-info"
+                            style="display:none; padding: 10px; background: var(--main-bg); border-radius: 8px; margin: 10px 0; font-size: 12px; color: var(--text-light);">
+                            <p id="snooze-selected-title" style="margin: 0; font-weight: 600; color: var(--text-dark);">
+                            </p>
+                            <p id="snooze-selected-status" style="margin: 5px 0 0 0;"></p>
+                        </div>
+                        <div class="form-group" style="margin-top:15px;">
+                            <label data-i18n="snooze_after_minutes">Snooze after (minutes)</label>
+                            <select id="snooze-timing"
+                                style="padding: 8px; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 10px;">
+                                <option value="5" data-i18n="minutes_5_after">5 minutes</option>
+                                <option value="10" data-i18n="minutes_10_after">10 minutes</option>
+                                <option value="15" data-i18n="minutes_15_after">15 minutes</option>
+                                <option value="30" data-i18n="minutes_30_after">30 minutes</option>
+                                <option value="custom" data-i18n="custom_option">Custom</option>
+                            </select>
+                            <input type="number" id="snooze-custom-timing" placeholder="Enter minutes (1-180)"
+                                style="display:none; padding: 8px; border-radius: 8px; border: 1px solid var(--border-color); width: 100%;"
+                                min="1" max="180">
+                            <div id="snooze-timing-error"
+                                style="color: var(--urgency-high); font-size: 12px; margin-top: 5px; display: none;">
+                            </div>
+                        </div>
+                        <button id="btn-save-snooze-settings"
+                            style="margin-top:15px; padding: 8px; background: var(--sidebar-bg); color:white; border:none; border-radius:8px; cursor:pointer; width:100%;"
+                            data-i18n="save_settings_btn">Save Settings</button>
+                        <div id="snooze-notification-status" style="margin-top: 10px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-settings" class="view-content">
+            <div class="card">
+                <div class="settings-section">
+                    <h3 style="margin-bottom: 20px;" data-i18n="account_info">Account Information</h3>
+                    <div class="account-info">
+                        <img src="https://ui-avatars.com/api/?name=User&background=344054&color=fff" alt="User"
+                            class="avatar" style="width: 60px; height: 60px;">
+                        <div class="account-details">
+                            <h4>Demo User</h4>
+                            <p>demo.user@student.edu.vn</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3 style="margin-bottom: 10px;" data-i18n="app_preferences">App Preferences</h3>
+
+                    <div class="settings-row">
+                        <div>
+                            <h4 data-i18n="theme">Display Theme</h4>
+                            <p style="font-size: 12px; color: var(--text-light);" data-i18n="theme_desc">Switch between
+                                Light and Dark mode</p>
+                        </div>
+                        <select id="setting-theme"
+                            style="padding: 8px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--input-bg); color: var(--text-dark);">
+                            <option value="light" data-i18n="light_mode">Light Mode</option>
+                            <option value="dark" data-i18n="dark_mode">Dark Mode</option>
+                        </select>
+                    </div>
+
+                    <div class="settings-row">
+                        <div>
+                            <h4 data-i18n="language">Language</h4>
+                            <p style="font-size: 12px; color: var(--text-light);" data-i18n="lang_desc">Change the
+                                display language</p>
+                        </div>
+                        <select id="setting-lang"
+                            style="padding: 8px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--input-bg); color: var(--text-dark);">
+                            <option value="en">English (US)</option>
+                            <option value="vi">Tiếng Việt</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button id="btn-save-settings"
+                    style="background: var(--sidebar-bg); color: white; border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; font-weight: 600;"
+                    data-i18n="save_settings">
+                    Save Settings
+                </button>
+                <div id="settings-feedback"
+                    style="margin-top: 10px; font-size: 14px; color: var(--text-light); display: none;"></div>
+            </div>
+        </div>
+
+        <div id="view-other" class="view-content">
+            <div class="card">
+                <p data-i18n="module_under_construction">Module under construction.</p>
+            </div>
+        </div>
+    </main>
+
+    <div id="cal-details-modal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3 id="modal-date-title" style="margin: 0;">Details</h3>
+                <button onclick="Calendar.closeModal()"
+                    style="background:none; border:none; font-size:18px; cursor:pointer;"><i
+                        class="fas fa-times"></i></button>
+            </div>
+            <div id="modal-content" class="modal-body"></div>
+        </div>
+    </div>
+
+    <div id="deadline-details-modal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3 id="deadline-details-title" style="margin: 0;" data-i18n="deadline_details_title">Deadline Details
+                </h3>
+                <button onclick="Deadline.closeDetails()"
+                    style="background:none; border:none; font-size:18px; cursor:pointer;"><i
+                        class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body" style="gap: 12px;">
+                <p id="deadline-details-meta" style="font-size: 13px; color: var(--text-light); margin: 0;"></p>
+                <div>
+                    <p style="font-size: 13px; font-weight: 600; margin: 0 0 5px 0;"
+                        data-i18n="deadline_description_label">Details / What to prepare</p>
+                    <div id="deadline-details-description"
+                        style="font-size: 14px; color: var(--text-dark); white-space: pre-wrap;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="schedule-details-modal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3 id="schedule-details-title" style="margin: 0;" data-i18n="schedule_details_title">Schedule Details
+                </h3>
+                <button onclick="Schedule.closeDetails()"
+                    style="background:none; border:none; font-size:18px; cursor:pointer;"><i
+                        class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body" style="gap: 12px;">
+                <p id="schedule-details-meta" style="font-size: 13px; color: var(--text-light); margin: 0;"></p>
+                <div>
+                    <p style="font-size: 13px; font-weight: 600; margin: 0 0 5px 0;"
+                        data-i18n="schedule_description_label">Details / What to prepare</p>
+                    <div id="schedule-details-description"
+                        style="font-size: 14px; color: var(--text-dark); white-space: pre-wrap;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="logout-confirmation-modal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3 id="logout-modal-title" style="margin: 0;" data-i18n="confirm_logout">Confirm Logout</h3>
+                <button onclick="Logout.cancelLogout()"
+                    style="background:none; border:none; font-size:18px; cursor:pointer;"><i
+                        class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body" style="gap: 20px;">
+                <p id="logout-modal-message" style="margin: 0;" data-i18n="logout_message">Are you sure you want to log
+                    out?</p>
+                <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                    <button onclick="Logout.cancelLogout()"
+                        style="padding: 10px 20px; border: 1px solid var(--border-color); background: none; border-radius: 8px; cursor: pointer;"
+                        data-i18n="cancel">Cancel</button>
+                    <button onclick="Logout.confirmLogout()"
+                        style="padding: 10px 20px; border: none; background: var(--urgency-high); color: white; border-radius: 8px; cursor: pointer;"
+                        data-i18n="logout_btn">Logout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fullscreen Loading Overlay for Settings Save -->
+    <div id="settings-save-overlay" class="fullscreen-loading-overlay">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <div class="loading-text" data-i18n="saving_settings">Saving Settings...</div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="js/features/calendar.js"></script>
+    <script>
+        const Storage = {
+            KEY: 'STUDENT_APP_DATA',
+            get: () => {
+                const data = JSON.parse(localStorage.getItem(Storage.KEY)) || {
+                    schedule: [],
+                    subjects: [],
+                    deadlines: [],
+                    reminders: [],
+                    remSettings: { notify: true, timing: "10" },
+                    appSettings: { theme: 'light', lang: 'en' }
+                };
+                if (!data.subjects) data.subjects = [];
+                if (!data.deadlines) data.deadlines = [];
+                if (!data.schedule) data.schedule = [];
+                if (!data.reminders) data.reminders = [];
+                if (!data.remSettings) data.remSettings = { notify: true, timing: "10" };
+                if (!data.appSettings) data.appSettings = { theme: 'light', lang: 'en' };
+                return data;
+            },
+            save: (data) => {
+                localStorage.setItem(Storage.KEY, JSON.stringify(data));
+                Dashboard.render();
+            }
+        };
+
+        const Toast = {
+            show: function (message, type = 'success') {
+                const container = document.getElementById('toast-container');
+                if (!container) return;
+
+                const toast = document.createElement('div');
+                toast.className = `toast ${type}`;
+                toast.innerText = message;
+
+                container.appendChild(toast);
+
+                // Wait for append to finish then trigger transition
+                setTimeout(() => {
+                    toast.classList.add('show');
+                }, 10);
+
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                    setTimeout(() => {
+                        toast.remove();
+                    }, 300); // Wait for transition out
+                }, 3000); // Show for 3 seconds
+            }
+        };
+
+        /* --- I18N DICTIONARY --- */
+        const i18n = {
+            en: {
+                menu_dashboard: "Dashboard", menu_schedule: "Schedule", menu_deadline: "Deadline",
+                menu_calendar: "Calendar", menu_subjects: "Subjects", menu_statistics: "Statistics",
+                menu_reminders: "Reminders", menu_settings: "Settings", menu_logout: "Logout",
+                search_placeholder: "Search tasks, subjects...", today_schedule: "Today Schedule",
+                quick_insight: "Quick Insight", filter_day: "Filter Day:", all_days: "All Days",
+                mon: "Monday", tue: "Tuesday", wed: "Wednesday", thu: "Thursday", fri: "Friday", sat: "Saturday", sun: "Sunday",
+                add_new_schedule: "Add New Schedule", account_info: "Account Information",
+                app_preferences: "App Preferences", theme: "Display Theme", theme_desc: "Switch between Light and Dark mode",
+                light_mode: "Light Mode", dark_mode: "Dark Mode", language: "Language",
+                lang_desc: "Change the display language", save_settings: "Save Settings",
+                // Dashboard
+                schedules: "Schedules", deadlines: "Deadlines", today: "Today", completed: "Completed",
+                no_classes_today: "No classes for today.",
+                warning_overdue: "Warning: You have overdue deadlines! Check the Deadline tab.",
+                system_healthy: "System healthy. You have {{count}} pending tasks.",
+                // Schedule
+                color: "Color", day: "Day", time: "Time", subject: "Subject", room: "Room", type: "Type", actions: "Actions",
+                no_schedules_found: "No schedules found.",
+                schedule_description_label: "Details / What to prepare",
+                no_schedule_description: "No additional details provided for this schedule.",
+                filter_status: "Status:", all_deadlines: "All Deadlines", pending: "Pending", overdue: "Overdue",
+                subject_name: "Subject Name", day_of_week: "Day of Week", start_time: "Start Time", end_time: "End Time",
+                add_new_deadline: "Add New Deadline", due_date: "Due Date", task: "Task", status: "Status",
+                // Deadline
+                done: "Done", no_deadlines_found: "No deadlines found.",
+                create_deadline: "Create Deadline", deadline_title: "Deadline Title", edit_schedule: "Edit Schedule",
+                deadline_details_title: "Deadline Details",
+                deadline_description_label: "Details / What to prepare",
+                no_deadline_description: "No additional details provided.",
+                lecture: "Lecture", lab: "Lab", practice: "Practice", online: "Online", event_color: "Highlight",
+                cancel: "Cancel", save_schedule: "Save Schedule", save_deadline: "Save Deadline",
+                delete: "Delete", edit: "Edit",
+                // Logout Confirmation
+                confirm_logout: "Confirm Logout", logout_message: "Are you sure you want to log out?", logout_btn: "Logout",
+                // Calendar
+                january: "January", february: "February", march: "March", april: "April", may: "May", june: "June",
+                july: "July", august: "August", september: "September", october: "October", november: "November", december: "December",
+                month_view: "Month", week_view: "Week", no_events: "No events",
+                week_header_sun: "Sun", week_header_mon: "Mon", week_header_tue: "Tue", week_header_wed: "Wed",
+                week_header_thu: "Thu", week_header_fri: "Fri", week_header_sat: "Sat",
+                day_sunday: "Sunday", day_monday: "Monday", day_tuesday: "Tuesday", day_wednesday: "Wednesday",
+                day_thursday: "Thursday", day_friday: "Friday", day_saturday: "Saturday",
+                // Subjects
+                manage_subjects: "Manage Your Subjects", add_new_subject: "Add New Subject",
+                teacher_name: "Teacher Name", color_tag: "Color Tag", no_subjects_found: "No subjects found.",
+                add_new_subject_form: "Add New Subject", teacher: "Teacher", subject: "Subject",
+                save_subject: "Save Subject",
+                // Statistics
+                weekly_hours: "Weekly Hours", success_rate: "Success Rate", pending_tasks: "Pending Tasks",
+                study_time_distribution: "Study Time Distribution", deadline_completion_rate: "Deadline Completion Rate",
+                schedules_per_subject: "Schedules per Subject", completed_vs_total: "Completed vs Total",
+                hours_abbr: "hours", session_abbr: "session", sessions_abbr: "sessions",
+                you_have_finished: "You have finished {{rate}}% of your assigned tasks.",
+                no_study_data: "No data.",
+                // Reminders
+                upcoming_reminders: "Upcoming Reminders", notification_settings: "Notification Settings",
+                snooze_settings: "Snooze Settings",
+                create_reminder: "Create Reminder", enable_desktop_notifications: "Enable Desktop Notifications",
+                reminder_timing: "Reminder Timing", minutes_before: "{{value}} minutes before",
+                minutes_5: "5 minutes before", minutes_10: "10 minutes before", minutes_30: "30 minutes before",
+                snooze_after_minutes: "Snooze after (minutes)",
+                save_settings_btn: "Save Settings", new_reminder: "New Reminder", reminder_title: "Title",
+                reminder_date: "Date", reminder_time: "Time", reminder_note: "Note", dismiss: "Dismiss",
+                no_active_reminders: "No active reminders.", overdue_tag: "OVERDUE", upcoming_tag: "UPCOMING",
+                snooze_5: "+5m", snooze_30: "+30m", reminder_snoozed: "Reminder snoozed for {{minutes}} minutes",
+                reminder_disabled: "Schedule saved (reminder disabled)", reminder_enabled: "Reminder enabled ({{minutes}} minutes before)",
+                no_reminders_set: "You have not set any reminders. Notifications will not be triggered.",
+                custom_reminder_label: "Custom minutes", invalid_reminder: "Please enter a number between 1 and 180",
+                notification_permission_denied: "Notification permission was denied", notification_permission_granted: "Notification permission granted",
+                select_schedule_for_reminder: "Select Reminder to Configure", reminder_set_for_schedule: "Reminder: {{minutes}} minutes before",
+                no_reminder_for_schedule: "No reminder set", reminder_status: "Reminder",
+                select_reminder_label: "Select Reminder", reminder_notification_not_configured: "Notification not configured",
+                reminder_notification_configured: "Notify {{minutes}} minutes before",
+                snooze_settings_saved: "Snooze settings saved successfully",
+                snooze_configured: "Snooze: {{minutes}} minutes", snooze_not_configured: "No snooze configured",
+                // Weather
+                todays_weather: "Today’s Weather", weather_feels_like: "Feels like", weather_humidity: "Humidity",
+                weather_min: "Min", weather_max: "Max", loading_weather: "Loading weather...",
+                weather_error_geo: "Geolocation not supported", weather_error_pos: "Unable to retrieve position",
+                weather_error_data: "Weather data unavailable", weather_error_fetch: "Unable to load weather",
+                // Reminders Settings
+                minutes_5_before: "5 minutes before", minutes_10_before: "10 minutes before", minutes_30_before: "30 minutes before",
+                minutes_5_after: "5 minutes after", minutes_10_after: "10 minutes after", minutes_15_after: "15 minutes after", minutes_30_after: "30 minutes after",
+                custom_option: "Custom", choose_reminder_placeholder: "-- Choose a reminder --",
+                // Calendar Modal
+                no_events_for_day: "No events for this day.", class: "Class",
+                // Form
+                subject_name_label: "Subject Name *", day_label: "Day of Week *", start_time_label: "Start Time *",
+                end_time_label: "End Time *", room_label: "Room", type_label: "Type", event_color_label: "Highlight",
+                deadline_title_label: "Deadline Title *", due_date_label: "Due Date *", subject_label: "Subject",
+                submit_save: "Save", today_btn: "Today",
+                deadline_title_form: "Deadline Title", subject_name_form: "Subject Name", teacher_name_form: "Teacher Name", room_form: "Room",
+                color_tag_form: "Color Tag",
+                reminder_title_label: "Title *", reminder_date_label: "Date *", reminder_time_label: "Time *",
+                reminder_note_label: "Note",
+                module_under_construction: "Module under construction.",
+                // Onboarding
+                welcome_title: "Welcome to Studay!", onboarding_message: "Get started by adding your first schedule or deadline to organize your study time effectively.",
+                add_schedule_btn: "Add Schedule", add_deadline_btn: "Add Deadline",
+                // General
+                loading: "Loading...", error: "Error", success: "Success"
+            },
+            vi: {
+                menu_dashboard: "Bảng điều khiển", menu_schedule: "Thời khóa biểu", menu_deadline: "Hạn chót",
+                menu_calendar: "Lịch", menu_subjects: "Môn học", menu_statistics: "Thống kê",
+                menu_reminders: "Nhắc nhở", menu_settings: "Cài đặt", menu_logout: "Đăng xuất",
+                search_placeholder: "Tìm kiếm bài tập, môn học...", today_schedule: "Lịch học hôm nay",
+                quick_insight: "Thông tin nhanh", filter_day: "Lọc ngày:", all_days: "Tất cả các ngày",
+                mon: "Thứ Hai", tue: "Thứ Ba", wed: "Thứ Tư", thu: "Thứ Năm", fri: "Thứ Sáu", sat: "Thứ Bảy", sun: "Chủ Nhật",
+                add_new_schedule: "Thêm lịch mới", account_info: "Thông tin tài khoản",
+                app_preferences: "Tùy chỉnh ứng dụng", theme: "Chế độ hiển thị", theme_desc: "Chuyển đổi giữa chế độ Sáng và Tối",
+                light_mode: "Chế độ Sáng", dark_mode: "Chế độ Tối", language: "Ngôn ngữ",
+                lang_desc: "Thay đổi ngôn ngữ hiển thị", save_settings: "Lưu cài đặt",
+                // Dashboard
+                schedules: "Thời khoá biểu", deadlines: "Hạn chót", today: "Hôm nay", completed: "Hoàn thành",
+                no_classes_today: "Không có lớp học hôm nay.",
+                warning_overdue: "Cảnh báo: Bạn có hạn chót quá hạn! Kiểm tra tab Hạn chót.",
+                system_healthy: "Hệ thống bình thường. Bạn có {{count}} bài tập chờ xử lý.",
+                // Schedule
+                color: "Màu sắc", day: "Ngày", time: "Giờ", subject: "Môn học", room: "Phòng", type: "Loại", actions: "Hành động",
+                no_schedules_found: "Không tìm thấy thời khoá biểu.",
+                schedule_description_label: "Chi tiết / Cần chuẩn bị",
+                no_schedule_description: "Không có ghi chú chi tiết nào cho lịch này.",
+                filter_status: "Trạng thái:", all_deadlines: "Tất cả hạn chót", pending: "Chưa hoàn thành", overdue: "Quá hạn",
+                subject_name: "Tên môn học", day_of_week: "Ngày trong tuần", start_time: "Giờ bắt đầu", end_time: "Giờ kết thúc",
+                add_new_deadline: "Thêm hạn chót mới", due_date: "Ngày hết hạn", task: "Bài tập", status: "Trạng thái",
+                // Deadline
+                done: "Xong", no_deadlines_found: "Không tìm thấy hạn chót.",
+                create_deadline: "Tạo hạn chót", deadline_title: "Tên hạn chót", edit_schedule: "Chỉnh sửa thời khoá biểu",
+                deadline_details_title: "Chi tiết hạn chót",
+                deadline_description_label: "Chi tiết / Cần chuẩn bị",
+                no_deadline_description: "Không có ghi chú chi tiết nào.",
+                lecture: "Bài giảng", lab: "Thực hành", practice: "Luyện tập", online: "Trực tuyến", event_color: "Màu nổi bật",
+                cancel: "Hủy", save_schedule: "Lưu thời khoá biểu", save_deadline: "Lưu hạn chót",
+                delete: "Xóa", edit: "Chỉnh sửa",
+                // Logout Confirmation
+                confirm_logout: "Xác nhận đăng xuất", logout_message: "Bạn có chắc chắn muốn đăng xuất?", logout_btn: "Đăng xuất",
+                // Calendar
+                january: "Tháng 1", february: "Tháng 2", march: "Tháng 3", april: "Tháng 4", may: "Tháng 5", june: "Tháng 6",
+                july: "Tháng 7", august: "Tháng 8", september: "Tháng 9", october: "Tháng 10", november: "Tháng 11", december: "Tháng 12",
+                month_view: "Tháng", week_view: "Tuần", no_events: "Không có sự kiện",
+                week_header_sun: "CN", week_header_mon: "T2", week_header_tue: "T3", week_header_wed: "T4",
+                week_header_thu: "T5", week_header_fri: "T6", week_header_sat: "T7",
+                day_sunday: "Chủ nhật", day_monday: "Thứ hai", day_tuesday: "Thứ ba", day_wednesday: "Thứ tư",
+                day_thursday: "Thứ năm", day_friday: "Thứ sáu", day_saturday: "Thứ bảy",
+                // Subjects
+                manage_subjects: "Quản lý môn học", add_new_subject: "Thêm môn học mới",
+                teacher_name: "Tên giáo viên", color_tag: "Nhãn màu", no_subjects_found: "Không tìm thấy môn học.",
+                add_new_subject_form: "Thêm môn học mới", teacher: "Giáo viên", subject: "Môn học",
+                save_subject: "Lưu môn học",
+                // Statistics
+                weekly_hours: "Giờ hàng tuần", success_rate: "Tỷ lệ thành công", pending_tasks: "Bài tập chờ xử lý",
+                study_time_distribution: "Phân bố thời gian học", deadline_completion_rate: "Tỷ lệ hoàn thành hạn chót",
+                schedules_per_subject: "Thời khoá biểu theo môn học", completed_vs_total: "Hoàn thành so với tổng",
+                hours_abbr: "giờ", session_abbr: "buổi học", sessions_abbr: "buổi học",
+                you_have_finished: "Bạn đã hoàn thành {{rate}}% bài tập được giao.",
+                no_study_data: "Không có dữ liệu.",
+                // Reminders
+                upcoming_reminders: "Nhắc nhở sắp tới", notification_settings: "Cài đặt thông báo",
+                snooze_settings: "Cài đặt Hoãn",
+                create_reminder: "Tạo nhắc nhở", enable_desktop_notifications: "Bật thông báo máy tính",
+                reminder_timing: "Thời gian nhắc nhở", minutes_before: "{{value}} phút trước",
+                minutes_5: "5 phút trước", minutes_10: "10 phút trước", minutes_30: "30 phút trước",
+                snooze_after_minutes: "Hoãn sau (phút)",
+                save_settings_btn: "Lưu cài đặt", new_reminder: "Nhắc nhở mới", reminder_title: "Tiêu đề",
+                reminder_date: "Ngày", reminder_time: "Giờ", reminder_note: "Ghi chú", dismiss: "Bỏ qua",
+                no_active_reminders: "Không có nhắc nhở nào.", overdue_tag: "QUÁ HẠN", upcoming_tag: "SẮP TỚI",
+                snooze_5: "+5p", snooze_30: "+30p", reminder_snoozed: "Nhắc nhở được hoãn {{minutes}} phút",
+                reminder_disabled: "Đã lưu lịch (nhắc nhở bị tắt)", reminder_enabled: "Đã bật nhắc nhở ({{minutes}} phút trước)",
+                no_reminders_set: "Bạn chưa đặt nhắc nhở nào. Thông báo sẽ không được kích hoạt.",
+                custom_reminder_label: "Phút tùy chỉnh", invalid_reminder: "Vui lòng nhập một số từ 1 đến 180",
+                notification_permission_denied: "Quyền thông báo bị từ chối", notification_permission_granted: "Quyền thông báo được cấp",
+                select_schedule_for_reminder: "Chọn Nhắc Nhở để Cấu Hình", reminder_set_for_schedule: "Nhắc nhở: {{minutes}} phút trước",
+                no_reminder_for_schedule: "Chưa thiết lập nhắc nhở", reminder_status: "Nhắc nhở",
+                select_reminder_label: "Chọn Nhắc Nhở", reminder_notification_not_configured: "Chưa cấu hình thông báo",
+                reminder_notification_configured: "Thông báo {{minutes}} phút trước",
+                snooze_settings_saved: "Cài đặt hoãn đã được lưu thành công",
+                snooze_configured: "Hoãn: {{minutes}} phút", snooze_not_configured: "Chưa cấu hình hoãn",
+                // Weather
+                todays_weather: "Thời tiết hôm nay", weather_feels_like: "Cảm giác", weather_humidity: "Độ ẩm",
+                weather_min: "Thấp nhất", weather_max: "Cao nhất", loading_weather: "Đang tải thời tiết...",
+                weather_error_geo: "Trình duyệt không hỗ trợ định vị", weather_error_pos: "Không thể lấy vị trí",
+                weather_error_data: "Dữ liệu thời tiết không khả dụng", weather_error_fetch: "Không thể tải thời tiết",
+                // Reminders Settings
+                minutes_5_before: "Trước 5 phút", minutes_10_before: "Trước 10 phút", minutes_30_before: "Trước 30 phút",
+                minutes_5_after: "Sau 5 phút", minutes_10_after: "Sau 10 phút", minutes_15_after: "Sau 15 phút", minutes_30_after: "Sau 30 phút",
+                custom_option: "Tùy chỉnh", choose_reminder_placeholder: "-- Chọn nhắc nhở --",
+                // Calendar Modal
+                no_events_for_day: "Không có sự kiện cho ngày này.", class: "Lớp học",
+                // Form
+                subject_name_label: "Tên môn học *", day_label: "Ngày trong tuần *", start_time_label: "Giờ bắt đầu *",
+                end_time_label: "Giờ kết thúc *", room_label: "Phòng", type_label: "Loại", event_color_label: "Màu đánh dấu",
+                deadline_title_label: "Tên hạn chót *", due_date_label: "Ngày hết hạn *", subject_label: "Môn học",
+                submit_save: "Lưu", today_btn: "Hôm nay",
+                deadline_title_form: "Tên hạn chót", subject_name_form: "Tên môn học", teacher_name_form: "Tên giáo viên", room_form: "Phòng",
+                color_tag_form: "Nhãn màu",
+                reminder_title_label: "Tiêu đề *", reminder_date_label: "Ngày *", reminder_time_label: "Giờ *",
+                reminder_note_label: "Ghi chú",
+                module_under_construction: "Mô-đun đang được xây dựng.",
+                // Onboarding
+                welcome_title: "Chào mừng đến với Studay!", onboarding_message: "Bắt đầu bằng cách thêm lịch học hoặc hạn chót đầu tiên để tổ chức thời gian học tập hiệu quả.",
+                add_schedule_btn: "Thêm Lịch Học", add_deadline_btn: "Thêm Hạn Chót",
+                // General
+                loading: "Đang tải...", error: "Lỗi", success: "Thành công"
+            }
+        };
+
+        /* --- SETTINGS LOGIC --- */
+        const Settings = {
+            init: function () {
+                const data = Storage.get();
+                this.applyTheme(data.appSettings.theme);
+                this.applyLanguage(data.appSettings.lang);
+                this.loadForm();
+                this.bindEvents();
+            },
+            bindEvents: function () {
+                document.getElementById('btn-save-settings').onclick = () => this.save();
+            },
+            loadForm: function () {
+                const data = Storage.get();
+                document.getElementById('setting-theme').value = data.appSettings.theme;
+                document.getElementById('setting-lang').value = data.appSettings.lang;
+            },
+            applyTheme: function (theme) {
+                document.documentElement.setAttribute('data-theme', theme);
+            },
+            applyLanguage: function (lang) {
+                const dictionary = i18n[lang] || i18n.en;
+                document.querySelectorAll('[data-i18n]').forEach(el => {
+                    const key = el.getAttribute('data-i18n');
+                    if (dictionary[key]) el.innerText = dictionary[key];
+                });
+                document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                    const key = el.getAttribute('data-i18n-placeholder');
+                    if (dictionary[key]) el.placeholder = dictionary[key];
+                });
+                document.querySelectorAll('[data-i18n][class*="option"]').forEach(el => {
+                    const key = el.getAttribute('data-i18n');
+                    if (dictionary[key]) el.innerText = dictionary[key];
+                });
+                Calendar.updateWeekHeader();
+                this.rerenderActiveView();
+            },
+            rerenderActiveView: function () {
+                const activeView = document.querySelector('.view-content.active');
+                if (!activeView) return;
+
+                const viewId = activeView.id;
+                if (viewId === 'view-dashboard') Dashboard.render();
+                else if (viewId === 'view-schedule') Schedule.init();
+                else if (viewId === 'view-deadline') Deadline.init();
+                else if (viewId === 'view-calendar') initCalendar();
+                else if (viewId === 'view-subjects') Subjects.init();
+                else if (viewId === 'view-statistics') Statistics.init();
+                else if (viewId === 'view-reminders') Reminders.init();
+            },
+            save: function () {
+                const btn = document.getElementById('btn-save-settings');
+                const overlay = document.getElementById('settings-save-overlay');
+                const startTime = Date.now();
+
+                // Show fullscreen loading overlay
+                overlay.classList.add('active');
+
+                // Start button loading state
+                btn.classList.add('btn-loading');
+                btn.disabled = true;
+
+                const data = Storage.get();
+                const newTheme = document.getElementById('setting-theme').value;
+                const newLang = document.getElementById('setting-lang').value;
+
+                data.appSettings = { theme: newTheme, lang: newLang };
+                localStorage.setItem(Storage.KEY, JSON.stringify(data));
+
+                this.applyTheme(newTheme);
+                this.applyLanguage(newLang);
+
+                // Ensure minimum overlay duration of 500ms
+                const elapsed = Date.now() - startTime;
+                const remaining = Math.max(0, 500 - elapsed);
+
+                setTimeout(() => {
+                    // Hide fullscreen overlay
+                    overlay.classList.add('fade-out');
+                    setTimeout(() => {
+                        overlay.classList.remove('active', 'fade-out');
+                    }, 300);
+
+                    // Stop button loading, show success
+                    btn.classList.remove('btn-loading');
+                    btn.classList.add('btn-success');
+                    btn.disabled = false;
+
+                    // Show success for 200-300ms
+                    setTimeout(() => {
+                        btn.classList.remove('btn-success');
+                    }, 250);
+                }, remaining);
+            }
+        };
+
+        const Weather = {
+            apiKey: '289b1cfba83a8b6aec6623cd52543989',
+
+            init: function () {
+                this.fetchWeather();
+            },
+
+            fetchWeather: function () {
+                const weatherContent = document.getElementById('weather-content');
+                if (!weatherContent) return;
+
+                // Show loading state
+                weatherContent.innerHTML = '<div class="weather-loading">Đang tải thời tiết...</div>';
+
+                // Check if geolocation is supported
+                if (!navigator.geolocation) {
+                    const data = Storage.get();
+                    const lang = data.appSettings.lang || 'en';
+                    const dict = i18n[lang];
+                    this.displayError(dict.weather_error_geo || 'Geolocation not supported');
+                    return;
+                }
+
+                // Get user's location
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const lat = position.coords.latitude;
+                        const lon = position.coords.longitude;
+                        this.fetchWeatherByCoords(lat, lon);
+                    },
+                    (error) => {
+                        console.error('Geolocation error:', error);
+                        const data = Storage.get();
+                        const lang = data.appSettings.lang || 'en';
+                        const dict = i18n[lang];
+                        this.displayError(dict.weather_error_pos || 'Unable to retrieve position');
+                    }
+                );
+            },
+
+            fetchWeatherByCoords: function (lat, lon) {
+                const data = Storage.get();
+                const lang = data.appSettings.lang || 'en';
+                const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${this.apiKey}&units=metric&lang=${lang}`;
+
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.cod === 200) {
+                            this.displayWeather(data);
+                        } else {
+                            const dict = i18n[lang];
+                            this.displayError(dict.weather_error_data);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Weather API error:', error);
+                        const dict = i18n[lang];
+                        this.displayError(dict.weather_error_fetch);
+                    });
+            },
+
+            displayWeather: function (data) {
+                const weatherContent = document.getElementById('weather-content');
+                if (!weatherContent) return;
+
+                const storeData = Storage.get();
+                const lang = storeData.appSettings.lang || 'en';
+                const dict = i18n[lang];
+
+                const temp = Math.round(data.main.temp);
+                const feelsLike = Math.round(data.main.feels_like);
+                const description = data.weather[0].description;
+                const icon = data.weather[0].icon;
+                const humidity = data.main.humidity;
+                const windSpeed = data.wind.speed;
+                const tempMin = Math.round(data.main.temp_min);
+                const tempMax = Math.round(data.main.temp_max);
+
+                const iconUrl = `https://openweathermap.org/img/wn/${icon}@2x.png`;
+
+                weatherContent.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 10px;">
+                        <img src="${iconUrl}" alt="${description}" style="width: 50px; height: 50px;">
+                        <div>
+                            <div style="font-size: 24px; font-weight: 700; color: var(--text-dark);">${temp}°C</div>
+                            <div style="font-size: 14px; color: var(--text-light); text-transform: capitalize;">${description}</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; font-size: 12px; color: var(--text-light); margin-bottom: 5px;">
+                        <span><i class="fas fa-thermometer-half"></i> ${dict.weather_feels_like} ${feelsLike}°C</span>
+                        <span><i class="fas fa-tint"></i> ${dict.weather_humidity} ${humidity}%</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; font-size: 12px; color: var(--text-light); margin-bottom: 5px;">
+                        <span><i class="fas fa-temperature-low"></i> ${tempMin}°C</span>
+                        <span><i class="fas fa-temperature-high"></i> ${tempMax}°C</span>
+                    </div>
+                    <div style="font-size: 12px; color: var(--text-light);">
+                        <i class="fas fa-map-marker-alt"></i> ${data.name}
+                    </div>
+                `;
+            },
+
+            displayError: function (message) {
+                const weatherContent = document.getElementById('weather-content');
+                if (weatherContent) {
+                    weatherContent.innerHTML = `<div style="color: var(--text-light); font-size: 12px; text-align: center;">${message}</div>`;
+                }
+            }
+        };
+
+        const Dashboard = {
+            render: function () {
+                const data = Storage.get();
+                const lang = data.appSettings.lang || 'en';
+                const dict = i18n[lang];
+                const today = new Date().getDay();
+                const now = new Date();
+
+                // Check if user has data to determine onboarding visibility
+                const hasSchedules = data.schedule.length > 0;
+                const hasDeadlines = data.deadlines.length > 0;
+                const showOnboarding = !hasSchedules && !hasDeadlines;
+
+                // Show/hide onboarding section
+                const onboardingSection = document.getElementById('onboarding-section');
+                if (onboardingSection) {
+                    onboardingSection.style.display = showOnboarding ? 'block' : 'none';
+                }
+
+                const totalDeadlines = data.deadlines.length;
+                const completedDeadlines = data.deadlines.filter(d => d.status === 'completed').length;
+                const todayClasses = data.schedule.filter(s => parseInt(s.day) === today).length;
+
+                const summaryHtml = `
+                <div class="card summary-card"><div class="icon-box icon-blue"><i class="fas fa-book"></i></div><div class="card-info"><h3>${dict.schedules}</h3><h2>${data.schedule.length}</h2></div></div>
+                <div class="card summary-card"><div class="icon-box icon-orange"><i class="fas fa-tasks"></i></div><div class="card-info"><h3>${dict.deadlines}</h3><h2>${totalDeadlines}</h2></div></div>
+                <div class="card summary-card"><div class="icon-box icon-pink"><i class="fas fa-clock"></i></div><div class="card-info"><h3>${dict.today}</h3><h2>${todayClasses}</h2></div></div>
+                <div class="card summary-card"><div class="icon-box icon-green"><i class="fas fa-check"></i></div><div class="card-info"><h3>${dict.completed}</h3><h2>${completedDeadlines}</h2></div></div>
+            `;
+                document.getElementById('dashboard-summary').innerHTML = summaryHtml;
+
+                const todayList = data.schedule.filter(s => parseInt(s.day) === today);
+                const listContainer = document.getElementById('dashboard-today-schedule');
+
+                if (todayList.length === 0) {
+                    listContainer.innerHTML = `<div class="empty-state"><i class="far fa-calendar-times"></i><p>${dict.no_classes_today}</p></div>`;
+                } else {
+                    listContainer.innerHTML = todayList.sort((a, b) => a.startTime.localeCompare(b.startTime)).map(s => `
+                    <div class="list-item">
+                        <div style="display:flex; align-items:center; gap:15px;">
+                            <div class="time-box" style="border-left: 4px solid ${s.color || '#3B82F6'}">${s.startTime}</div>
+                            <div class="item-info"><h4>${s.subjectName}</h4><p>${s.room || 'No Room'}</p></div>
+                        </div>
+                        <span class="tag tag-low">${s.type}</span>
+                    </div>
+                `).join('');
+                }
+
+                const overdueCount = data.deadlines.filter(d => d.status === 'pending' && new Date(d.dueDate) < now).length;
+                const pendingCount = data.deadlines.filter(d => d.status === 'pending').length;
+                document.getElementById('dashboard-insight').innerText = overdueCount > 0
+                    ? dict.warning_overdue
+                    : dict.system_healthy.replace('{{count}}', pendingCount);
+
+                // Initialize weather widget
+                Weather.init();
+            }
+        };
+
+        const Schedule = {
+            filter: 'all',
+            selectedDays: [],
+            getDayName: function (dayIndex) {
+                const data = Storage.get();
+                const lang = data.appSettings.lang || 'en';
+                const dict = i18n[lang];
+                const dayMap = { 0: dict.sun, 1: dict.mon, 2: dict.tue, 3: dict.wed, 4: dict.thu, 5: dict.fri, 6: dict.sat };
+                return dayMap[dayIndex] || '';
+            },
+            getTypeTranslation: function (typeValue) {
+                const data = Storage.get();
+                const lang = data.appSettings.lang || 'en';
+                const dict = i18n[lang];
+                const typeKey = (typeValue || 'Lecture').toLowerCase();
+                const keyMap = { 'lecture': 'lecture', 'lab': 'lab', 'practice': 'practice', 'online': 'online' };
+                return dict[keyMap[typeKey]] || typeValue || 'Lecture';
+            },
+            getDayDisplayName: function (dayValue) {
+                const data = Storage.get();
+                const lang = data.appSettings.lang || 'en';
+                const dict = i18n[lang];
+                if (Array.isArray(dayValue)) {
+                    return dayValue.map(d => this.getDayName(parseInt(d))).join(', ');
+                }
+                if (dayValue === 'all') return dict.all_days;
+                return this.getDayName(parseInt(dayValue));
+            },
+            init: function () { this.renderList(); this.bindEvents(); },
+            bindEvents: function () {
+                document.getElementById('btn-open-form').onclick = () => this.toggleForm(true);
+                document.getElementById('btn-close-form').onclick = () => this.toggleForm(false);
+                document.getElementById('filter-day').onchange = (e) => { this.filter = e.target.value; this.renderList(); };
+                document.getElementById('schedule-form').onsubmit = (e) => { e.preventDefault(); this.save(); };
+                document.getElementById('sch-color-presets').addEventListener('click', (e) => {
+                    if (e.target.classList.contains('color-btn')) {
+                        const color = e.target.dataset.color;
+                        document.getElementById('sch-color').value = color;
+                        this.updatePresetUI('sch-color', color);
+                    }
+                });
+                // Bind day selector buttons
+                document.getElementById('day-selector').addEventListener('click', (e) => {
+                    if (e.target.classList.contains('day-btn')) {
+                        const day = e.target.dataset.day;
+                        this.toggleDaySelection(day);
+                    }
+                });
+            },
+            toggleDaySelection: function (day) {
+                if (day === 'all') {
+                    // If "All Days" is clicked, select all days
+                    if (this.selectedDays.length === 7) {
+                        // If all days are already selected, deselect all
+                        this.selectedDays = [];
+                    } else {
+                        // Select all days (0-6)
+                        this.selectedDays = ['0', '1', '2', '3', '4', '5', '6'];
+                    }
+                } else {
+                    // Handle individual day selection
+                    const index = this.selectedDays.indexOf(day);
+                    if (index > -1) {
+                        this.selectedDays.splice(index, 1);
+                    } else {
+                        this.selectedDays.push(day);
+                    }
+                }
+                this.updateDayButtons();
+            },
+            updateDayButtons: function () {
+                const buttons = document.querySelectorAll('.day-btn');
+                buttons.forEach(btn => {
+                    const day = btn.dataset.day;
+                    if (this.selectedDays.includes(day)) {
+                        btn.classList.add('selected');
+                    } else {
+                        btn.classList.remove('selected');
+                    }
+                });
+            },
+            updatePresetUI: function (inputId, value) {
+                const container = document.getElementById(inputId + '-presets');
+                container.querySelectorAll('.color-btn').forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.color === value);
+                });
+            },
+            toggleForm: function (show, id = null) {
+                const card = document.getElementById('schedule-form-card');
+                const form = document.getElementById('schedule-form');
+                const data = Storage.get();
+                const lang = data.appSettings.lang || 'en';
+                const dict = i18n[lang];
+                form.reset();
+                document.getElementById('edit-id').value = '';
+                document.getElementById('sch-color').value = '#3B82F6';
+                this.selectedDays = [];
+                this.updateDayButtons();
+                document.getElementById('form-title').innerText = id ? dict.edit_schedule : dict.add_new_schedule;
+                if (show) {
+                    card.style.display = 'block';
+                    if (id) {
+                        const item = Storage.get().schedule.find(s => s.id === id);
+                        document.getElementById('edit-id').value = item.id;
+                        document.getElementById('sch-subject').value = item.subjectName;
+                        // Handle backward compatibility for old format
+                        if (item.selectedDays && Array.isArray(item.selectedDays)) {
+                            this.selectedDays = item.selectedDays;
+                        } else if (item.allDays) {
+                            this.selectedDays = ['0', '1', '2', '3', '4', '5', '6'];
+                        } else {
+                            this.selectedDays = [item.day || '1'];
+                        }
+                        this.updateDayButtons();
+                        document.getElementById('sch-start').value = item.startTime;
+                        document.getElementById('sch-end').value = item.endTime;
+                        document.getElementById('sch-room').value = item.room;
+                        document.getElementById('sch-type').value = item.type;
+                        document.getElementById('sch-color').value = item.color || '#3B82F6';
+                        const descInput = document.getElementById('sch-description');
+                        if (descInput) descInput.value = item.description || '';
+                    }
+                } else card.style.display = 'none';
+            },
+            save: function () {
+                if (this.selectedDays.length === 0) {
+                    alert('Please select at least one day for the schedule.');
+                    return;
+                }
+                const data = Storage.get();
+                const id = document.getElementById('edit-id').value;
+                const newItem = {
+                    id: id ? parseInt(id) : Date.now(),
+                    subjectName: document.getElementById('sch-subject').value,
+                    selectedDays: this.selectedDays.slice(),
+                    day: this.selectedDays.length === 7 ? 'all' : (this.selectedDays[0] || '1'),
+                    allDays: this.selectedDays.length === 7,
+                    startTime: document.getElementById('sch-start').value,
+                    endTime: document.getElementById('sch-end').value,
+                    room: document.getElementById('sch-room').value,
+                    type: document.getElementById('sch-type').value,
+                    color: document.getElementById('sch-color').value,
+                    description: document.getElementById('sch-description') ? document.getElementById('sch-description').value : ''
+                };
+                if (id) data.schedule[data.schedule.findIndex(s => s.id === parseInt(id))] = newItem;
+                else data.schedule.push(newItem);
+                Storage.save(data);
+                this.toggleForm(false);
+                this.renderList();
+                Toast.show(id ? 'Schedule updated successfully' : 'Schedule added successfully');
+            },
+            openDetails: function (id) {
+                const store = Storage.get();
+                const item = store.schedule.find(s => s.id === id);
+                if (!item) return;
+                const lang = store.appSettings.lang || 'en';
+                const dict = i18n[lang];
+                const modal = document.getElementById('schedule-details-modal');
+                const metaEl = document.getElementById('schedule-details-meta');
+                const descEl = document.getElementById('schedule-details-description');
+                const titleEl = document.getElementById('schedule-details-title');
+                if (!modal || !metaEl || !descEl || !titleEl) return;
+
+                titleEl.textContent = item.subjectName || dict.subject_name || 'Schedule';
+                const dayText = this.getDayDisplayName(item.day);
+                const timeText = `${item.startTime}-${item.endTime}`;
+                const roomText = item.room || '-';
+                metaEl.textContent = `${dict.day}: ${dayText} • ${dict.time}: ${timeText} • ${dict.room}: ${roomText}`;
+                descEl.textContent = item.description && item.description.trim() ? item.description : (dict.no_schedule_description || '');
+
+                modal.classList.add('active');
+            },
+            closeDetails: function () {
+                const modal = document.getElementById('schedule-details-modal');
+                if (modal) modal.classList.remove('active');
+            },
+            delete: function (id) { if (confirm('Delete?')) { const data = Storage.get(); data.schedule = data.schedule.filter(s => s.id !== id); Storage.save(data); this.renderList(); } },
+            renderList: function () {
+                const data = Storage.get();
+                const lang = data.appSettings.lang || 'en';
+                const dict = i18n[lang];
+                const container = document.getElementById('schedule-list-container');
+                let list = Storage.get().schedule;
+                if (this.filter !== 'all') list = list.filter(s => s.day === this.filter);
+                if (currentSearchTerm) {
+                    list = list.filter(s =>
+                        (s.subjectName && s.subjectName.toLowerCase().includes(currentSearchTerm)) ||
+                        (s.room && s.room.toLowerCase().includes(currentSearchTerm)) ||
+                        (s.type && s.type.toLowerCase().includes(currentSearchTerm)) ||
+                        (s.description && s.description.toLowerCase().includes(currentSearchTerm))
+                    );
+                }
+                list.sort((a, b) => a.day - b.day || a.startTime.localeCompare(b.startTime));
+                if (list.length === 0) { container.innerHTML = `<div class="empty-state"><p>${dict.no_schedules_found}</p></div>`; return; }
+                let html = `<table class="schedule-table"><thead><tr><th>${dict.color}</th><th>${dict.day}</th><th>${dict.time}</th><th>${dict.subject}</th><th>${dict.room}</th><th>${dict.type}</th><th>${dict.actions}</th></tr></thead><tbody>`;
+                list.forEach(s => {
+                    html += `<tr>
+                    <td><div style="width:15px; height:15px; border-radius:50%; background:${s.color || '#3B82F6'}"></div></td>
+                    <td>${this.getDayDisplayName(s.day)}</td>
+                    <td>${s.startTime}-${s.endTime}</td>
+                    <td style="font-weight:600; cursor: pointer;" onclick="Schedule.openDetails(${s.id})">${s.subjectName}</td>
+                    <td>${s.room || '-'}</td>
+                    <td><span class="tag tag-low">${this.getTypeTranslation(s.type)}</span></td>
+                    <td><button class="btn-icon btn-edit" onclick="Schedule.toggleForm(true, ${s.id})"><i class="fas fa-edit"></i></button><button class="btn-icon btn-delete" onclick="Schedule.delete(${s.id})"><i class="fas fa-trash"></i></button></td>
+                </tr>`;
+                });
+                container.innerHTML = html + `</tbody></table>`;
+            }
+        };
+
+        const Deadline = {
+            filter: 'all',
+            init: function () { this.renderList(); this.bindEvents(); },
+            bindEvents: function () {
+                document.getElementById('btn-open-deadline-form').onclick = () => this.toggleForm(true);
+                document.getElementById('btn-close-deadline-form').onclick = () => this.toggleForm(false);
+                document.getElementById('filter-deadline').onchange = (e) => { this.filter = e.target.value; this.renderList(); };
+                document.getElementById('deadline-form').onsubmit = (e) => { e.preventDefault(); this.save(); };
+            },
+            toggleForm: function (show, id = null) {
+                const card = document.getElementById('deadline-form-card');
+                const form = document.getElementById('deadline-form');
+                const data = Storage.get();
+                const lang = data.appSettings.lang || 'en';
+                const dict = i18n[lang];
+                form.reset();
+                document.getElementById('deadline-edit-id').value = '';
+                document.getElementById('deadline-form-title').innerText = id ? dict.edit_schedule : dict.create_deadline;
+                if (show) {
+                    card.style.display = 'block';
+                    if (id) {
+                        const item = Storage.get().deadlines.find(d => d.id === id);
+                        document.getElementById('deadline-edit-id').value = item.id;
+                        document.getElementById('dl-title').value = item.title;
+                        document.getElementById('dl-date').value = item.dueDate;
+                        document.getElementById('dl-subject').value = item.subject;
+                        const descInput = document.getElementById('dl-description');
+                        if (descInput) descInput.value = item.description || '';
+                    }
+                } else card.style.display = 'none';
+            },
+            save: function () {
+                const data = Storage.get();
+                const id = document.getElementById('deadline-edit-id').value;
+                const newItem = {
+                    id: id ? parseInt(id) : Date.now(),
+                    title: document.getElementById('dl-title').value,
+                    dueDate: document.getElementById('dl-date').value,
+                    subject: document.getElementById('dl-subject').value,
+                    description: document.getElementById('dl-description') ? document.getElementById('dl-description').value : '',
+                    status: id ? data.deadlines.find(d => d.id === parseInt(id)).status : 'pending',
+                    createdAt: new Date().toISOString()
+                };
+                if (id) data.deadlines[data.deadlines.findIndex(d => d.id === parseInt(id))] = newItem;
+                else data.deadlines.push(newItem);
+                Storage.save(data);
+                this.toggleForm(false);
+                this.renderList();
+                Toast.show(id ? 'Deadline updated successfully' : 'Deadline added successfully');
+            },
+            toggleStatus: function (id) {
+                const data = Storage.get();
+                const item = data.deadlines.find(d => d.id === id);
+                item.status = item.status === 'completed' ? 'pending' : 'completed';
+                Storage.save(data);
+                this.renderList();
+                Toast.show(item.status === 'completed' ? 'Deadline marked as completed' : 'Deadline marked as pending');
+            },
+            openDetails: function (id) {
+                const store = Storage.get();
+                const item = store.deadlines.find(d => d.id === id);
+                if (!item) return;
+                const lang = store.appSettings.lang || 'en';
+                const dict = i18n[lang];
+                const modal = document.getElementById('deadline-details-modal');
+                const metaEl = document.getElementById('deadline-details-meta');
+                const descEl = document.getElementById('deadline-details-description');
+                const titleEl = document.getElementById('deadline-details-title');
+                if (!modal || !metaEl || !descEl || !titleEl) return;
+
+                titleEl.textContent = item.title || dict.deadline_title || 'Deadline';
+                const dueText = item.dueDate ? new Date(item.dueDate).toLocaleString([], { dateStyle: 'short', timeStyle: 'short' }) : '-';
+                const subjectText = item.subject || '-';
+                metaEl.textContent = `${dict.due_date}: ${dueText} • ${dict.subject}: ${subjectText}`;
+                descEl.textContent = item.description && item.description.trim() ? item.description : (dict.no_deadline_description || '');
+
+                modal.classList.add('active');
+            },
+            closeDetails: function () {
+                const modal = document.getElementById('deadline-details-modal');
+                if (modal) modal.classList.remove('active');
+            },
+            delete: function (id) { if (confirm('Delete deadline?')) { const data = Storage.get(); data.deadlines = data.deadlines.filter(d => d.id !== id); Storage.save(data); this.renderList(); } },
+            renderList: function () {
+                const data = Storage.get();
+                const lang = data.appSettings.lang || 'en';
+                const dict = i18n[lang];
+                const container = document.getElementById('deadline-list-container');
+                const now = new Date();
+                let list = Storage.get().deadlines;
+                if (this.filter === 'pending') list = list.filter(d => d.status === 'pending');
+                else if (this.filter === 'completed') list = list.filter(d => d.status === 'completed');
+                else if (this.filter === 'overdue') list = list.filter(d => d.status === 'pending' && new Date(d.dueDate) < now);
+                list.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+                if (list.length === 0) { container.innerHTML = `<div class="empty-state"><i class="fas fa-check-circle"></i><p>${dict.no_deadlines_found}</p></div>`; return; }
+                let html = `<table class="schedule-table"><thead><tr><th>${dict.done}</th><th>${dict.due_date}</th><th>${dict.task}</th><th>${dict.subject}</th><th>${dict.status}</th><th>${dict.actions}</th></tr></thead><tbody>`;
+                list.forEach(d => {
+                    const isOverdue = d.status === 'pending' && new Date(d.dueDate) < now;
+                    let statusTag = `<span class="tag tag-low">${dict.pending}</span>`;
+                    if (d.status === 'completed') statusTag = `<span class="tag tag-completed">${dict.completed}</span>`;
+                    else if (isOverdue) statusTag = `<span class="tag tag-overdue">${dict.overdue}</span>`;
+                    html += `<tr style="opacity: ${d.status === 'completed' ? '0.6' : '1'}">
+                    <td><input type="checkbox" ${d.status === 'completed' ? 'checked' : ''} onclick="Deadline.toggleStatus(${d.id})"></td>
+                    <td>${new Date(d.dueDate).toLocaleString([], { dateStyle: 'short', timeStyle: 'short' })}</td>
+                    <td style="font-weight:600; text-decoration: ${d.status === 'completed' ? 'line-through' : 'none'}; cursor: pointer;" onclick="Deadline.openDetails(${d.id})">${d.title}</td>
+                    <td>${d.subject || '-'}</td>
+                    <td>${statusTag}</td>
+                    <td>
+                        <button class="btn-icon btn-edit" onclick="Deadline.toggleForm(true, ${d.id})"><i class="fas fa-edit"></i></button>
+                        <button class="btn-icon btn-delete" onclick="Deadline.delete(${d.id})"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>`;
+                });
+                container.innerHTML = html + `</tbody></table>`;
+            }
+        };
+
+        // Calendar logic moved to js/features/calendar.js
+
+        const Subjects = {
+            init: function () { this.renderList(); this.bindEvents(); },
+            bindEvents: function () {
+                document.getElementById('btn-open-subject-form').onclick = () => this.toggleForm(true);
+                document.getElementById('btn-close-subject-form').onclick = () => this.toggleForm(false);
+                document.getElementById('subject-form').onsubmit = (e) => { e.preventDefault(); this.save(); };
+                document.getElementById('sub-color-presets').addEventListener('click', (e) => {
+                    if (e.target.classList.contains('color-btn')) {
+                        const color = e.target.dataset.color;
+                        document.getElementById('sub-color').value = color;
+                        this.updatePresetUI('sub-color', color);
+                    }
+                });
+            },
+            toggleForm: function (show, id = null) {
+                const card = document.getElementById('subject-form-card');
+                const form = document.getElementById('subject-form');
+                form.reset();
+                document.getElementById('sub-edit-id').value = '';
+                if (show) {
+                    card.style.display = 'block';
+                    if (id) {
+                        const item = Storage.get().subjects.find(s => s.id === id);
+                        document.getElementById('sub-edit-id').value = item.id;
+                        document.getElementById('sub-name').value = item.name;
+                        document.getElementById('sub-teacher').value = item.teacher || '';
+                        document.getElementById('sub-room').value = item.room || '';
+                        document.getElementById('sub-color').value = item.color || '#3B82F6';
+                        this.updatePresetUI('sub-color', item.color || '#3B82F6');
+                    } else {
+                        this.updatePresetUI('sub-color', '#3B82F6');
+                    }
+                } else card.style.display = 'none';
+            },
+            save: function () {
+                const data = Storage.get();
+                const id = document.getElementById('sub-edit-id').value;
+                const newItem = {
+                    id: id ? parseInt(id) : Date.now(),
+                    name: document.getElementById('sub-name').value,
+                    teacher: document.getElementById('sub-teacher').value,
+                    room: document.getElementById('sub-room').value,
+                    color: document.getElementById('sub-color').value
+                };
+                if (id) data.subjects[data.subjects.findIndex(s => s.id === parseInt(id))] = newItem;
+                else data.subjects.push(newItem);
+                Storage.save(data);
+                this.toggleForm(false);
+                this.renderList();
+                Toast.show(id ? 'Subject updated successfully' : 'Subject added successfully');
+            },
+            delete: function (id) {
+                if (confirm('Delete this subject?')) {
+                    const data = Storage.get();
+                    data.subjects = data.subjects.filter(s => s.id !== id);
+                    Storage.save(data);
+                    this.renderList();
+                }
+            },
+            renderList: function () {
+                const data = Storage.get();
+                const lang = data.appSettings.lang || 'en';
+                const dict = i18n[lang];
+                const container = document.getElementById('subject-list-container');
+                let list = Storage.get().subjects;
+                if (currentSearchTerm) {
+                    list = list.filter(s =>
+                        (s.name && s.name.toLowerCase().includes(currentSearchTerm)) ||
+                        (s.teacher && s.teacher.toLowerCase().includes(currentSearchTerm)) ||
+                        (s.room && s.room.toLowerCase().includes(currentSearchTerm))
+                    );
+                }
+                if (list.length === 0) { container.innerHTML = `<div class="empty-state"><p>${dict.no_subjects_found}</p></div>`; return; }
+                let html = `<table class="schedule-table"><thead><tr><th>${dict.color_tag}</th><th>${dict.subject}</th><th>${dict.teacher}</th><th>${dict.room}</th><th>${dict.actions}</th></tr></thead><tbody>`;
+                list.forEach(s => {
+                    html += `<tr>
+                    <td><div style="width:20px; height:20px; border-radius:4px; background:${s.color}"></div></td>
+                    <td style="font-weight:600;">${s.name}</td>
+                    <td>${s.teacher || '-'}</td>
+                    <td>${s.room || '-'}</td>
+                    <td>
+                        <button class="btn-icon btn-edit" onclick="Subjects.toggleForm(true, ${s.id})"><i class="fas fa-edit"></i></button>
+                        <button class="btn-icon btn-delete" onclick="Subjects.delete(${s.id})"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>`;
+                });
+                container.innerHTML = html + `</tbody></table>`;
+            }
+        };
+
+        const Statistics = {
+            init: function () {
+                this.render();
+            },
+            calculateDuration: function (start, end) {
+                const [sH, sM] = start.split(':').map(Number);
+                const [eH, eM] = end.split(':').map(Number);
+                return (eH * 60 + eM) - (sH * 60 + sM);
+            },
+            render: function () {
+                const data = Storage.get();
+                const lang = data.appSettings.lang || 'en';
+                const dict = i18n[lang];
+                const schedule = data.schedule || [];
+                const deadlines = data.deadlines || [];
+                const subjects = data.subjects || [];
+
+                // 1. Total Weekly Study Time
+                let totalMinutes = 0;
+                const dailyMinutes = [0, 0, 0, 0, 0, 0, 0]; // Sun-Sat
+                schedule.forEach(s => {
+                    const dur = this.calculateDuration(s.startTime, s.endTime);
+                    totalMinutes += dur;
+                    dailyMinutes[parseInt(s.day)] += dur;
+                });
+                const totalHours = (totalMinutes / 60).toFixed(1);
+
+                // 2. Deadline Completion
+                const totalDL = deadlines.length;
+                const compDL = deadlines.filter(d => d.status === 'completed').length;
+                const pendDL = totalDL - compDL;
+                const rate = totalDL > 0 ? Math.round((compDL / totalDL) * 100) : 0;
+
+                // Render Summary Cards
+                document.getElementById('stats-summary-cards').innerHTML = `
+                <div class="card summary-card"><div class="icon-box icon-blue"><i class="fas fa-hourglass-half"></i></div><div class="card-info"><h3>${dict.weekly_hours}</h3><h2>${totalHours} ${dict.hours_abbr}</h2></div></div>
+                <div class="card summary-card"><div class="icon-box icon-green"><i class="fas fa-percentage"></i></div><div class="card-info"><h3>${dict.success_rate}</h3><h2>${rate}%</h2></div></div>
+                <div class="card summary-card"><div class="icon-box icon-pink"><i class="fas fa-tasks"></i></div><div class="card-info"><h3>${dict.pending_tasks}</h3><h2>${pendDL}</h2></div></div>
+                <div class="card summary-card"><div class="icon-box icon-orange"><i class="fas fa-check-double"></i></div><div class="card-info"><h3>${dict.completed}</h3><h2>${compDL}</h2></div></div>
+            `;
+
+                // Render Weekly Chart (Bar)
+                const days = [
+                    dict.week_header_sun, dict.week_header_mon, dict.week_header_tue, dict.week_header_wed,
+                    dict.week_header_thu, dict.week_header_fri, dict.week_header_sat
+                ];
+                const maxMin = Math.max(...dailyMinutes, 60);
+                document.getElementById('stats-study-time-chart').innerHTML = dailyMinutes.map((m, i) => {
+                    const h = (m / 60).toFixed(1);
+                    const pct = (m / maxMin) * 100;
+                    return `<div class="bar-item" style="height: ${pct}%">
+                    <span class="bar-value">${h} ${dict.hours_abbr}</span>
+                    <span class="bar-label">${days[i]}</span>
+                </div>`;
+                }).join('');
+
+                // Render Progress Bar
+                document.getElementById('stats-deadline-completion').innerHTML = `
+                <div class="stat-row"><span>${dict.completed_vs_total}</span><span class="stat-value">${compDL} / ${totalDL}</span></div>
+                <div class="stat-progress-container"><div class="stat-progress-bar" style="width: ${rate}%"></div></div>
+                <p style="font-size:12px; color:var(--text-light); margin-top:5px;">${dict.you_have_finished.replace('{{rate}}', rate)}</p>
+            `;
+
+                // Render Subject Breakdown
+                const subCounts = {};
+                schedule.forEach(s => {
+                    subCounts[s.subjectName] = (subCounts[s.subjectName] || 0) + 1;
+                });
+                const sortedSubs = Object.entries(subCounts).sort((a, b) => b[1] - a[1]);
+
+                if (sortedSubs.length === 0) {
+                    document.getElementById('stats-subject-breakdown').innerHTML = `<div class="empty-state"><p>${dict.no_study_data}</p></div>`;
+                } else {
+                    document.getElementById('stats-subject-breakdown').innerHTML = sortedSubs.map(([name, count]) => `
+                    <div class="stat-row" style="padding: 8px 0; border-bottom: 1px solid #f3f4f6;">
+                        <span>${name}</span>
+                        <span class="stat-value">${count} ${count > 1 ? dict.sessions_abbr : dict.session_abbr}</span>
+                    </div>
+                `).join('');
+                }
+            }
+        };
+
+        const Reminders = {
+            currentReminderId: null,
+            notificationSchedules: {}, // Track active notification timeouts
+            init: function () {
+                this.populateReminderDropdown();
+                this.renderList();
+                this.bindEvents();
+                this.loadSettings();
+                this.updateNotificationStatus();
+            },
+            populateReminderDropdown: function () {
+                const data = Storage.get();
+                const lang = data.appSettings.lang || 'en';
+                const dict = i18n[lang];
+                const reminders = data.reminders || [];
+                const select = document.getElementById('rem-select-reminder');
+                const selectSnooze = document.getElementById('snooze-select-reminder');
+
+                if (select) {
+                    select.innerHTML = `<option value="">${dict.choose_reminder_placeholder}</option>`;
+                    reminders.forEach(r => {
+                        if (r.active) {
+                            const option = document.createElement('option');
+                            option.value = r.id;
+                            option.text = `Reminder: ${r.title}`;
+                            select.appendChild(option);
+                        }
+                    });
+                }
+
+                // Populate snooze settings dropdown with same reminders
+                if (selectSnooze) {
+                    selectSnooze.innerHTML = `<option value="">${dict.choose_reminder_placeholder}</option>`;
+                    reminders.forEach(r => {
+                        if (r.active) {
+                            const option = document.createElement('option');
+                            option.value = r.id;
+                            option.text = `Reminder: ${r.title}`;
+                            selectSnooze.appendChild(option);
+                        }
+                    });
+                }
+            },
+            updateReminderInfo: function () {
+                const selectEl = document.getElementById('rem-select-reminder');
+                const infoDiv = document.getElementById('rem-selected-info');
+                const titleEl = document.getElementById('rem-selected-title');
+                const statusEl = document.getElementById('rem-selected-status');
+
+                if (!selectEl || !infoDiv || !titleEl || !statusEl) return;
+
+                const data = Storage.get();
+                const lang = data.appSettings.lang || 'en';
+                const dict = i18n[lang];
+                const reminderId = parseInt(selectEl.value);
+
+                if (!reminderId) {
+                    infoDiv.style.display = 'none';
+                    return;
+                }
+
+                const reminder = data.reminders.find(r => r.id === reminderId);
+                if (!reminder) return;
+
+                titleEl.innerText = reminder.title;
+                const hasNotification = reminder.notificationMinutes !== undefined && reminder.notificationMinutes !== null;
+                statusEl.innerText = hasNotification ? dict.reminder_notification_configured.replace('{{minutes}}', reminder.notificationMinutes) : dict.reminder_notification_not_configured;
+                infoDiv.style.display = 'block';
+            },
+            updateSnoozeReminderInfo: function () {
+                const selectEl = document.getElementById('snooze-select-reminder');
+                const infoDiv = document.getElementById('snooze-selected-info');
+                const titleEl = document.getElementById('snooze-selected-title');
+                const statusEl = document.getElementById('snooze-selected-status');
+
+                if (!selectEl || !infoDiv || !titleEl || !statusEl) return;
+
+                const data = Storage.get();
+                const lang = data.appSettings.lang || 'en';
+                const dict = i18n[lang];
+                const reminderId = parseInt(selectEl.value);
+
+                if (!reminderId) {
+                    infoDiv.style.display = 'none';
+                    return;
+                }
+
+                const reminder = data.reminders.find(r => r.id === reminderId);
+                if (!reminder) return;
+
+                titleEl.innerText = reminder.title;
+                const hasSnooze = reminder.snoozeMinutes !== undefined && reminder.snoozeMinutes !== null;
+                statusEl.innerText = hasSnooze ? dict.snooze_configured.replace('{{minutes}}', reminder.snoozeMinutes) : dict.snooze_not_configured;
+                infoDiv.style.display = 'block';
+            },
+            bindEvents: function () {
+                const btnOpenForm = document.getElementById('btn-open-reminder-form');
+                const btnCloseForm = document.getElementById('btn-close-reminder-form');
+                const reminderForm = document.getElementById('reminder-form');
+                const btnSaveSettings = document.getElementById('btn-save-rem-settings');
+                const selectReminder = document.getElementById('rem-select-reminder');
+                const remTiming = document.getElementById('rem-timing');
+
+                // Snooze Settings event listeners
+                const btnSaveSnoozeSettings = document.getElementById('btn-save-snooze-settings');
+                const selectSnoozeReminder = document.getElementById('snooze-select-reminder');
+                const snoozeTiming = document.getElementById('snooze-timing');
+
+                if (btnOpenForm) btnOpenForm.onclick = () => this.toggleForm(true);
+                if (btnCloseForm) btnCloseForm.onclick = () => this.toggleForm(false);
+                if (reminderForm) reminderForm.onsubmit = (e) => { e.preventDefault(); this.save(); };
+                if (btnSaveSettings) btnSaveSettings.onclick = () => this.saveSettings();
+                if (selectReminder) selectReminder.onchange = (e) => {
+                    this.currentReminderId = e.target.value ? parseInt(e.target.value) : null;
+                    this.updateReminderInfo();
+                };
+                if (remTiming) remTiming.onchange = (e) => {
+                    const customInput = document.getElementById('rem-custom-timing');
+                    if (customInput) customInput.style.display = e.target.value === 'custom' ? 'block' : 'none';
+                    const timingError = document.getElementById('rem-timing-error');
+                    if (timingError && e.target.value !== 'custom') timingError.style.display = 'none';
+                };
+
+                // Snooze Settings event listeners
+                if (btnSaveSnoozeSettings) btnSaveSnoozeSettings.onclick = () => this.saveSnoozeSettings();
+                if (selectSnoozeReminder) selectSnoozeReminder.onchange = (e) => {
+                    this.currentSnoozeReminderId = e.target.value ? parseInt(e.target.value) : null;
+                    this.updateSnoozeReminderInfo();
+                };
+                if (snoozeTiming) snoozeTiming.onchange = (e) => {
+                    const customInput = document.getElementById('snooze-custom-timing');
+                    if (customInput) customInput.style.display = e.target.value === 'custom' ? 'block' : 'none';
+                    const timingError = document.getElementById('snooze-timing-error');
+                    if (timingError && e.target.value !== 'custom') timingError.style.display = 'none';
+                };
+            },
+            updateNotificationStatus: function () {
+                const statusDiv = document.getElementById('rem-notification-status');
+                if (!statusDiv) return;
+
+                if (!('Notification' in window)) {
+                    statusDiv.innerHTML = '<p style="color: var(--text-light); font-size: 12px; margin: 10px 0;">⚠️ Notifications not supported in this browser</p>';
+                    return;
+                }
+
+                const data = Storage.get();
+                const lang = data.appSettings.lang || 'en';
+                const dict = i18n[lang];
+                const permission = Notification.permission;
+
+                if (permission === 'granted') {
+                    statusDiv.innerHTML = '<p style="color: var(--urgency-low); font-size: 12px; margin: 10px 0;">✓ ' + dict.notification_permission_granted + '</p>';
+                } else if (permission === 'denied') {
+                    statusDiv.innerHTML = '<p style="color: var(--urgency-high); font-size: 12px; margin: 10px 0;">✗ ' + dict.notification_permission_denied + '</p>';
+                } else {
+                    statusDiv.innerHTML = '<p style="color: var(--text-light); font-size: 12px; margin: 10px 0;">⚠️ Click "Save Settings" to enable notifications</p>';
+                }
+            },
+            requestNotificationPermissionAsync: function (callback) {
+                // Check if Notification API is available
+                if (!('Notification' in window)) {
+                    console.log('[NOTIFICATION] Notification API not available');
+                    callback(false);
+                    return;
+                }
+
+                // If already granted, call callback immediately
+                if (Notification.permission === 'granted') {
+                    console.log('[NOTIFICATION] Permission already granted');
+                    callback(true);
+                    return;
+                }
+
+                // If already denied, call callback with false
+                if (Notification.permission === 'denied') {
+                    console.log('[NOTIFICATION] Permission denied');
+                    callback(false);
+                    return;
+                }
+
+                // Request permission (must be during user interaction)
+                console.log('[NOTIFICATION] Requesting permission');
+                Notification.requestPermission().then(function (permission) {
+                    console.log('[NOTIFICATION] Permission result:', permission);
+                    callback(permission === 'granted');
+                });
+            },
+            scheduleNotificationForReminder: function (reminder) {
+                if (!('Notification' in window) || Notification.permission !== 'granted') {
+                    console.log('[NOTIFICATION] Cannot schedule notification - permission not granted');
+                    return;
+                }
+
+                if (!reminder.active || !reminder.notificationMinutes) {
+                    console.log('[NOTIFICATION] Reminder not active or notification not configured');
+                    return;
+                }
+
+                const data = Storage.get();
+                const lang = data.appSettings.lang || 'en';
+                const dict = i18n[lang];
+
+                // Parse reminder date and time correctly (as local time)
+                const [year, month, day] = reminder.date.split('-').map(Number);
+                const [hours, minutes] = reminder.time.split(':').map(Number);
+                const remTime = new Date(year, month - 1, day, hours, minutes, 0, 0);
+
+                const timingMinutes = reminder.notificationMinutes;
+                const notificationTime = new Date(remTime.getTime() - timingMinutes * 60 * 1000);
+                const now = new Date();
+                const delayMs = notificationTime.getTime() - now.getTime();
+
+                console.log('[NOTIFICATION] Scheduling notification for:', reminder.title, 'Delay (ms):', delayMs, 'Trigger at:', notificationTime);
+
+                if (delayMs > 0) {
+                    // Clear any existing schedule for this reminder
+                    if (this.notificationSchedules[reminder.id]) {
+                        clearTimeout(this.notificationSchedules[reminder.id]);
+                    }
+
+                    // Schedule the notification - setTimeout only triggers handler function
+                    // Do NOT create Notification() inside the timeout callback
+                    this.notificationSchedules[reminder.id] = setTimeout(() => {
+                        Reminders.triggerNotificationForReminder(reminder.id);
+                    }, delayMs);
+                } else {
+                    console.log('[NOTIFICATION] Notification time is in the past, not scheduling');
+                }
+            },
+            requestNotificationPermission: function () {
+                if (!('Notification' in window)) return;
+                if (Notification.permission === 'default') {
+                    Notification.requestPermission();
+                }
+            },
+            toggleForm: function (show) {
+                document.getElementById('reminder-form-card').style.display = show ? 'block' : 'none';
+                if (!show) document.getElementById('reminder-form').reset();
+            },
+            save: function () {
+                const data = Storage.get();
+                const newRem = {
+                    id: Date.now(),
+                    title: document.getElementById('rem-title').value,
+                    date: document.getElementById('rem-date').value,
+                    time: document.getElementById('rem-time').value,
+                    note: document.getElementById('rem-note').value,
+                    active: true,
+                    notificationMinutes: null,
+                    snoozeMinutes: null
+                };
+                data.reminders.push(newRem);
+                Storage.save(data);
+                this.toggleForm(false);
+                this.renderList();
+                this.populateReminderDropdown();
+                Toast.show('Reminder added successfully');
+            },
+            validateAndGetTiming: function () {
+                const timingValue = document.getElementById('rem-timing').value;
+                const customInput = document.getElementById('rem-custom-timing');
+                const errorDiv = document.getElementById('rem-timing-error');
+                const data = Storage.get();
+                const lang = data.appSettings.lang || 'en';
+                const dict = i18n[lang];
+
+                if (timingValue === 'custom') {
+                    const customValue = parseInt(customInput.value);
+                    if (!customInput.value || isNaN(customValue) || customValue < 1 || customValue > 180) {
+                        errorDiv.innerText = dict.invalid_reminder;
+                        errorDiv.style.display = 'block';
+                        return null;
+                    }
+                    errorDiv.style.display = 'none';
+                    return customValue;
+                }
+                errorDiv.style.display = 'none';
+                return parseInt(timingValue);
+            },
+            saveSettings: function () {
+                const timing = this.validateAndGetTiming();
+                if (timing === null) return;
+
+                const reminderId = document.getElementById('rem-select-reminder').value;
+                const data = Storage.get();
+                const lang = data.appSettings.lang || 'en';
+                const dict = i18n[lang];
+
+                if (!reminderId) {
+                    alert(dict.select_reminder_label);
+                    return;
+                }
+
+                const timingValue = parseInt(timing);
+                const reminderIdInt = parseInt(reminderId);
+
+                // Find and update the reminder with notification settings
+                const reminder = data.reminders.find(r => r.id === reminderIdInt);
+                if (!reminder) {
+                    alert(dict.error);
+                    return;
+                }
+
+                // Request notification permission only during user interaction (SaveSettings button click)
+                this.requestNotificationPermissionAsync(function (granted) {
+                    if (!granted) {
+                        if (Notification.permission === 'denied') {
+                            alert(dict.notification_permission_denied);
+                        }
+                        // Update status display even if permission was not granted
+                        Reminders.updateNotificationStatus();
+                        return;
+                    }
+
+                    // Permission granted - save notification settings
+                    reminder.notificationMinutes = timingValue;
+                    Storage.save(data);
+
+                    // Schedule notification for this specific reminder
+                    Reminders.scheduleNotificationForReminder(reminder);
+
+                    // Update selected reminder info display
+                    Reminders.updateReminderInfo();
+
+                    // Update reminder list to show updated info
+                    Reminders.renderList();
+
+                    // Update notification status
+                    Reminders.updateNotificationStatus();
+
+                    const message = dict.reminder_notification_configured.replace('{{minutes}}', timingValue);
+                    Toast.show(message);
+                });
+            },
+            loadSettings: function () {
+                const timingValue = Storage.get().remSettings?.timing || 5;
+                const remTiming = document.getElementById('rem-timing');
+                const customTiming = document.getElementById('rem-custom-timing');
+
+                if (!remTiming || !customTiming) return;
+
+                if (timingValue > 30) {
+                    remTiming.value = 'custom';
+                    customTiming.value = timingValue;
+                    customTiming.style.display = 'block';
+                } else {
+                    remTiming.value = timingValue;
+                    customTiming.style.display = 'none';
+                }
+            },
+            validateAndGetSnoozeTiming: function () {
+                const timingValue = document.getElementById('snooze-timing').value;
+                const customInput = document.getElementById('snooze-custom-timing');
+                const errorDiv = document.getElementById('snooze-timing-error');
+                const data = Storage.get();
+                const lang = data.appSettings.lang || 'en';
+                const dict = i18n[lang];
+
+                if (timingValue === 'custom') {
+                    const customValue = parseInt(customInput.value);
+                    if (!customInput.value || isNaN(customValue) || customValue < 1 || customValue > 180) {
+                        errorDiv.innerText = dict.invalid_reminder;
+                        errorDiv.style.display = 'block';
+                        return null;
+                    }
+                    errorDiv.style.display = 'none';
+                    return customValue;
+                }
+                errorDiv.style.display = 'none';
+                return parseInt(timingValue);
+            },
+            saveSnoozeSettings: function () {
+                const timing = this.validateAndGetSnoozeTiming();
+                if (timing === null) return;
+
+                const reminderId = document.getElementById('snooze-select-reminder').value;
+                const data = Storage.get();
+                const lang = data.appSettings.lang || 'en';
+                const dict = i18n[lang];
+
+                if (!reminderId) {
+                    alert(dict.select_reminder_label);
+                    return;
+                }
+
+                const timingValue = parseInt(timing);
+                const reminderIdInt = parseInt(reminderId);
+
+                // Find and update the reminder with snooze settings
+                const reminder = data.reminders.find(r => r.id === reminderIdInt);
+                if (!reminder) {
+                    alert(dict.error);
+                    return;
+                }
+
+                // Save snooze setting (no permission needed for storing configuration)
+                reminder.snoozeMinutes = timingValue;
+                Storage.save(data);
+
+                // Update selected reminder info display
+                this.updateSnoozeReminderInfo();
+
+                // Update reminder list to show updated snooze info
+                this.renderList();
+
+                const message = dict.snooze_settings_saved;
+                alert(message);
+            },
+            showNotification: function (title, options = {}) {
+                if (!('Notification' in window)) {
+                    console.log('[NOTIFICATION] Notification blocked - API not available');
+                    return;
+                }
+                if (Notification.permission !== 'granted') {
+                    console.log('[NOTIFICATION] Notification blocked - permission not granted');
+                    return;
+                }
+
+                // Enhanced options for Windows system UI
+                const enhancedOptions = {
+                    body: options.body || '',
+                    icon: options.icon || '⏰',
+                    requireInteraction: true, // Keep notification visible until user interacts
+                    silent: false, // Ensure sound plays
+                    tag: 'reminder', // Group notifications
+                    ...options
+                };
+
+                try {
+                    new Notification(title, enhancedOptions);
+                    console.log('[NOTIFICATION] Notification shown:', title);
+                } catch (error) {
+                    console.log('[NOTIFICATION] Error creating notification:', error);
+                }
+            },
+            triggerNotificationForReminder: function (reminderId, isSnooze = false) {
+                const data = Storage.get();
+                const reminder = data.reminders.find(r => r.id === reminderId);
+                if (!reminder) return;
+
+                // Use the same showNotification function that works for direct user interactions
+                this.showNotification(reminder.title, {
+                    body: reminder.note || 'Reminder',
+                    icon: '⏰'
+                });
+                const notificationType = isSnooze ? 'snooze notification' : 'notification';
+                console.log(`[NOTIFICATION] Triggered ${notificationType} for reminder:`, reminder.title);
+            },
+            checkAndNotify: function () {
+                const data = Storage.get();
+                if (!data.remSettings.notify) return;
+
+                const now = new Date();
+                const timingMinutes = data.remSettings.timing;
+
+                data.reminders.forEach(rem => {
+                    if (!rem.active) return;
+                    const remTime = new Date(`${rem.date}T${rem.time}`);
+                    const diffMinutes = (remTime - now) / (1000 * 60);
+
+                    if (diffMinutes > 0 && diffMinutes <= timingMinutes && diffMinutes > timingMinutes - 1) {
+                        this.showNotification(rem.title, { body: rem.note || 'Reminder', icon: '⏰' });
+                    }
+                });
+            },
+            dismiss: function (id) {
+                const data = Storage.get();
+                const rem = data.reminders.find(r => r.id === id);
+                if (rem) rem.active = false;
+                Storage.save(data);
+
+                // Clear any scheduled notifications for this reminder
+                if (this.notificationSchedules[id]) {
+                    clearTimeout(this.notificationSchedules[id]);
+                    delete this.notificationSchedules[id];
+                }
+                // Clear any scheduled snooze notifications
+                if (this.notificationSchedules[`snooze_${id}`]) {
+                    clearTimeout(this.notificationSchedules[`snooze_${id}`]);
+                    delete this.notificationSchedules[`snooze_${id}`];
+                }
+
+                this.renderList();
+                this.populateReminderDropdown();
+                this.updateNotificationStatus();
+            },
+            snooze: function (id, mins) {
+                const data = Storage.get();
+                const lang = data.appSettings.lang || 'en';
+                const dict = i18n[lang];
+                const rem = data.reminders.find(r => r.id === id);
+
+                if (!rem) return;
+
+                // Initialize properties if they don't exist (for backwards compatibility)
+                if (!rem.hasOwnProperty('notificationMinutes')) {
+                    rem.notificationMinutes = null;
+                }
+                if (!rem.hasOwnProperty('snoozeMinutes')) {
+                    rem.snoozeMinutes = null;
+                }
+
+                // Calculate NEW reminder time from CURRENT TIME
+                // NOT adding snooze to the OLD reminder time
+                const now = new Date();
+                let newDate = new Date(now.getTime() + mins * 60 * 1000);
+
+                // Update reminder with new snoozed time (current time + snooze minutes)
+                rem.date = newDate.getFullYear() + '-' +
+                    String(newDate.getMonth() + 1).padStart(2, '0') + '-' +
+                    String(newDate.getDate()).padStart(2, '0');
+                rem.time = String(newDate.getHours()).padStart(2, '0') + ':' +
+                    String(newDate.getMinutes()).padStart(2, '0');
+                rem.active = true;
+
+                // If notification settings are configured, schedule snooze notification
+                if (rem.notificationMinutes) {
+                    // Clear any existing notification schedule for this reminder
+                    if (this.notificationSchedules[rem.id]) {
+                        clearTimeout(this.notificationSchedules[rem.id]);
+                    }
+                    // Clear any existing snooze notification schedule
+                    if (this.notificationSchedules[`snooze_${rem.id}`]) {
+                        clearTimeout(this.notificationSchedules[`snooze_${rem.id}`]);
+                        delete this.notificationSchedules[`snooze_${rem.id}`];
+                    }
+
+                    // Schedule snooze notification instead of regular notification
+                    this.scheduleSnoozeNotification(rem, mins);
+                }
+
+                Storage.save(data);
+                this.renderList();
+                this.populateReminderDropdown();
+                this.updateNotificationStatus();
+
+                // Show feedback message
+                const message = dict.reminder_snoozed.replace('{{minutes}}', mins);
+                Toast.show(message);
+            },
+            scheduleSnoozeNotification: function (reminder, snoozeMinutes) {
+                // Check if notifications are supported and permission is granted
+                if (!('Notification' in window) || Notification.permission !== 'granted') {
+                    console.log('[NOTIFICATION] Cannot schedule snooze notification - permission not granted');
+                    return;
+                }
+
+                // Calculate delay in milliseconds
+                const delayMs = snoozeMinutes * 60 * 1000;
+
+                if (delayMs <= 0) {
+                    console.log('[NOTIFICATION] Snooze delay is invalid (<=0), not scheduling');
+                    return;
+                }
+
+                console.log('[NOTIFICATION] Scheduling snooze notification for:', reminder.title, 'Delay (ms):', delayMs);
+
+                // Clear any existing snooze schedule for this reminder
+                if (this.notificationSchedules[`snooze_${reminder.id}`]) {
+                    clearTimeout(this.notificationSchedules[`snooze_${reminder.id}`]);
+                }
+
+                // Capture the necessary values for the timeout callback
+                const reminderTitle = reminder.title;
+                const reminderNote = reminder.note;
+
+                // Schedule the snooze notification - setTimeout only triggers handler function
+                // Do NOT create Notification() inside the timeout callback
+                this.notificationSchedules[`snooze_${reminder.id}`] = setTimeout(() => {
+                    Reminders.triggerNotificationForReminder(reminder.id);
+                }, delayMs);
+            },
+            renderList: function () {
+                const data = Storage.get();
+                const lang = data.appSettings.lang || 'en';
+                const dict = i18n[lang];
+                const container = document.getElementById('reminder-list-container');
+                const now = new Date();
+
+                let list = data.reminders.filter(r => r.active);
+                // Sort by reminder time (convert to proper timestamps for comparison)
+                list.sort((a, b) => {
+                    const [aYear, aMonth, aDay] = a.date.split('-').map(Number);
+                    const [aHours, aMinutes] = a.time.split(':').map(Number);
+                    const aTime = new Date(aYear, aMonth - 1, aDay, aHours, aMinutes, 0, 0).getTime();
+
+                    const [bYear, bMonth, bDay] = b.date.split('-').map(Number);
+                    const [bHours, bMinutes] = b.time.split(':').map(Number);
+                    const bTime = new Date(bYear, bMonth - 1, bDay, bHours, bMinutes, 0, 0).getTime();
+
+                    return aTime - bTime;
+                });
+
+                if (list.length === 0) {
+                    container.innerHTML = `<div class="empty-state"><i class="far fa-bell-slash"></i><p>${dict.no_active_reminders}</p></div>`;
+                    return;
+                }
+
+                container.innerHTML = list.map(r => {
+                    // Correctly parse reminder date and time as local timestamp
+                    // Split date (YYYY-MM-DD) and time (HH:mm) into components
+                    const [year, month, day] = r.date.split('-').map(Number);
+                    const [hours, minutes] = r.time.split(':').map(Number);
+
+                    // Create a local Date object with the reminder date/time
+                    const remTime = new Date(year, month - 1, day, hours, minutes, 0, 0);
+                    const isOverdue = remTime.getTime() < now.getTime();
+
+                    const hasNotification = r.notificationMinutes !== undefined && r.notificationMinutes !== null;
+                    const notificationStatus = hasNotification ? dict.reminder_notification_configured.replace('{{minutes}}', r.notificationMinutes) : dict.reminder_notification_not_configured;
+                    return `
+                    <div class="list-item ${isOverdue ? 'rem-overdue' : 'rem-active'}" style="padding: 15px; border-radius: 8px; margin-bottom: 10px; flex-direction: column; align-items: flex-start;">
+                        <div style="display:flex; justify-content:space-between; width:100%;">
+                            <h4 style="color:var(--text-dark);">${r.title}</h4>
+                            <span style="font-size:11px; font-weight:700; color: ${isOverdue ? 'var(--urgency-high)' : 'var(--accent-blue)'};">
+                                ${isOverdue ? dict.overdue_tag : dict.upcoming_tag}
+                            </span>
+                        </div>
+                        <p style="font-size:12px; color:var(--text-light); margin: 5px 0;">
+                            <i class="far fa-calendar"></i> ${r.date} &nbsp; <i class="far fa-clock"></i> ${r.time}
+                        </p>
+                        ${r.note ? `<p style="font-size:12px; font-style:italic; color:var(--text-light);">${r.note}</p>` : ''}
+                        <p style="font-size:11px; color: ${hasNotification ? 'var(--accent-blue)' : 'var(--text-light)'}; margin: 5px 0 0 0; font-weight: 500;">
+                            ${notificationStatus}
+                        </p>
+                        <div style="display:flex; gap:10px; margin-top:10px; width:100%;">
+                            <button onclick="Reminders.dismiss(${r.id})" style="flex:1; padding:5px; border:none; border-radius:4px; background:#e2e8f0; cursor:pointer; font-size:11px;">${dict.dismiss}</button>
+                            <div style="display:flex; gap:5px; flex:1;">
+                                <button onclick="Reminders.snooze(${r.id}, 5)" style="flex:1; padding:5px; border:none; border-radius:4px; background:var(--accent-yellow); cursor:pointer; font-size:11px;">${dict.snooze_5}</button>
+                                <button onclick="Reminders.snooze(${r.id}, 30)" style="flex:1; padding:5px; border:none; border-radius:4px; background:var(--accent-orange); color:white; cursor:pointer; font-size:11px;">${dict.snooze_30}</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                }).join('');
+            }
+        };
+
+        const Logout = {
+            showConfirmation: function () {
+                const modal = document.getElementById('logout-confirmation-modal');
+                modal.classList.add('active');
+            },
+            cancelLogout: function () {
+                const modal = document.getElementById('logout-confirmation-modal');
+                modal.classList.remove('active');
+            },
+            confirmLogout: function () {
+                window.location.href = 'register_login_form.html';
+            }
+        };
+
+        const Onboarding = {
+            currentStep: 0,
+            inScheduleFlow: false,
+            scheduleFlowStep: 0,
+            steps: [
+                {
+                    target: '.sidebar-logo',
+                    position: 'right',
+                    title: 'Welcome to Studay!',
+                    content: 'This is your navigation sidebar. Use it to switch between different sections of the app.',
+                    highlight: true
+                },
+                {
+                    target: '.search-box',
+                    position: 'bottom',
+                    title: 'Search Everything',
+                    content: 'Use the search bar to quickly find your schedules, deadlines, and subjects.',
+                    highlight: true
+                },
+                {
+                    target: '[data-page="schedule"]',
+                    position: 'right',
+                    title: 'Add Your Schedule',
+                    content: 'Click here to add your class schedules and organize your study time.',
+                    highlight: true,
+                    action: 'switchToSchedule'
+                },
+                {
+                    target: '[data-page="deadline"]',
+                    position: 'right',
+                    title: 'Set Deadlines',
+                    content: 'Create and manage your assignment deadlines to stay on track.',
+                    highlight: true
+                },
+                {
+                    target: '#onboarding-section',
+                    position: 'left',
+                    title: 'Get Started!',
+                    content: 'You\'re all set! Click the buttons below to add your first schedule or deadline.',
+                    highlight: false
+                }
+            ],
+            scheduleFlowSteps: [
+                {
+                    target: '#btn-open-form',
+                    position: 'bottom',
+                    title: 'Add New Schedule',
+                    content: 'Click this button to add a new class schedule.',
+                    highlight: true
+                },
+                {
+                    target: '#sch-subject',
+                    position: 'right',
+                    title: 'Enter Subject Name',
+                    content: 'Enter the name of your subject or class (for example: Math, Physics, English).',
+                    highlight: true
+                },
+                {
+                    target: '#day-selector',
+                    position: 'right',
+                    title: 'Select Day of Week',
+                    content: 'Choose which days this class takes place.',
+                    highlight: true
+                },
+                {
+                    target: '#sch-start',
+                    position: 'right',
+                    title: 'Select Start Time',
+                    content: 'Choose the time when this class starts.',
+                    highlight: true
+                },
+                {
+                    target: '#sch-end',
+                    position: 'right',
+                    title: 'Select End Time',
+                    content: 'Choose the time when this class ends.',
+                    highlight: true
+                },
+                {
+                    target: '#sch-room',
+                    position: 'right',
+                    title: 'Enter Room / Location',
+                    content: 'Enter the classroom or location for this class (optional).',
+                    highlight: true
+                },
+                {
+                    target: '#sch-type',
+                    position: 'right',
+                    title: 'Select Class Type',
+                    content: 'Select the type of class.',
+                    highlight: true
+                },
+                {
+                    target: '#sch-color',
+                    position: 'right',
+                    title: 'Choose Event Color',
+                    content: 'Choose a color to easily identify this schedule.',
+                    highlight: true
+                },
+                {
+                    target: 'button[type="submit"]',
+                    position: 'top',
+                    title: 'Save Your Schedule',
+                    content: 'Click here to save and create your schedule.',
+                    highlight: true
+                }
+            ],
+            init: function () {
+                // Check if user has any data
+                const data = Storage.get();
+                const hasUserData = (data.schedule && data.schedule.length > 0) || (data.deadlines && data.deadlines.length > 0);
+
+                const onboardingSection = document.getElementById('onboarding-section');
+                if (hasUserData) {
+                    // Hide onboarding if user has data
+                    if (onboardingSection) onboardingSection.style.display = 'none';
+                    return;
+                }
+
+                // Show onboarding and start tooltips if no data
+                if (onboardingSection) onboardingSection.style.display = 'block';
+                setTimeout(() => {
+                    this.showTooltip();
+                }, 1000);
+            },
+            showTooltip: function () {
+                if (this.currentStep >= this.steps.length) {
+                    this.complete();
+                    return;
+                }
+
+                const step = this.steps[this.currentStep];
+                const targetElement = document.querySelector(step.target);
+
+                if (!targetElement) {
+                    this.next();
+                    return;
+                }
+
+                // Create tooltip element
+                const tooltip = document.createElement('div');
+                tooltip.className = `onboarding-tooltip tooltip-${step.position}`;
+                tooltip.innerHTML = `
+                <div style="font-weight: 600; margin-bottom: 8px; color: var(--accent-blue);">${step.title}</div>
+                <div style="font-size: 14px; line-height: 1.4;">${step.content}</div>
+                <div style="margin-top: 12px; display: flex; gap: 8px; justify-content: flex-end;">
+                    <button onclick="Onboarding.skip()" style="padding: 4px 8px; border: 1px solid var(--border-color); background: none; border-radius: 4px; cursor: pointer; font-size: 12px;">Skip</button>
+                    <button onclick="Onboarding.next()" style="padding: 4px 8px; background: var(--accent-blue); color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">${this.currentStep === this.steps.length - 1 ? 'Done' : 'Next'}</button>
+                </div>
+            `;
+
+                // Position tooltip
+                document.body.appendChild(tooltip);
+                this.positionTooltip(tooltip, targetElement, step.position);
+
+                // Highlight target element
+                if (step.highlight) {
+                    targetElement.classList.add('onboarding-highlight');
+                }
+
+                // Add click outside to dismiss
+                setTimeout(() => {
+                    document.addEventListener('click', this.handleOutsideClick);
+                }, 100);
+            },
+            positionTooltip: function (tooltip, target, position) {
+                const targetRect = target.getBoundingClientRect();
+                const tooltipRect = tooltip.getBoundingClientRect();
+
+                let top, left;
+
+                switch (position) {
+                    case 'top':
+                        top = targetRect.top - tooltipRect.height - 10;
+                        left = targetRect.left + (targetRect.width / 2) - (tooltipRect.width / 2);
+                        break;
+                    case 'bottom':
+                        top = targetRect.bottom + 10;
+                        left = targetRect.left + (targetRect.width / 2) - (tooltipRect.width / 2);
+                        break;
+                    case 'left':
+                        top = targetRect.top + (targetRect.height / 2) - (tooltipRect.height / 2);
+                        left = targetRect.left - tooltipRect.width - 10;
+                        break;
+                    case 'right':
+                        top = targetRect.top + (targetRect.height / 2) - (tooltipRect.height / 2);
+                        left = targetRect.right + 10;
+                        break;
+                }
+
+                // Ensure tooltip stays within viewport
+                const viewportWidth = window.innerWidth;
+                const viewportHeight = window.innerHeight;
+
+                if (left < 10) left = 10;
+                if (left + tooltipRect.width > viewportWidth - 10) left = viewportWidth - tooltipRect.width - 10;
+                if (top < 10) top = 10;
+                if (top + tooltipRect.height > viewportHeight - 10) top = viewportHeight - tooltipRect.height - 10;
+
+                tooltip.style.top = top + 'px';
+                tooltip.style.left = left + 'px';
+            },
+            next: function () {
+                this.hideCurrentTooltip();
+
+                // Handle special case for Schedule tooltip
+                if (this.currentStep === 2 && this.steps[this.currentStep].action === 'switchToSchedule') {
+                    // Switch to Schedule page and start schedule flow
+                    Navigation.goToPage('schedule');
+                    this.inScheduleFlow = true;
+                    this.scheduleFlowStep = 0;
+                    setTimeout(() => {
+                        this.showScheduleFlowTooltip();
+                    }, 500); // Wait for page transition
+                    return;
+                }
+
+                this.currentStep++;
+                this.showTooltip();
+            },
+            skip: function () {
+                this.hideCurrentTooltip();
+                this.complete();
+            },
+            hideCurrentTooltip: function () {
+                // Remove highlight
+                document.querySelectorAll('.onboarding-highlight').forEach(el => {
+                    el.classList.remove('onboarding-highlight');
+                });
+
+                // Remove tooltip
+                const tooltip = document.querySelector('.onboarding-tooltip');
+                if (tooltip) {
+                    tooltip.remove();
+                }
+
+                document.removeEventListener('click', this.handleOutsideClick);
+            },
+            handleOutsideClick: function (e) {
+                const tooltip = document.querySelector('.onboarding-tooltip');
+                if (tooltip && !tooltip.contains(e.target)) {
+                    Onboarding.next();
+                }
+            },
+            showScheduleFlowTooltip: function () {
+                if (this.scheduleFlowStep >= this.scheduleFlowSteps.length) {
+                    this.inScheduleFlow = false;
+                    this.complete();
+                    return;
+                }
+
+                const step = this.scheduleFlowSteps[this.scheduleFlowStep];
+                const targetElement = document.querySelector(step.target);
+
+                if (!targetElement) {
+                    this.scheduleFlowStep++;
+                    this.showScheduleFlowTooltip();
+                    return;
+                }
+
+                // Create tooltip element
+                const tooltip = document.createElement('div');
+                tooltip.className = `onboarding-tooltip tooltip-${step.position}`;
+                tooltip.innerHTML = `
+                <div style="font-weight: 600; margin-bottom: 8px; color: var(--accent-blue);">${step.title}</div>
+                <div style="font-size: 14px; line-height: 1.4;">${step.content}</div>
+                <div style="margin-top: 12px; display: flex; gap: 8px; justify-content: flex-end;">
+                    <button onclick="Onboarding.skipScheduleFlow()" style="padding: 4px 8px; border: 1px solid var(--border-color); background: none; border-radius: 4px; cursor: pointer; font-size: 12px;">Skip</button>
+                    <button onclick="Onboarding.nextScheduleFlow()" style="padding: 4px 8px; background: var(--accent-blue); color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">${this.scheduleFlowStep === this.scheduleFlowSteps.length - 1 ? 'Done' : 'Next'}</button>
+                </div>
+            `;
+
+                // Position tooltip
+                document.body.appendChild(tooltip);
+                this.positionTooltip(tooltip, targetElement, step.position);
+
+                // Highlight target element
+                if (step.highlight) {
+                    targetElement.classList.add('onboarding-highlight');
+                }
+
+                // Handle special actions
+                if (step.action === 'openScheduleForm') {
+                    // Add click handler to the target element to proceed to next step
+                    const originalClick = targetElement.onclick;
+                    targetElement.onclick = () => {
+                        if (originalClick) originalClick();
+                        setTimeout(() => {
+                            this.nextScheduleFlow();
+                        }, 300);
+                    };
+                }
+
+                // Add click outside to dismiss
+                setTimeout(() => {
+                    document.addEventListener('click', this.handleScheduleFlowOutsideClick);
+                }, 100);
+            },
+            nextScheduleFlow: function () {
+                this.hideCurrentTooltip();
+                // Special handling for step 0 to 1: open the schedule form
+                if (this.scheduleFlowStep === 0) {
+                    Schedule.toggleForm(true);
+                }
+                this.scheduleFlowStep++;
+                this.showScheduleFlowTooltip();
+            },
+            skipScheduleFlow: function () {
+                this.hideCurrentTooltip();
+                this.inScheduleFlow = false;
+                this.complete();
+            },
+            handleScheduleFlowOutsideClick: function (e) {
+                const tooltip = document.querySelector('.onboarding-tooltip');
+                if (tooltip && !tooltip.contains(e.target)) {
+                    Onboarding.nextScheduleFlow();
+                }
+            },
+            complete: function () {
+                this.hideCurrentTooltip();
+                Toast.show('Welcome to Studay! 🎉');
+            }
+        };
+
+        const Navigation = {
+            init: function () {
+                document.querySelectorAll('.menu a').forEach(link => {
+                    link.onclick = (e) => {
+                        const page = link.getAttribute('data-page');
+                        if (page === 'logout') {
+                            e.preventDefault();
+                            Logout.showConfirmation();
+                            return;
+                        }
+                        this.goToPage(page);
+                    };
+                });
+            },
+            goToPage: function (page) {
+                // Hide onboarding section when clicking Schedule
+                if (page === 'schedule') {
+                    const onboardingSection = document.getElementById('onboarding-section');
+                    if (onboardingSection) {
+                        onboardingSection.style.display = 'none';
+                    }
+                }
+
+                document.querySelectorAll('.menu a').forEach(a => a.classList.remove('active'));
+                const activeLink = document.querySelector(`[data-page="${page}"]`);
+                if (activeLink) activeLink.classList.add('active');
+                document.getElementById('page-title').innerText = activeLink ? activeLink.innerText.trim() : page;
+                document.querySelectorAll('.view-content').forEach(v => v.classList.remove('active'));
+                if (page === 'dashboard') { document.getElementById('view-dashboard').classList.add('active'); Dashboard.render(); }
+                else if (page === 'schedule') { document.getElementById('view-schedule').classList.add('active'); Schedule.init(); }
+                else if (page === 'deadline') { document.getElementById('view-deadline').classList.add('active'); Deadline.init(); }
+                else if (page === 'calendar') { document.getElementById('view-calendar').classList.add('active'); initCalendar(); }
+                else if (page === 'subjects') { document.getElementById('view-subjects').classList.add('active'); Subjects.init(); }
+                else if (page === 'statistics') { document.getElementById('view-statistics').classList.add('active'); Statistics.init(); }
+                else if (page === 'reminders') { document.getElementById('view-reminders').classList.add('active'); Reminders.init(); }
+                else if (page === 'settings') { document.getElementById('view-settings').classList.add('active'); Settings.init(); }
+                else document.getElementById('view-other').classList.add('active');
+            }
+        };
+
+        let currentSearchTerm = '';
+
+        // Splash screen animation
+        const splashScreen = document.getElementById('splash-screen');
+        if (splashScreen) {
+            setTimeout(() => {
+                splashScreen.classList.add('fade-out');
+                setTimeout(() => {
+                    splashScreen.style.display = 'none';
+                }, 300);
+            }, 1100); // Hold for 500-700ms + fade-in 300ms = 1100ms total
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            Settings.init(); // Initialize settings (theme/lang) first
+            Dashboard.render();
+            Navigation.init();
+            Onboarding.init(); // Initialize onboarding
+
+            // Add search suggestion functionality
+            const searchInput = document.querySelector('.search-box input');
+            const suggestionsDiv = document.getElementById('search-suggestions');
+
+            if (searchInput && suggestionsDiv) {
+                let searchTimeout;
+                searchInput.addEventListener('input', (e) => {
+                    const query = e.target.value.toLowerCase().trim();
+                    clearTimeout(searchTimeout);
+
+                    if (query.length === 0) {
+                        suggestionsDiv.classList.remove('active');
+                        setTimeout(() => suggestionsDiv.style.display = 'none', 200);
+                        return;
+                    }
+
+                    // Show searching state immediately
+                    suggestionsDiv.innerHTML = '<div class="searching">Searching...</div>';
+                    suggestionsDiv.style.display = 'block';
+                    suggestionsDiv.classList.add('active');
+
+                    // Debounce the actual search
+                    searchTimeout = setTimeout(() => {
+                        const data = Storage.get();
+                        const suggestions = [];
+
+                        // Search schedules
+                        data.schedule.forEach(s => {
+                            if ((s.subjectName && s.subjectName.toLowerCase().includes(query)) ||
+                                (s.room && s.room.toLowerCase().includes(query)) ||
+                                (s.type && s.type.toLowerCase().includes(query)) ||
+                                (s.description && s.description.toLowerCase().includes(query))) {
+                                suggestions.push({
+                                    type: 'schedule',
+                                    title: s.subjectName,
+                                    subtitle: `${s.room || 'No Room'} • ${s.type}`,
+                                    icon: '<i class="fas fa-book"></i>',
+                                    action: () => {
+                                        // Switch to schedule view and open details
+                                        document.querySelectorAll('.menu a').forEach(a => a.classList.remove('active'));
+                                        document.querySelector('[data-page="schedule"]').classList.add('active');
+                                        document.getElementById('page-title').innerText = 'Schedule';
+                                        document.querySelectorAll('.view-content').forEach(v => v.classList.remove('active'));
+                                        document.getElementById('view-schedule').classList.add('active');
+                                        Schedule.init();
+                                        Schedule.openDetails(s.id);
+                                    }
+                                });
+                            }
+                        });
+
+                        // Search deadlines
+                        data.deadlines.forEach(d => {
+                            if ((d.title && d.title.toLowerCase().includes(query)) ||
+                                (d.subject && d.subject.toLowerCase().includes(query)) ||
+                                (d.description && d.description.toLowerCase().includes(query))) {
+                                suggestions.push({
+                                    type: 'deadline',
+                                    title: d.title,
+                                    subtitle: `${d.subject || 'No Subject'} • Due: ${new Date(d.dueDate).toLocaleDateString()}`,
+                                    icon: '<i class="fas fa-tasks"></i>',
+                                    action: () => {
+                                        // Switch to deadline view and open details
+                                        document.querySelectorAll('.menu a').forEach(a => a.classList.remove('active'));
+                                        document.querySelector('[data-page="deadline"]').classList.add('active');
+                                        document.getElementById('page-title').innerText = 'Deadline';
+                                        document.querySelectorAll('.view-content').forEach(v => v.classList.remove('active'));
+                                        document.getElementById('view-deadline').classList.add('active');
+                                        Deadline.init();
+                                        Deadline.openDetails(d.id);
+                                    }
+                                });
+                            }
+                        });
+
+                        // Search subjects
+                        data.subjects.forEach(s => {
+                            if ((s.name && s.name.toLowerCase().includes(query)) ||
+                                (s.teacher && s.teacher.toLowerCase().includes(query)) ||
+                                (s.room && s.room.toLowerCase().includes(query))) {
+                                suggestions.push({
+                                    type: 'subject',
+                                    title: s.name,
+                                    subtitle: `${s.teacher || 'No Teacher'} • ${s.room || 'No Room'}`,
+                                    icon: '<i class="fas fa-book-open"></i>',
+                                    action: () => {
+                                        // Switch to subjects view and open edit form
+                                        document.querySelectorAll('.menu a').forEach(a => a.classList.remove('active'));
+                                        document.querySelector('[data-page="subjects"]').classList.add('active');
+                                        document.getElementById('page-title').innerText = 'Subjects';
+                                        document.querySelectorAll('.view-content').forEach(v => v.classList.remove('active'));
+                                        document.getElementById('view-subjects').classList.add('active');
+                                        Subjects.init();
+                                        Subjects.toggleForm(true, s.id);
+                                    }
+                                });
+                            }
+                        });
+
+                        // Render suggestions
+                        if (suggestions.length > 0) {
+                            suggestionsDiv.innerHTML = suggestions.slice(0, 10).map(s => `
+                            <div class="suggestion-item" onclick="this.suggestionAction()">
+                                <div class="suggestion-icon">${s.icon}</div>
+                                <div class="suggestion-text">
+                                    <div style="font-weight: 600; color: var(--text-dark);">${s.title}</div>
+                                    <div style="font-size: 12px; color: var(--text-light);">${s.subtitle}</div>
+                                </div>
+                                <div class="suggestion-type">${s.type}</div>
+                            </div>
+                        `).join('');
+
+                            // Attach actions to suggestion items
+                            suggestions.slice(0, 10).forEach((s, index) => {
+                                suggestionsDiv.children[index].suggestionAction = s.action;
+                            });
+                        } else {
+                            suggestionsDiv.innerHTML = '<div class="no-results">No matching results found</div>';
+                        }
+                    }, 150); // Small delay for smooth UX
+                });
+
+                // Hide suggestions when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!searchInput.contains(e.target) && !suggestionsDiv.contains(e.target)) {
+                        suggestionsDiv.style.display = 'none';
+                    }
+                });
+
+                // Clear suggestions on focus out
+                searchInput.addEventListener('blur', () => {
+                    setTimeout(() => {
+                        if (!suggestionsDiv.matches(':hover')) {
+                            suggestionsDiv.style.display = 'none';
+                        }
+                    }, 150);
+                });
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            // 1. Lấy dữ liệu người dùng từ localStorage
+            const currentUserData = localStorage.getItem("currentUser");
+
+            if (currentUserData) {
+                const user = JSON.parse(currentUserData);
+
+                // 2. Tìm các phần tử hiển thị thông tin Demo User
+                // Theo cấu trúc CSS trong index.html, phần này thường nằm trong .account-details
+                const userNameElements = document.querySelectorAll('.account-details h4');
+                const userEmailElements = document.querySelectorAll('.account-details p');
+
+                // 3. Cập nhật Họ và Tên (lấy từ trường 'fullname' trong đối tượng user)
+                userNameElements.forEach(el => {
+                    if (el.textContent.includes("Demo User")) {
+                        el.textContent = user.fullname;
+                    }
+                });
+
+                // 4. Cập nhật Email (lấy từ trường 'email' trong đối tượng user)
+                userEmailElements.forEach(el => {
+                    if (el.textContent.includes("demo.user@student.edu.vn")) {
+                        el.textContent = user.email;
+                    }
+                });
+
+                // Cập nhật thêm phần hiển thị ở User Profile (nếu có)
+                const profileName = document.querySelector('.user-profile span');
+                if (profileName) {
+                    profileName.textContent = user.fullname;
+                }
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            // 1. Lấy dữ liệu từ localStorage
+            const currentUserData = localStorage.getItem("currentUser");
+
+            if (currentUserData) {
+                const user = JSON.parse(currentUserData);
+                const fullName = user.fullname || "User";
+                const userEmail = user.email || "demo.user@student.edu.vn";
+
+                // --- XỬ LÝ CHỮ CÁI ĐẦU (LOGIC MỚI: LẤY 2 TỪ CUỐI) ---
+                const getInitials = (name) => {
+                    // Tách chuỗi tên thành mảng các từ, loại bỏ khoảng trắng thừa
+                    const parts = name.trim().split(/\s+/);
+
+                    if (parts.length >= 2) {
+                        // Lấy chữ cái đầu của từ Áp chót (Kế cuối) và từ Cuối cùng
+                        // Ví dụ: Trần [B]ảo [N]am -> parts.length là 3 -> lấy index 1 (Bảo) và 2 (Nam)
+                        const secondToLastChar = parts[parts.length - 2].charAt(0);
+                        const lastChar = parts[parts.length - 1].charAt(0);
+                        return (secondToLastChar + lastChar).toUpperCase();
+                    }
+                    // Trường hợp tên chỉ có 1 từ (Ví dụ: "Nam") -> Lấy "N"
+                    return parts[0].charAt(0).toUpperCase();
+                };
+
+                const initials = getInitials(fullName);
+
+                // Tạo link Avatar với ký tự vừa lấy
+                const avatarUrl = `https://ui-avatars.com/api/?name=${initials}&background=344054&color=fff`;
+
+                // --- CẬP NHẬT GIAO DIỆN (Tên, Email, Avatar) ---
+
+                // 1. Cập nhật Họ và Tên (Header, Settings, Sidebar profile)
+                const userNameElements = document.querySelectorAll('.account-details h4, .user-profile span, .sidebar-profile-name');
+                userNameElements.forEach(el => {
+                    // Kiểm tra nếu là thẻ span hoặc nội dung là Demo User thì thay thế
+                    if (el.tagName === "SPAN" || el.textContent.includes("Demo User")) {
+                        el.textContent = fullName;
+                    }
+                });
+
+                // 2. Cập nhật Email (trong Settings)
+                const userEmailElements = document.querySelectorAll('.account-details p');
+                userEmailElements.forEach(el => {
+                    if (el.textContent.includes("demo.user@student.edu.vn")) {
+                        el.textContent = userEmail;
+                    }
+                });
+
+                // 3. Cập nhật Ảnh Avatar (Header, Settings)
+                const avatarImages = document.querySelectorAll('img.avatar');
+                avatarImages.forEach(img => {
+                    img.src = avatarUrl;
+                });
+            }
+        });
+    </script>
 </body>
+
 </html>

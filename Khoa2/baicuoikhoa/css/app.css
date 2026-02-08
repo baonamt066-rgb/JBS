@@ -1,0 +1,23 @@
+/* Base Styles */
+@import "base/variables.css";
+@import "base/reset.css";
+@import "base/animations.css";
+
+/* Layout Styles */
+@import "layout/sidebar.css";
+@import "layout/header.css";
+@import "layout/main.css";
+
+/* Component Styles */
+@import "components/button.css";
+@import "components/card.css";
+@import "components/modal.css";
+@import "components/form.css";
+@import "components/calendar.css";
+
+/* Page Styles */
+@import "pages/dashboard.css";
+@import "pages/schedule.css";
+@import "pages/statistics.css";
+@import "pages/reminders.css";
+@import "pages/settings.css";

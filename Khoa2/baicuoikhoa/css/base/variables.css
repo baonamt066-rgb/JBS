@@ -1,0 +1,29 @@
+:root {
+    --sidebar-bg: #344054;
+    --sidebar-active: #ffffff;
+    --main-bg: #f3f4f6;
+    --text-dark: #1F2937;
+    --text-light: #9CA3AF;
+    --accent-blue: #3B82F6;
+    --accent-orange: #F59E0B;
+    --accent-yellow: #FCD34D;
+    --accent-pink: #EC4899;
+    --dark-blue: #1e293b;
+    --urgency-high: #EF4444;
+    --urgency-med: #F59E0B;
+    --urgency-low: #10B981;
+    --card-bg: #ffffff;
+    --input-bg: #ffffff;
+    --border-color: #dddddd;
+}
+
+/* DARK MODE COLORS */
+[data-theme="dark"] {
+    --main-bg: #111827;
+    --text-dark: #F9FAFB;
+    --text-light: #9CA3AF;
+    --card-bg: #1F2937;
+    --input-bg: #374151;
+    --border-color: #4B5563;
+    --sidebar-bg: #0f172a;
+}

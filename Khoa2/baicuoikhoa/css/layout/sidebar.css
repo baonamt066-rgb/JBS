@@ -1,0 +1,80 @@
+/* --- SIDEBAR --- */
+.sidebar {
+    width: 250px;
+    background-color: var(--sidebar-bg);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+/* Sidebar logo alignment fix */
+.sidebar-logo {
+    display: flex;
+    align-items: center;
+    height: 56px;
+    /* MUST match sidebar item height */
+    padding: 0 16px;
+    box-sizing: border-box;
+}
+
+.sidebar-logo img {
+    height: 50px;
+    /* REQUIRED */
+    width: auto;
+    display: block;
+    /* IMPORTANT: remove inline baseline */
+    flex-shrink: 0;
+}
+
+.sidebar-logo .logo-text {
+    margin-left: 10px;
+    line-height: 1;
+    /* IMPORTANT: fix text baseline */
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    font-size: 20px;
+    color: inherit;
+    /* keep existing Studay color */
+}
+
+.menu {
+    list-style: none;
+    flex-grow: 1;
+}
+
+.menu li {
+    margin-bottom: 8px;
+}
+
+.menu a {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: #94a3b8;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.menu a:hover {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.menu a.active {
+    background-color: white;
+    color: var(--sidebar-bg);
+    font-weight: 600;
+}
+
+.bottom-menu {
+    margin-top: auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 10px;
+}
